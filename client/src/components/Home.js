@@ -1,17 +1,34 @@
 import React from 'react'
 
+
 function Home() {
   return (
-    <div>
-      <p>DASHBOARD</p>
-      <ul>
-        <li><a href='#'>Report</a></li>
-        <li><a href='#'>SALES REPORT</a></li>
-        <li><a href='#'>PRODUCTS</a></li>
-        <li><a href='#'>INVENTORY</a></li>
-        <li><a href='#'>EMPLOYEES</a></li>
-      </ul>
+    <>
+    <div className='homebody'>
+        <h2> Dashboard Overview</h2>
+        <div className='body1'>
+        <div class="card">
+           Sales
+         </div>
+         <div class="card">
+           Customers
+         </div>
+         <div class="card">
+            Products
+         </div>
+         <div class="card">
+            Products
+         </div>
+        </div>
+        <div className='body2'>
+        heyy buddyyyyyyyyyyyyyyyy
+        </div>
+        <div className='body3'>
+        heyy buddyyyyyyyyyyyyyyyy
+        </div>
     </div>
+    </>
+
   )
 }
 

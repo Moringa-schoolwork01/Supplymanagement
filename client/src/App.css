@@ -1,1 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&family=Oranienbaum&family=Zilla+Slab&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: 'Comfortaa', cursive;
+}
+.sidebar{
+  width: 280px;
+  height: 940px;
+  background-color: rgb(50, 152, 247);
+}
+.header{
+  padding-top: 20px;
+  padding-bottom: px;
+  color: white;
+  background-color: rgba(0, 81, 255, 0.664);
+}
+.header h1{
+  color: rgb(255, 255, 255);
+  font-size: 24px;
+text-align: center;
+}
+.header h5, p{
+  color: rgb(22, 7, 150);
+  font-size: 17px;
+  margin-left: 30px;
+}
+.header p{
+  margin-top: -5px ;
+}
 
+.sidebar ul a{
+  display: block;
+  line-height: 95px;
+  font-size: 28px;
+  color: white;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: 0.4s;
+}
+ul li:hover a{
+  padding-left: 10px;
+  background: rgba(0, 0, 0, 0.164);
+  color: black;
+}
+
+
+button {
+  width: 100px;
+  height: 50px;
+  margin-left: 30px;
+  margin-top: 20px;
+  margin-bottom: 95px;
+  border: 3px solid #315cfd;
+  border-radius: 45px;
+  transition: all 0.3s;
+  cursor: pointer;
+  background: white;
+  font-size: 1.2em;
+  font-weight: 550;
+  font-family: 'Montserrat', sans-serif;
+}
+
+button:hover {
+  background: #315cfd;
+  color: white;
+  font-size: 1.3em;
+}
+
+.homebody{
+  margin-left: 5%;
+  margin-top: -47%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+}
+.body1{
+  display: flex;
+  gap: 3rem;
+}
+.card {
+  box-sizing: border-box;
+  margin-top: 150px;
+  width: 250px;
+  height: 150px;
+  background: rgba(217, 217, 217, 0.58);
+  border: 1px solid white;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+  border-radius: 17px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-weight: bolder;
+  color: rgb(55, 139, 235);
+}
+
+.card:hover {
+  border: 1px solid rgba(8, 132, 248, 0.507);
+  transform: scale(1.05);
+}
+
+.card:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+.App{
+  display: flex;
+  flex-direction: column;
+  width: 100vh;
+  height: 100vh;
+}
+.dashcontent{
+  display: flex;
+}
