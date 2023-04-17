@@ -1,11 +1,3 @@
-Rails.application.routes.draw do
-  resources :sales
-  resources :orders
-  resources :customers
-  resources :products
-  resources :users
-
-  # config/routes.rb
 
 Rails.application.routes.draw do
   resources :sales
@@ -35,4 +27,5 @@ end
   # get "/users", to: "users#usersList"
   # post "/users/signup", to: "users#addUser"
   # post "/users/login", to: "users#login"
+
 end
