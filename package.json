@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "antd": "^5.4.2",
+    "chart.js": "^4.2.1",
+    "react-router-dom": "^6.10.0",
+    "recharts": "^2.5.0"
+  }
+}
