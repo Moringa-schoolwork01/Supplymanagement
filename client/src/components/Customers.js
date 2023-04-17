@@ -1,60 +1,60 @@
 import React from 'react'
 
-function Products() {
+function Customers() {
   return (
     <div className='prodcont'>
 
-    <h3 >Add your product here</h3>
-    <button className='btn2'>Add new product</button>
+    <h3 >Add new customer</h3>
+    <button className='btn2'>Add new Customer</button>
 
           <table class="table">
   <thead>
     <tr class="table-primary">
       <th scope="col">#</th>
-      <th scope="col">Product code </th>
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
+      <th scope="col">Full name</th>
+      <th scope="col">Contant</th>
+      <th scope="col">Email</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th scope="row">1</th>
-      <td>32yu8nm</td>
-      <td>Chairs</td>
-      <td>$20</td>
+      <td>Jeffrey dama</td>
+      <td>0722848380</td>
+      <td>jeff@email.com</td>
       <button className='custom-btn btn-2'>Update</button>
       <button className='btnd'>Delete</button>
     </tr>
     <tr>
       <th scope="row">2</th>
-      <td>RUH44758</td>
-      <td>Tables</td>
-      <td>$70</td>
+      <td>Sammy kuria</td>
+      <td>0768696986</td>
+      <td>sammy@email.com</td>
       <button className='custom-btn btn-2'>Update</button>
       <button className='btnd'>Delete</button>
     </tr>
     <tr>
       <th scope="row">3</th>
-      <td >TY598IJ </td>
-      <td >Mabati </td>
-      <td>$150</td>
+      <td>Dante mabwoy</td>
+      <td>0787889097</td>
+      <td>dnte@email.com</td>
       <button className='custom-btn btn-2'>Update</button>
       <button className='btnd'>Delete</button>
     </tr>
     <tr>
       <th scope="row">3</th>
-      <td >GH667IO </td>
-      <td >Wheelbarrow </td>
-      <td>$200</td>
+      <td>Bobby shmoney</td>
+      <td>0766789636</td>
+      <td>bobby@email.com</td>
       <button className='custom-btn btn-2'>Update</button>
       <button className='btnd'>Delete</button>
     </tr>
     <tr>
       <th scope="row">3</th>
-      <td >GT559NM </td>
-      <td >Paperbag </td>
-      <td>$50</td>
+      <td>shiks kapienga</td>
+      <td>0722848380</td>
+      <td>shiks@email.com</td>
       <button className='custom-btn btn-2'>Update</button>
       <button className='btnd'>Delete</button>
     </tr>
@@ -65,8 +65,4 @@ function Products() {
   )
 }
 
-
-
-
-
-export default Products
+export default Customers

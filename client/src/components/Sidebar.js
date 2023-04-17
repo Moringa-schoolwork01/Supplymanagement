@@ -15,11 +15,11 @@ function Sidebar() {
       <li><Link to='/'>Dashboard </Link></li>
         <li><Link to='/sales'>Sales </Link></li>
         <li><Link to='/products'>Products</Link></li>
-        <li><Link to='/reports'>Report</Link></li>
-        <li><Link to='/inventory'>Inventory</Link></li>
-        <li><Link to='/employees'>Customers</Link></li>
+        <li><Link to='/customers'>Customers</Link></li>
+        <li><Link to='/orders'>Orders</Link></li>
+        <li><Link to='/reports'>Reports</Link></li>
       </ul>
-      <button>LogOut</button>
+      <button className="btn1">LogOut</button>
     </div>
     </div>
   )

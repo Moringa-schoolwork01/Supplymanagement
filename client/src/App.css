@@ -46,7 +46,7 @@ ul li:hover a{
 }
 
 
-button {
+.btn1 {
   width: 100px;
   height: 50px;
   margin-left: 30px;
@@ -62,7 +62,7 @@ button {
   font-family: 'Montserrat', sans-serif;
 }
 
-button:hover {
+.btn1:hover {
   background: #315cfd;
   color: white;
   font-size: 1.3em;
@@ -70,7 +70,7 @@ button:hover {
 
 .homebody{
   margin-left: 5%;
-  margin-top: -47%;
+  margin-top: -20%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -82,7 +82,8 @@ button:hover {
 }
 .card {
   box-sizing: border-box;
-  margin-top: 150px;
+  margin-top: 30px;
+  margin-bottom: 70px;
   width: 250px;
   height: 150px;
   background: rgba(217, 217, 217, 0.58);
@@ -118,3 +119,110 @@ button:hover {
 .dashcontent{
   display: flex;
 }
+.btn2 {
+  background-color: white;
+  color: black;
+  border-radius: 10em;
+  margin-bottom: 15px;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid black;
+  box-shadow: 0 0 0 0 black;
+}
+
+.btn2:hover {
+  transform: translateY(-4px) translateX(-2px);
+  box-shadow: 2px 5px 0 0 black;
+};
+
+.btn2:active {
+  transform: translateY(2px) translateX(1px);
+  box-shadow: 0 0 0 0 black;
+};
+
+.homeh2{
+  color: black;
+}
+.body2{
+  background-color: rgba(0, 0, 0, 0.274);
+padding-bottom: 20%;
+width: 50%;
+}
+.body3{
+  background-color: rgba(109, 18, 18, 0.274);
+padding-bottom: 20%;
+width: 50%;
+margin-left: 70px;
+}
+.homecont{
+  display: flex;
+  justify-content: space-around;
+}
+
+.prodcont{
+  color: rgb(0, 0, 0);
+  width: 200%;
+  margin-left: 10%;
+  margin-top: -60%;
+}
+.prodcont h3{
+  margin-bottom: 20px;
+  font-weight: bolder;
+}
+.custom-btn {
+  width: 100px;
+  height: 40px;
+  margin-right: 20px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+  font-size: 15px;
+}
+
+.btn-2 {
+  background: #004dff;
+  background: linear-gradient(0deg, #004dff 0%, #004dff 100%);
+  border: none;
+}
+
+.btn-2:before {
+  height: 0%;
+  width: 2px;
+}
+
+.btn-2:hover {
+  box-shadow: 4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+
+.btnd {
+  border-radius: 5px;
+  padding: 10px 25px;
+  background-color: #ff0000;
+  color: #000000;
+  font-weight: Bold;
+  transition: all 0.5s;
+}
+
+.btnd:hover {
+  background-color: #f10000;
+  box-shadow: 0 0 20px #ff6f6f50;
+}
+
+

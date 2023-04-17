@@ -6,6 +6,8 @@ import Products from './components/Products';
 import Sales from './components/Sales';
 import Reports from './Reports';
 import { Space} from "antd"
+import Customers from './components/Customers';
+import Orders from './components/Orders';
 
 
 
@@ -19,6 +21,8 @@ function App() {
         <Route exact path="/products" element={<Products />}></Route>
         <Route exact path="/sales" element={<Sales />}></Route>
         <Route exact path="/reports" element={<Reports />}></Route>
+        <Route exact path="/customers" element={<Customers />}></Route>
+        <Route exact path="/orders" element={<Orders />}></Route>
       </Routes> 
      </Space>
     

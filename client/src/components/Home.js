@@ -1,11 +1,13 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
 function Home() {
+  const navigate = useNavigate()
   return (
     <>
     <div className='homebody'>
-        <h2> Dashboard Overview</h2>
+        <h2 > Dashboard Overview</h2>
         <div className='body1'>
         <div class="card">
            Sales
@@ -17,15 +19,18 @@ function Home() {
             Products
          </div>
          <div class="card">
-            Products
+            Orders
          </div>
         </div>
+        <div className='homecont'>
         <div className='body2'>
-        heyy buddyyyyyyyyyyyyyyyy
+        Weekly Report
         </div>
         <div className='body3'>
-        heyy buddyyyyyyyyyyyyyyyy
+        Top 5 Products        
         </div>
+        </div>
+        
     </div>
     </>
 
