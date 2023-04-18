@@ -1,11 +1,15 @@
 import React from 'react'
+import { Link,Outlet } from 'react-router-dom'
+
+
 
 function Customers() {
   return (
     <div className='prodcont'>
 
     <h3 >Add new customer</h3>
-    <button className='btn2'>Add new Customer</button>
+    <button className='btn2'><Link to='addcustomer'>Add new customer</Link></button>
+    <Outlet />
 
           <table class="table">
   <thead>

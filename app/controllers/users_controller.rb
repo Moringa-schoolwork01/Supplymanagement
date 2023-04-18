@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
+
+    def index
+      users = User.all
+      render json: users
+    end
+
     def create
         user = User.find_by(email: params[:email])
         if user && user.authenticate(params[:password])
@@ -24,4 +30,3 @@ class UsersController < ApplicationController
         end
       end
     end
-end
