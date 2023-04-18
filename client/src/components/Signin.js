@@ -1,22 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 
 function Signin() {
+
+    const [name, setName] = useState('')
+const [email, setEmail] = useState('')
+const [password, setPassword] = useState('')
+
+
+const handleSubmit = (e) => {
+    e.preventDefault()
+    const userData = { name, email, password}
+
+    console.log(userData)
+}
+
   return (
     <div class="form-box">
-<form class="form">
-    <span class="title">Sign in</span>
-    <span class="subtitle">Create a free account with your email.</span>
+<form class="form" onSubmit={handleSubmit}>
+    <span class="title"> User Login</span>
+    <span class="subtitle">Remember Me?</span>
     <div class="form-container">
-      <input type="text" class="input" placeholder="Full Name"/>
-			<input type="email" class="input" placeholder="Email"/>
-			<input type="password" class="input" placeholder="Password"/>
+      <input type="text" class="input" placeholder="Full Name"id='name' value={name} onChange={(e) => setName(e.target.value)}/>
+			<input type="email" class="input" placeholder="Email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
+			<input type="password" class="input" placeholder="Password" id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
     </div>
-    <button>Sign in</button>
+    <button>Login</button>
+  
+
     </form>
     
 <div class="form-section">
-  <p>Have an account? <a href="#">Log in</a> </p>
+  <p>Have an account? <a href="#">Sign in</a> </p>
 </div>
 </div>
   )
