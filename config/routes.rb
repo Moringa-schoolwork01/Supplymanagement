@@ -1,10 +1,10 @@
 
 Rails.application.routes.draw do
+  resources :users
   resources :sales
   resources :orders
   resources :customers
   resources :products
-  resources :users
   # Routes for logging in and out
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
