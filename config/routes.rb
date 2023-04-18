@@ -28,5 +28,3 @@ end
   # get "/users", to: "users#usersList"
   # post "/users/signup", to: "users#addUser"
   # post "/users/login", to: "users#login"
-
-
