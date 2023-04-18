@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { Link,Outlet } from 'react-router-dom'
 
 
 function Signin() {
+
 
     const [name, setName] = useState('')
 const [email, setEmail] = useState('')
@@ -21,7 +23,6 @@ const handleSubmit = (e) => {
     <span class="title"> User Login</span>
     <span class="subtitle">Remember Me?</span>
     <div class="form-container">
-      <input type="text" class="input" placeholder="Full Name"id='name' value={name} onChange={(e) => setName(e.target.value)}/>
 			<input type="email" class="input" placeholder="Email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
 			<input type="password" class="input" placeholder="Password" id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
     </div>
@@ -31,8 +32,10 @@ const handleSubmit = (e) => {
     </form>
     
 <div class="form-section">
-  <p>Have an account? <a href="#">Sign in</a> </p>
+  <p>Don't have an account? <a><Link to="login">Sign Up</Link></a> </p>
 </div>
+<Outlet />
+
 </div>
   )
 }
