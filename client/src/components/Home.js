@@ -65,7 +65,7 @@ function Home() {
       <div className='homeheader'>
       <h2 > Dashboard Overview</h2>
         <button onClick={() => navigate('Signin')}>
-            Sign up
+            Login
             <div class="arrow-wrapper">
                 <div class="arrow"></div>
             </div>

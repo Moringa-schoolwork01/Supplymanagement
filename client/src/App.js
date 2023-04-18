@@ -9,7 +9,7 @@ import { Space} from "antd"
 import Customers from './components/Customers';
 import Orders from './components/Orders';
 import Signin from './components/Signin';
-
+import Login from './components/Login';
 
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
         <Route exact path="/customers" element={<Customers />}></Route>
         <Route exact path="/orders" element={<Orders />}></Route>
         <Route exact path="/signin" element={<Signin />}></Route>
+        <Route exact path="/Login" element={<Login />}></Route>
       </Routes> 
      </Space>
     

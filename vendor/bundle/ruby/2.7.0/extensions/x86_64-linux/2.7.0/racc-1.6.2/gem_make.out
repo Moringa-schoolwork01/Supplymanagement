@@ -1,0 +1,17 @@
+current directory: /home/manuh/Supplymanagement/vendor/bundle/ruby/2.7.0/gems/racc-1.6.2/ext/racc/cparse
+/home/manuh/.rbenv/versions/2.7.4/bin/ruby -I /home/manuh/.rbenv/versions/2.7.4/lib/ruby/2.7.0 -r ./siteconf20230418-26965-zhid30.rb extconf.rb
+checking for rb_block_call()... yes
+checking for rb_ary_subseq()... yes
+creating Makefile
+
+current directory: /home/manuh/Supplymanagement/vendor/bundle/ruby/2.7.0/gems/racc-1.6.2/ext/racc/cparse
+make "DESTDIR=" clean
+
+current directory: /home/manuh/Supplymanagement/vendor/bundle/ruby/2.7.0/gems/racc-1.6.2/ext/racc/cparse
+make "DESTDIR="
+compiling cparse.c
+linking shared-object racc/cparse.so
+
+current directory: /home/manuh/Supplymanagement/vendor/bundle/ruby/2.7.0/gems/racc-1.6.2/ext/racc/cparse
+make "DESTDIR=" install
+/bin/install -c -m 0755 cparse.so ./.gem.20230418-26965-hpai7k/racc
