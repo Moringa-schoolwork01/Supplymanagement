@@ -29,4 +29,8 @@ end
   # post "/users/signup", to: "users#addUser"
   # post "/users/login", to: "users#login"
 
+<<<<<<< HEAD
 # end
+=======
+
+>>>>>>> 5bb57d654522c180a37fa1fc33d42f92a06758d8

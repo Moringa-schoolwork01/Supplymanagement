@@ -67,7 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_130339) do
     t.string "user_email"
     t.string "user_password"
     t.datetime "created_at", null: false
-    t.datetime "updajhted_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "order_items", "orders"
