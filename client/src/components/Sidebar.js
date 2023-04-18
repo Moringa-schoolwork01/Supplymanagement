@@ -21,7 +21,6 @@ function Sidebar() {
         <li><Link to='/reports'>Reports</Link></li>
       </ul>
       <button className="btn1">LogOut</button>
-      <button className="btn4">SignIn</button>
     </div>
     </div>
   )
