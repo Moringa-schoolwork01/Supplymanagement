@@ -7,7 +7,16 @@ function Home() {
   return (
     <>
     <div className='homebody'>
-        <h2 > Dashboard Overview</h2>
+      <div className='homeheader'>
+      <h2 > Dashboard Overview</h2>
+        <button onClick={() => navigate('Signin')}>
+            Login
+            <div class="arrow-wrapper">
+                <div class="arrow"></div>
+            </div>
+        </button>
+      </div>
+       
         <div className='body1'>
         <div class="card">
            Sales
