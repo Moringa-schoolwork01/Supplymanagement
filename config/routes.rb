@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :customers
   resources :products
   # Routes for logging in and out
-  get '/login', to: 'sessions#new'
+  get '/auth', to: 'users#show'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 

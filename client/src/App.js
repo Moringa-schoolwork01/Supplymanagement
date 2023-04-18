@@ -8,10 +8,23 @@ import Reports from './Reports';
 import { Space} from "antd"
 import Customers from './components/Customers';
 import Orders from './components/Orders';
+import { useEffect } from 'react';
+
 
 
 
 function App() {
+  useEffect(() => {
+    fetch('/auth')
+      .then(res => {
+        if (res.ok) {
+          res.json().then(user => setCurrentUser(user))
+        }
+      })
+  }, [])
+  
+
+  if(!currentUser) return <Login setCurrentUserUser={setCurrentUser}/>
   return (
     <div className="App">
      <Space className='dashcontent'>
@@ -19,7 +32,6 @@ function App() {
      <Routes>
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/products" element={<Products />}></Route>
-        <Route exact path="/sales" element={<Sales />}></Route>
         <Route exact path="/reports" element={<Reports />}></Route>
         <Route exact path="/customers" element={<Customers />}></Route>
         <Route exact path="/orders" element={<Orders />}></Route>
