@@ -8,6 +8,7 @@ import Reports from './Reports';
 import { Space} from "antd"
 import Customers from './components/Customers';
 import Orders from './components/Orders';
+import Signin from './components/Signin';
 
 
 
@@ -23,6 +24,7 @@ function App() {
         <Route exact path="/reports" element={<Reports />}></Route>
         <Route exact path="/customers" element={<Customers />}></Route>
         <Route exact path="/orders" element={<Orders />}></Route>
+        <Route exact path="/signin" element={<Signin />}></Route>
       </Routes> 
      </Space>
     
