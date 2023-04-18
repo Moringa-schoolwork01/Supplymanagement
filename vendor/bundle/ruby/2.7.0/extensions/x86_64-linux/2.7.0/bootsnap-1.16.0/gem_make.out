@@ -1,0 +1,15 @@
+current directory: /home/manuh/Supplymanagement/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.16.0/ext/bootsnap
+/home/manuh/.rbenv/versions/2.7.4/bin/ruby -I /home/manuh/.rbenv/versions/2.7.4/lib/ruby/2.7.0 -r ./siteconf20230418-26965-qpk9vf.rb extconf.rb
+creating Makefile
+
+current directory: /home/manuh/Supplymanagement/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.16.0/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /home/manuh/Supplymanagement/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.16.0/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.so
+
+current directory: /home/manuh/Supplymanagement/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.16.0/ext/bootsnap
+make "DESTDIR=" install
+/bin/install -c -m 0755 bootsnap.so ./.gem.20230418-26965-w5nov7/bootsnap
