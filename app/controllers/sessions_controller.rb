@@ -1,22 +1,13 @@
 class SessionsController < ApplicationController
-  # def create
-  #   user = User.new(user_params)
-  #   if email.present? && password_digest.present?
-  #   render json:  user
-  #   else
-  #     render json: { error: 'Email and password are required' }, status: :unprocessable_entity
-  #   end
-  # end
 
-  
   def create
     user = User.find_by(email: params[:email])
     puts user
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      render json: { status: 200, logged_in: true, user: user }
+      token = encode_token(user_id: user.id)
+      render json: { user: @user, token: token }, status: :created
     else
-      render json: { status: 401, errors: ['Authentication failed'] }
+      render json: {  errors: 'Invalid email or password' }, status: :unprocessable_entity
     end
   end
 
