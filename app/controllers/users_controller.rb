@@ -7,8 +7,8 @@
         end
     
         def create
-          # User.create!(email: params[:email], password_digest: BCrypt::Password.create("123admin"))
-          user = User.create!(user_params)
+          
+            user = User.create!(user_params)
             
 
             if user.valid?

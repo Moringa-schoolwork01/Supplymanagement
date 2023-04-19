@@ -17,16 +17,23 @@ const [password, setPassword] = useState('')
     setNotify((notify) => !notify);
     setTimeout(endNotification, 1000);
   }
+ 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(email + password)
+    console.log("ni kunoma mazee")
+    const newData = {
+      email: email,
+      password_digest: password
+    }
+    console.log(newData)
     setError(null);
     fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify(newData),
     }).then((res) => {
       if (res.ok) {
         res.json().then((user) => {
