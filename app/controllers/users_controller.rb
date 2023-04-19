@@ -28,7 +28,7 @@
           def logged_in
             if current_user
               render json: { logged_in: true, user: current_user }
-            elseno s
+            else
               render json: { logged_in: false }
             end
           end
