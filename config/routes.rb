@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   resources :customers
   resources :products
   # Routes for logging in and out
-  get '/auth', to: 'users#show'
+  # get '/auth', to: 'users#show'
   post '/login', to: 'sessions#create'
+  get "/me", to: "users#show"
   delete '/logout', to: 'sessions#destroy'
 
 end
@@ -29,8 +30,3 @@ end
   # post "/users/signup", to: "users#addUser"
   # post "/users/login", to: "users#login"
 
-<<<<<<< HEAD
-# end
-=======
-
->>>>>>> 5bb57d654522c180a37fa1fc33d42f92a06758d8

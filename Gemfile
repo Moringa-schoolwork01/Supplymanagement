@@ -14,12 +14,8 @@ gem "puma", "~> 5.0"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
-<<<<<<< HEAD
 gem "bcrypt"
 gem "faker"
-=======
-gem 'bcrypt'
->>>>>>> 5bb57d654522c180a37fa1fc33d42f92a06758d8
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
