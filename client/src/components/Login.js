@@ -27,7 +27,9 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("/login", {
+    console.log("ni kunoma mazee")
+    setError(null);
+    fetch("/users", {
       method: "POST",
       headers: {
         "Content-type": "application/json",

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link,Outlet } from 'react-router-dom'
 
 
-function Signin() {
+function Signin(onLogin) {
 
 
     const [name, setName] = useState('')
@@ -12,10 +12,18 @@ const [password, setPassword] = useState('')
 
 const handleSubmit = (e) => {
     e.preventDefault()
-    const userData = { name, email, password}
 
-    console.log(userData)
+    fetch("/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then((r) => r.json())
+      .then((user) => onLogin(user));
 }
+
 
   return (
     <div class="form-box">
