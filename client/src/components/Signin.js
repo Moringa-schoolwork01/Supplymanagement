@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 
-function Signin() {
+function Signin(onLogin) {
 
     const [name, setName] = useState('')
 const [email, setEmail] = useState('')
@@ -10,10 +10,18 @@ const [password, setPassword] = useState('')
 
 const handleSubmit = (e) => {
     e.preventDefault()
-    const userData = { name, email, password}
 
-    console.log(userData)
+    fetch("/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then((r) => r.json())
+      .then((user) => onLogin(user));
 }
+
 
   return (
     <div class="form-box">
