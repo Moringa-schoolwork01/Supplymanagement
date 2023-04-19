@@ -3,11 +3,11 @@ class User < ApplicationRecord
 
     # validation
     validates :email, presence: true, uniqueness: true
-    validates :password_digest, presence: true
+    # validates :password, presence: true
 
-    # relationship
-    has_many :products
-    has_many :orders
+    # # relationship
+     has_many :products
+    # has_many :orders
 
-end
+
 end

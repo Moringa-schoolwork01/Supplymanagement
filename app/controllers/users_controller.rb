@@ -7,8 +7,10 @@
         end
     
         def create
-            user = User.create!(user_params)
+          # User.create!(email: params[:email], password_digest: BCrypt::Password.create("123admin"))
+          user = User.create!(user_params)
             
+
             if user.valid?
               # user was successfully created
               render json: { message: "User created successfully", user: user }
@@ -32,11 +34,9 @@
               render json: { logged_in: false }
             end
           end
-
-
           private
 
           def user_params
-            params.permit(:name, :email, :password_digest)  
+            params.permit( :email, :password,:password_confirmation)  
           end
         end

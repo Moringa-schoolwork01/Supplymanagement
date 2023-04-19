@@ -3,8 +3,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useCallback } from 'react';
 import "../css/login.css";
 
+
 const Login = () => {
-  const navigate = useNavigate();
 
   const [error, setError] = useState(null);
   const [notify, setNotify] = useState(false);
@@ -17,18 +17,11 @@ const [password, setPassword] = useState('')
     setNotify((notify) => !notify);
     setTimeout(endNotification, 1000);
   }
-
-
-
-  
-  
- 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email + password)
+    // console.log(email + password)
     setError(null);
-    fetch("/users", {
+    fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,8 +49,10 @@ const [password, setPassword] = useState('')
     setNotify((notify) => !notify);
     navigate("/dashboard");
   }
+  const navigate = useNavigate()
 
   return (
+    
 
     <div class="form-box">
     <form class="form" onSubmit={handleSubmit}>
@@ -67,7 +62,7 @@ const [password, setPassword] = useState('')
           <input type="email" class="input" placeholder="Email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
           <input type="password" class="input" placeholder="Password" id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
         </div>
-        <button>Login</button>
+        <button onClick={() => navigate('Home')}>Login</button>
       
     
         </form>

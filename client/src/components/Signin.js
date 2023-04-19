@@ -11,12 +11,18 @@ const [password, setPassword] = useState('')
 const handleSubmit = (e) => {
     e.preventDefault()
     console.log("bombastic side eye")
+
+    const newData = {
+      email: email,
+      password_digest: password
+    }
+  console.log(newData)
     fetch("/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify(newData),
     })
       .then((r) => r.json(onLogin))
       // .then((user) => onLogin(user));
