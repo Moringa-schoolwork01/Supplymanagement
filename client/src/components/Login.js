@@ -27,7 +27,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("ni kunoma mazee")
+    console.log(email + password)
     setError(null);
     fetch("/users", {
       method: "POST",
@@ -64,7 +64,7 @@ const Login = () => {
         <span class="title"> Sign Up</span>
         <span class="subtitle">Remember Me?</span>
         <div class="form-container">
-        <input type="text" class="input" placeholder="Full Name"id='name' value={name} onChange={(e) => setName(e.target.value)}/>
+        {/* <input type="text" class="input" placeholder="Full Name"id='name' value={name} onChange={(e) => setName(e.target.value)}/> */}
           <input type="email" class="input" placeholder="Email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
           <input type="password" class="input" placeholder="Password" id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
         </div>
