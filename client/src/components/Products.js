@@ -1,11 +1,16 @@
 import React from 'react'
+import { Link,Outlet } from 'react-router-dom'
+
 
 function Products() {
+  // const navigate = useNavigate()
+
   return (
     <div className='prodcont'>
 
     <h3 >Add your product here</h3>
-    <button className='btn2'>Add new product</button>
+    <button className='btn2'><Link to='addproduct'>Add new product</Link></button>
+    <Outlet />
 
           <table class="table">
   <thead>
@@ -60,7 +65,6 @@ function Products() {
     </tr>
   </tbody>
 </table>  
-
     </div>
   )
 }
