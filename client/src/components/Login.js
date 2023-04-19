@@ -17,25 +17,25 @@ const [password, setPassword] = useState('')
     setNotify((notify) => !notify);
     setTimeout(endNotification, 1000);
   }
-
-
-
-  
-  
  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("ni kunoma mazee")
+    const newData = {
+      email: email,
+      password_digest: password
+    }
+    console.log(newData)
     setError(null);
-    fetch("/users", {
+    fetch("/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
         Accept: "application/json",
         Authorization: localStorage.token,
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify(newData),
     }).then((res) => {
       if (res.ok) {
         res.json().then((user) => {

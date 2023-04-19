@@ -7,6 +7,7 @@
         end
     
         def create
+          
             user = User.create!(user_params)
             
             if user.valid?
@@ -37,6 +38,6 @@
           private
 
           def user_params
-            params.permit(:name, :email, :password_digest)  
+            params.permit( :email, :password_digest)  
           end
         end
