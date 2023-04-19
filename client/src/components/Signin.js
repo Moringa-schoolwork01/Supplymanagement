@@ -7,7 +7,7 @@ function Signin(onLogin) {
 const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
 
-
+// Register new user
 const handleSubmit = (e) => {
     e.preventDefault()
     console.log("bombastic side eye")
@@ -32,13 +32,13 @@ const handleSubmit = (e) => {
 			<input type="email" class="input" placeholder="Email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
 			<input type="password" class="input" placeholder="Password" id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
     </div>
-    <button>SignUp</button>
+    <button>Signin</button>
   
 
     </form>
     
 <div class="form-section">
-  <p>Have an account? <a href="login">Sign in</a> </p>
+  <p>Dont have an account? <a href="login">Sign up</a> </p>
 </div>
 <Outlet />
 
