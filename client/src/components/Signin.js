@@ -32,13 +32,13 @@ const handleSubmit = (e) => {
 			<input type="email" class="input" placeholder="Email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
 			<input type="password" class="input" placeholder="Password" id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
     </div>
-    <button>Signin</button>
+    <button>Signup</button>
   
 
     </form>
     
 <div class="form-section">
-  <p>Dont have an account? <a href="login">Sign up</a> </p>
+  <p>Have an account? <a href="login">login</a> </p>
 </div>
 <Outlet />
 
