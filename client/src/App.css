@@ -129,12 +129,13 @@ margin-right: 100px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   border: 1px solid black;
-  box-shadow: 0 0 0 0 black;
+  box-shadow: 0 0 0 0 rgb(248, 240, 240);
 }
 
 .btn2:hover {
   transform: translateY(-4px) translateX(-2px);
   box-shadow: 2px 5px 0 0 black;
+  color: white
 };
 
 .btn2:active {
@@ -210,8 +211,8 @@ margin-left: 70px;
 
 .btnd {
   border-radius: 5px;
-  padding: 10px 25px;
-  background-color: #ff0000;
+  /* padding: 10px 35px; */
+  background-color: #73ff00;
   color: #000000;
   font-weight: Bold;
   transition: all 0.5s;
@@ -291,10 +292,10 @@ button:hover .arrow:before {
 }
 
 .form-box {
-  max-width: 400px;
   background: #81b6f4;
-
-  overflow: hidden;
+ margin-left: 70%; 
+ width: 500px;
+ overflow: hidden;
   border-radius: 16px;
   color: #010101;
 }
@@ -332,11 +333,12 @@ button:hover .arrow:before {
   background: none;
   border: 0;
   outline: 0;
+  margin-top: 30px;
   height: 40px;
   width: 100%;
   border-bottom: 1px solid #eee;
-  font-size: .9rem;
-  padding: 8px 15px;
+  font-size: 20px;
+  padding: 8px 25px;
 }
 
 .form-section {
@@ -359,17 +361,19 @@ button:hover .arrow:before {
 
 /*Button*/
 .form button {
-  background-color: #0066ff;
+  background-color: #0066ffa5;
   color: #fff;
   border: 0;
   border-radius: 24px;
   padding: 10px 16px;
   font-size: 1rem;
   font-weight: 600;
+  width: 80px;
+  align-items: center;
   cursor: pointer;
   transition: background-color .3s ease;
 }
 
 .form button:hover {
-  background-color: #005ce6;
+  background-color: #002aff;
 }

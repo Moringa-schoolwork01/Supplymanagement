@@ -2,37 +2,43 @@ import React, { useState } from 'react'
 import { Link,Outlet } from 'react-router-dom'
 
 
-function Signin() {
+function Signin(onLogin) {
 
-
-    const [name, setName] = useState('')
 const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
 
 
 const handleSubmit = (e) => {
     e.preventDefault()
-    const userData = { name, email, password}
-
-    console.log(userData)
+    console.log("bombastic side eye")
+    fetch("/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((r) => r.json(onLogin))
+      // .then((user) => onLogin(user));
 }
+
 
   return (
     <div class="form-box">
 <form class="form" onSubmit={handleSubmit}>
-    <span class="title"> User Login</span>
-    <span class="subtitle">Remember Me?</span>
+    <span class="title"> register new user</span>
+    <span class="subtitle">Hey am new</span>
     <div class="form-container">
 			<input type="email" class="input" placeholder="Email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
 			<input type="password" class="input" placeholder="Password" id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
     </div>
-    <button>Login</button>
+    <button>SignUp</button>
   
 
     </form>
     
 <div class="form-section">
-  <p>Don't have an account? <a><Link to="login">Sign Up</Link></a> </p>
+  <p>Have an account? <a href="login">Sign in</a> </p>
 </div>
 <Outlet />
 
