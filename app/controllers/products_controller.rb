@@ -1,49 +1,38 @@
 class ProductsController < ApplicationController
-    class SpicesController < ApplicationController
 
-        # GET /spices: return an array of all spices
+        # GET /products: return an array of all products
         def  index
-            spices = Spice.all
-            render json: spices
+            products = Products.all
+            render json: products
         end
             
-        # POST /spices: create a new spice
+        # POST /spices: create a new product
         def create
-            spice = Spice.create(spice_params)
-            render json: spice, status: :created
+            products = Products.create(product_params)
+            render json: product, status: :created
         end
     
     
-        # PATCH /spices/:id: update an existing spice
+        # PATCH /product/:id: update an existing product
         def update
-            spice = Spice.find_by(id: params[:id])
-            if spice
-                spice.update(spice_params)
-                render json: spice
+            product = Product.find_by(id: params[:id])
+            if product
+                product.update(product_params)
+                render json: product
             else
-                render json: { error: "Spice not found" }, status: :not_found
+                render json: { error: "Product not found" }, status: :not_found
             end
         end
+
     
-        def increment_description
-            spice = Spice.find_by(id: params[:id])
-            if spice
-                spice.update(description: spice.description + 1)
-                render json: spice
-                else
-                    render json: { error: "Spice not found" }, status: :not_found
-                end
-        end
-    
-    
-        # DELETE /spices/:id: delete an existing spice 
+        # DELETE /products/:id: delete an existing product 
         def destroy
-            spice = Spice.find_by(id: params[:id])
-            if spice
-                spice.destroy
+            product = Product.find_by(id: params[:id])
+            if product
+                product.destroy
                 head :no_content
                 else
-                    render json: { error: "Spice not found" }, status: :not_found
+                    render json: { error: " Product not found" }, status: :not_found
                 end
         end
     
