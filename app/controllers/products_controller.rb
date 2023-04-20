@@ -1,47 +1,57 @@
 class ProductsController < ApplicationController
-    def index
-      @products = Product.all
+    class SpicesController < ApplicationController
+
+        # GET /spices: return an array of all spices
+        def  index
+            spices = Spice.all
+            render json: spices
+        end
+            
+        # POST /spices: create a new spice
+        def create
+            spice = Spice.create(spice_params)
+            render json: spice, status: :created
+        end
+    
+    
+        # PATCH /spices/:id: update an existing spice
+        def update
+            spice = Spice.find_by(id: params[:id])
+            if spice
+                spice.update(spice_params)
+                render json: spice
+            else
+                render json: { error: "Spice not found" }, status: :not_found
+            end
+        end
+    
+        def increment_description
+            spice = Spice.find_by(id: params[:id])
+            if spice
+                spice.update(description: spice.description + 1)
+                render json: spice
+                else
+                    render json: { error: "Spice not found" }, status: :not_found
+                end
+        end
+    
+    
+        # DELETE /spices/:id: delete an existing spice 
+        def destroy
+            spice = Spice.find_by(id: params[:id])
+            if spice
+                spice.destroy
+                head :no_content
+                else
+                    render json: { error: "Spice not found" }, status: :not_found
+                end
+        end
+    
+        private
+        
+        def products_params
+            params.permit(:code, :name, :image, :price, :action)
+        end
     end
-  
-    def show
-      @product = Product.find(params[:id])
-    end
-  
-    def new
-      @product = Product.new
-    end
-  
-    def create
-      @product = Product.new(product_params)
-      if @product.save
-        redirect_to @product
-      else
-        render :new
-      end
-    end
-  
-    def edit
-      @product = Product.find(params[:id])
-    end
-  
-    def update
-      @product = Product.find(params[:id])
-      if @product.update(product_params)
-        redirect_to @product
-      else
-        render :edit
-      end
-    end
-  
-    def destroy
-      @product = Product.find(params[:id])
-      @product.destroy
-      redirect_to products_path
-    end
-  
-    private
-  
-    def product_params
-      params.require(:product).permit(:product_code, :name, :price)
-    end
-  end
+    
+end
