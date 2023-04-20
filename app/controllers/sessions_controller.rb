@@ -1,24 +1,13 @@
 class SessionsController < ApplicationController
 
-
-
-  # def create
-  #   user = User.new(user_params)
-  #   if email.present? && password_digest.present?
-  #   render json:  user
-  #   else
-  #     render json: { error: 'Email and password are required' }, status: :unprocessable_entity
-  #   end
-  # end
-
-  
   def create
     user = User.find_by(email: params[:email])
-    if user&.authenticate(params[:password])
-      session[:user_id] = user.id
-      render json: user, status: :created
+    puts user
+    if user && user.authenticate(params[:password])
+      token = encode_token(user_id: user.id)
+      render json: { user: @user, token: token }, status: :created
     else
-      render json: { errors: ["Invalid password or username"] }, status: :unauthorized
+      render json: {  errors: 'Invalid email or password' }, status: :unprocessable_entity
     end
 
 
@@ -30,7 +19,21 @@ class SessionsController < ApplicationController
       private
 
       def user_params
-        params.permit(:email, :password_digest)
+        params.permit(:email, :password)
       end
     
 end
+# class SessionsController < ApplicationController
+#   def create
+#     user = User.find_by(username: params[:username])
+#     session[:user_id] = user.id
+#     render json: user
+#   end
+
+#   def destroy
+#       session.delete :user_id
+#       head :no_content
+#     end
+
+  
+# end
