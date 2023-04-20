@@ -13,7 +13,8 @@ const handleSubmit = (e) => {
 
     const newData ={
       email: email,
-      password_digest: password
+      password: password,
+      password_confirmation: password
     }
    console.log (newData)
     fetch("/users", {

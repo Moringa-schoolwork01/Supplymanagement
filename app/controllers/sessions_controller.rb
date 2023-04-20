@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     puts user
     if user && user.authenticate(params[:password])
       token = encode_token(user_id: user.id)
-      render json: { user: @user, token: token }, status: :created
+      render json: { user: user.email, token: token }, status: :created
     else
       render json: {  errors: 'Invalid email or password' }, status: :unprocessable_entity
     end
