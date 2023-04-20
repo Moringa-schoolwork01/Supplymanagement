@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link,Outlet } from 'react-router-dom'
 
 
 function Signin(onLogin) {
@@ -10,12 +11,19 @@ const [password, setPassword] = useState('')
 const handleSubmit = (e) => {
     e.preventDefault()
     console.log("bombastic side eye")
+
+    const newData = {
+      email: email,
+      password: password,
+      password_confirmation: password
+    }
+  console.log(newData)
     fetch("/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify(newData),
     })
       .then((r) => r.json(onLogin))
       // .then((user) => onLogin(user));
@@ -31,14 +39,16 @@ const handleSubmit = (e) => {
 			<input type="email" class="input" placeholder="Email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
 			<input type="password" class="input" placeholder="Password" id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
     </div>
-    <button>Signin</button>
+    <button>Signup</button>
   
 
     </form>
     
 <div class="form-section">
-  <p>Dont have an account? <a href="login">Sign up</a> </p>
+  <p>Have an account? <a href="login">login</a> </p>
 </div>
+<Outlet />
+
 </div>
   )
 }

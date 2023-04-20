@@ -3,37 +3,37 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useCallback } from 'react';
 import "../css/login.css";
 
+
 const Login = () => {
-  const navigate = useNavigate();
 
   const [error, setError] = useState(null);
   const [notify, setNotify] = useState(false);
   const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
 
-  // // const [credentials, setCredentials] = useState({
-  //   username: "",
-  //   password: "",
-  // });
+ 
   function notifyUser() {
+
     setNotify((notify) => !notify);
     setTimeout(endNotification, 1000);
   }
-
  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("ni kunoma mazee")
+    const newData = {
+      email: email,
+      password_digest: password
+    }
+    console.log(newData)
     setError(null);
-    fetch("/users", {
+    fetch("/login", {
       method: "POST",
       headers: {
-        "Content-type": "application/json",
-        Accept: "application/json",
-        Authorization: localStorage.token,
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify(newData),
     }).then((res) => {
       if (res.ok) {
         res.json().then((user) => {
@@ -56,7 +56,10 @@ const [password, setPassword] = useState('')
     setNotify((notify) => !notify);
     navigate("/dashboard");
   }
+  const navigate = useNavigate()
+
   return (
+    
 
     <div class="form-box">
     <form class="form" onSubmit={handleSubmit}>
@@ -66,7 +69,7 @@ const [password, setPassword] = useState('')
           <input type="email" class="input" placeholder="Email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
           <input type="password" class="input" placeholder="Password" id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
         </div>
-        <button>Login</button>
+        <button onClick={() => navigate('Home')}>Login</button>
       
     
         </form>
