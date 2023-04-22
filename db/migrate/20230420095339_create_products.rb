@@ -1,8 +1,7 @@
 class CreateProducts < ActiveRecord::Migration[7.0]
   def change
-    drop_table: products
 
-    create_table :products do |t|
+    create_table :products,if_not_exists: true do |t|
       t.boolean :code
       t.string :name
       t.string :image_url

@@ -2,22 +2,32 @@ class ProductsController < ApplicationController
 
         # GET /products: return an array of all products
         def  index
-            products = Products.all
+            products = Product.all
             render json: products
         end
+    
             
-        # POST /spices: create a new product
+        # POST /products: create a new product
         def create
-            products = Products.create(product_params)
+            product = Product.create(code: params[:code], name: params[:name], image_url: params[:image_url],  price: params[:price], action: params[:action])
             render json: product, status: :created
-        end
+          end
+
+        # GET /products: get product by id
+        def show
+            product = Product.find_by(id: params[:id])
+            if product
+              render json: product
+            else
+              render json: { error: "product  not found" }, status: :not_found
+            end
+          end
     
     
-        # PATCH /product/:id: update an existing product
         def update
             product = Product.find_by(id: params[:id])
             if product
-                product.update(product_params)
+                product.update(products_params)
                 render json: product
             else
                 render json: { error: "Product not found" }, status: :not_found
@@ -39,8 +49,7 @@ class ProductsController < ApplicationController
         private
         
         def products_params
-            params.permit(:code, :name, :image, :price, :action)
+            params.permit(:code, :name, :image_url, :price, :action)
         end
-    end
-    
+     
 end
