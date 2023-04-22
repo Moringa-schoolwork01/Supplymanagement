@@ -1,15 +1,20 @@
 Rails.application.routes.draw do
+  resources :products
+  resources :users
+  resources :sales
+  resources :orders
+  resources :customers
   resources :users, param: :_username
   post '/login', to: 'sessions#create'
   get '/*a', to: 'application#not_found'
 end
 # Rails.application.routes.draw do
-#   resources :users
-#   resources :sales
-#   resources :orders
-#   resources :customers
-#   resources :products
-#   # Routes for logging in and out
+  # resources :products
+  # resources :users
+  # resources :sales
+  # resources :orders
+  # resources :customers
+# #   # Routes for logging in and out
 #   # get '/auth', to: 'users#show'
 #   post '/login', to: 'sessions#create'
 #   get "/me", to: "users#show"
