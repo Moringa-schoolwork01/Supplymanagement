@@ -10,25 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_20_120110) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_22_201742) do
   create_table "customers", force: :cascade do |t|
-    t.string "name"
+    t.string "first_name"
+    t.string "last_name"
     t.integer "contact"
     t.string "email"
-    t.string "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "order_items", force: :cascade do |t|
-    t.integer "quantity"
-    t.decimal "price"
-    t.integer "order_id", null: false
-    t.integer "product_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_order_items_on_order_id"
-    t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -38,8 +27,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_20_120110) do
     t.integer "price"
     t.string "quantity"
     t.integer "total_sales"
+    t.integer "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -59,8 +50,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_20_120110) do
     t.integer "discount"
     t.integer "total"
     t.string "payment_method"
+    t.integer "customer_id"
+    t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_sales_on_customer_id"
+    t.index ["product_id"], name: "index_sales_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,6 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_20_120110) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "order_items", "orders"
-  add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "sales", "customers"
+  add_foreign_key "sales", "products"
 end

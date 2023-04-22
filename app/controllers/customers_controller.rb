@@ -1,48 +1,58 @@
 class CustomersController < ApplicationController
+
+   # GET /customers
     def index
-      @customers = Customer.all
+      customers = Customer.all
+      render json: customers
     end
   
+     # GET /customers/:id
     def show
-      @customer = Customer.find(params[:id])
-    end
+      customer = Customer.find_by(id: params[:id])
+      if customer
+        render json: customer
+      else
+        render json: { error: "Customer  not found" }, status: :not_found
+      end
+    end 
   
-    def new
-      @customer = Customer.new
-    end
-  
+
+
+  #  creating an new customer
     def create
-      @customer = Customer.new(customer_params)
-      if @customer.save
-        redirect_to @customer
-      else
-        render :new
-      end
+      customer = Customer.create(first_name: params[:first_name], last_name: params[:last_name],  contact: params[:contact], email: params[:email])
+      render json: customer, status: :created
     end
   
-    def edit
-      @customer = Customer.find(params[:id])
-    end
-  
+    
+
+
+     # PATCH /customer/:id
     def update
-      @customer = Customer.find(params[:id])
-      if @customer.update(customer_params)
-        redirect_to @customer
+      customer = Customer.find_by(id: params[:id])
+      if customer
+        customer.update(customer_params)
+        render json: customer 
       else
-        render :edit
+        render json: { error: "Customer not found" }, status: :not_found
       end
     end
-  
-    def destroy
-      @customer = Customer.find(params[:id])
-      @customer.destroy
-      redirect_to customers_path
+
+     # DELETE /customer/:id
+def destroy
+    customer = Customer.find_by(id: params[:id])
+    if customer
+      customer.destroy
+    else
+      render json: { error: "Customer not found" }, status: :not_found
     end
+  end
+
   
     private
   
     def customer_params
-      params.require(:customer).permit(:full_name, :contact, :email)
+      params.permit(:first_name, :last_name, :contact, :email,)
     end
   end
   

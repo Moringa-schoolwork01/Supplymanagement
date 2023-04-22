@@ -1,47 +1,50 @@
 class SalesController < ApplicationController
-    def index
-      @sales = Sale.all
-    end
-  
-    def show
-      @sale = Sale.find(params[:id])
-    end
-  
-    def new
-      @sale = Sale.new
-    end
-  
-    def create
-      @sale = Sale.new(sale_params)
-      if @sale.save
-        redirect_to @sale
-      else
-        render :new
-      end
-    end
-  
-    def edit
-      @sale = Sale.find(params[:id])
-    end
-  
-    def update
-      @sale = Sale.find(params[:id])
-      if @sale.update(sale_params)
-        redirect_to @sale
-      else
-        render :edit
-      end
-    end
-  
-    def destroy
-      @sale = Sale.find(params[:id])
-      @sale.destroy
-      redirect_to sales_path
-    end
-  
-    private
-  
-    def sale_params
-      params.require(:sale).permit(:date, :name, :price, :discount, :total)
-    end
+     # GET /sales: return an array of all sales
+  def  index
+    sales = Sale.all
+    render json: sales
+end
+
+   # GET /sales/:id
+def show
+  sale = Sale.find_by(id: params[:id])
+  if sale
+    render json: sale
+  else
+    render json: { error: "sale  not found" }, status: :not_found
   end
+end 
+
+
+
+
+# POST /sales: create a new sales
+def create
+    sale = Sale.create(date: params[:date], name: params[:name], price: params[:price], discount: params[:discount], total: params[:total] )
+    render json: sale, status: :created
+  end
+
+def update
+    sale = Sale.find_by(id: params[:id])
+    if sale
+        sale.update(sales_params)
+        render json: sale
+    else
+        render json: { error: "No sales" }, status: :not_found
+    end
+end
+# DELETE /sales/:id: delete an existing sales
+def destroy
+    sale = Sale.find_by(id: params[:id])
+    if sale
+        sale.destroy
+        head :no_content
+        else
+            render json: { error: "No sales" }, status: :not_found
+        end
+end
+private
+def sales_params
+    params.permit(:date, :name, :price, :discount, :total)
+end
+end

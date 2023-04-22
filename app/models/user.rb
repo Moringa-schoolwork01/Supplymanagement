@@ -7,7 +7,7 @@ class User < ApplicationRecord
     # validates :password, presence: true
 
     # # relationship
-     has_many :products
+    #  has_many :products
     # has_many :orders
 
 
