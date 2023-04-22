@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :orders
+  resources :sales
+  resources :customers
   resources :users, param: :_username
   post '/login', to: 'sessions#create'
   get '/*a', to: 'application#not_found'
