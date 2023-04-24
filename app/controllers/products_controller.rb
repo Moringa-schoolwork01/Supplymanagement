@@ -1,47 +1,54 @@
 class ProductsController < ApplicationController
-    def index
-      @products = Product.all
-    end
-  
-    def show
-      @product = Product.find(params[:id])
-    end
-  
-    def new
-      @product = Product.new
-    end
-  
-    def create
-      @product = Product.new(product_params)
-      if @product.save
-        redirect_to @product
-      else
-        render :new
-      end
-    end
-  
-    def edit
-      @product = Product.find(params[:id])
-    end
-  
-    def update
-      @product = Product.find(params[:id])
-      if @product.update(product_params)
-        redirect_to @product
-      else
-        render :edit
-      end
-    end
-  
-    def destroy
-      @product = Product.find(params[:id])
-      @product.destroy
-      redirect_to products_path
-    end
-  
-    private
-  
-    def product_params
-      params.require(:product).permit(:product_code, :name, :price)
+   # GET /products: return an array of all products
+   def  index
+    products = Product.all
+    render json: products
+end
+
+    
+# POST /products: create a new product
+def create
+    product = Product.create(code: params[:code], name: params[:name], image_url: params[:image_url],  price: params[:price], action: params[:action])
+    render json: product, status: :created
+  end
+
+# GET /products: get product by id
+def show
+    product = Product.find_by(id: params[:id])
+    if product
+      render json: product
+    else
+      render json: { error: "product  not found" }, status: :not_found
     end
   end
+
+
+def update
+    product = Product.find_by(id: params[:id])
+    if product
+        product.update(products_params)
+        render json: product
+    else
+        render json: { error: "Product not found" }, status: :not_found
+    end
+end
+
+
+# DELETE /products/:id: delete an existing product 
+def destroy
+    product = Product.find_by(id: params[:id])
+    if product
+        product.destroy
+        head :no_content
+        else
+            render json: { error: " Product not found" }, status: :not_found
+        end
+end
+
+private
+
+def products_params
+    params.permit(:code, :name, :image_url, :price, :action)
+end
+
+end
