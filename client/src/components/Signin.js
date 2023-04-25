@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link,Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 
 
 function Signin(onLogin) {
@@ -12,12 +12,12 @@ const handleSubmit = (e) => {
     e.preventDefault()
     console.log("bombastic side eye")
 
-    const newData = {
+    const newData ={
       email: email,
       password: password,
       password_confirmation: password
     }
-  console.log(newData)
+   console.log (newData)
     fetch("/users", {
       method: "POST",
       headers: {
@@ -47,8 +47,6 @@ const handleSubmit = (e) => {
 <div class="form-section">
   <p>Have an account? <a href="login">login</a> </p>
 </div>
-<Outlet />
-
 </div>
   )
 }
