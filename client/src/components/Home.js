@@ -116,7 +116,7 @@ function Home() {
           </div>
           <div className='body3'>
             <h2>Top 5 Products</h2>
-            <PieChart width={400} height={400}>
+            {/* <PieChart width={400} height={400}>
               <Pie
                 data={pieChartData}
                 cx={200}
@@ -127,7 +127,7 @@ function Home() {
               />
               <Tooltip />
               <Legend />
-            </PieChart>
+            </PieChart> */}
           </div>
         </div>
       </div>

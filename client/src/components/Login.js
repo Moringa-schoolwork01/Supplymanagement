@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import "../css/login.css";
+import Profile from "./Profile";
 
-function Login (onRegister) {
 
+function Login () {
   const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
-const [error, setError] = useState(false);
+const [isLoggedIn, setIsLoggedIn] = useState(false);
+const [errorMessage, setErrorMessage] = useState('');
+const [error, setError] = useState('');
 
  
+// const handleLogin = () => {
+//   navigate('/')
+// }
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,7 +25,7 @@ const [error, setError] = useState(false);
       }
       const newData = {
         email: email,
-        password_digest: password
+        password: password
       }
       console.log(newData)
       fetch('/login', {
@@ -28,32 +35,30 @@ const [error, setError] = useState(false);
           'Content-type': 'application/json; charset=UTF-8',
         },
       })
-      .then((r) => r.json(onRegister))
- 
-   
-  // };    
-      // if (res.ok) {
-      //   res.json().then((user) => {
-      //     notifyUser();
-      //     localStorage.setItem("token", user.jwt);
-      //     localStorage.setItem("user", `${user.user.id}`);
-      //   });
-      // } else {
-      //   res.json().then((error) => setError(error));
-      // }
- 
+      .then((r) => r.json())
+      .then((newuser) =>{
+        console.log(newuser)
+        // save the token to localStorage for future access
+       localStorage.setItem("jwt", newuser.jwt);
+       //shows alert with user details
+       if (newuser.user) {
+        setIsLoggedIn(true);
+        alert(`Login successful! Welcome, ${newuser.user}!`);
+        <Profile  user={newuser.user}/>
+      } else {
+        setErrorMessage('User does not exist.');
+        alert('Login failed. User does not exist.')
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      setErrorMessage('An error occurred. Please try again later.');
+    });
+      
+     
 
-  // const handleLogout = useCallback(() => {
-  //   localStorage.removeItem('token');
- 
-  // }, []);
-
-  // function endNotification() {
-  //   setNotify((notify) => !notify);
-  //   navigate("/dashboard");
+     
   }
-
-
   return (
 
     <div class="form-box">
@@ -69,8 +74,10 @@ const [error, setError] = useState(false);
           <label className="formlbel">Field cant be empty</label>:""}
 
         </div>
-        <button >Login</button>
+        <button>Login</button>
         </form>
+        {isLoggedIn && <p>Login successful!</p>}
+      {errorMessage && <p>{errorMessage}</p>}
     </div>
 
   );
