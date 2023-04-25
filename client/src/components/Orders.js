@@ -1,10 +1,22 @@
-import React from 'react'
+import React,{ useEffect, useState } from 'react'
 
 function Orders() {
+
+  const [orders,setOrders] = useState([])
+
+
+  useEffect(()=> {
+    fetch('/orders')
+    .then((resp) => resp.json())
+    .then((json) => {
+        console.log(json)
+        setOrders(json)
+    })
+}, [])
   return (
     <div className='prodcont'>
-
-    <h3 >Recent Orders</h3>
+<div className='prodorders'>
+          <h3 > Recent Orders </h3>
 
           <table class="table">
   <thead>
@@ -16,58 +28,31 @@ function Orders() {
       <th scope="col">Price</th>
       <th scope="col">Quantity</th>
       <th scope="col">Total sales</th>
+
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>2023-04-16</td>
-      <td>10:30pm</td>
-      <td>Chairs</td>
-      <td>$20</td>
-      <td>100</td>
-      <td>$2000</td>
 
+
+    {
+      orders.map((order) =>{
+        return(
+          <tr>
+          <th scope="row">{order.id}</th>
+          <td>{order.date}</td>
+          <td>{order.time}</td>
+          <td>{order.product_sold}</td>
+          <td>{order.price}</td>
+          <td>{order.quantity}</td>
+          <td>{order.total_sales}</td>
+        </tr>
     
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>2023-04-16</td>
-      <td>10:30pm</td>
-      <td>Tables</td>
-      <td>$70</td>
-      <td>300</td>
-      <td>$721000</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>2023-04-16</td>
-      <td>10:30pm</td>
-      <td >Mabati </td>
-      <td>$150</td>
-      <td>200</td>
-      <td>$30000</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>2023-04-16</td>
-      <td>10:30pm</td>
-      <td >Wheelbarrow </td>
-      <td>$200</td>
-      <td>300</td>
-      <td>$60000</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>2023-04-16</td>
-      <td>10:30pm</td>
-      <td >Paperbag </td>
-      <td>$50</td>
-      <td>1000</td>
-      <td>$50000</td>
-    </tr>
+        )
+      })
+    }
   </tbody>
 </table>  
+</div>
 
     </div>
   )

@@ -24,10 +24,10 @@ const auth = useAuth()
         <li><Link to='/customers'>Customers</Link></li>
         <li><Link to='/orders'>Orders</Link></li>
         <li><Link to='/reports'>Reports</Link></li>
-        <li><Link to='/profile'>Profile</Link></li>
+        {/* <li><Link to='/profile'>Profile</Link></li> */}
       </ul>
       {!auth.user && (
-              <button className="btn1"><Link to='/login'>Login</Link></button>
+              <button className="btn1"><Link to='/login'>Logout</Link></button>
       )}
     </div>
     </div>
