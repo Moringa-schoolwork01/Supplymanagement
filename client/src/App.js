@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Home from './components/Home';
 import{Routes, Route} from 'react-router-dom'
@@ -33,7 +32,7 @@ function App() {
         <Route exact path="customers/UpdateCustomer" element={<UpdateCustomer />}/>
         <Route exact path="/orders" element={<Orders />}></Route>
         <Route exact path="/home/signin" element={<Signin />}></Route>
-        <Route exact path="profile" element={<Profile />}></Route>
+        {/* <Route exact path="profile" element={<Profile />}></Route> */}
         <Route exact path="/home/login" element={<Login />}></Route>
       </Routes> 
      </Space>
