@@ -12,15 +12,20 @@ import Signin from './components/Signin';
 import Login from './components/Login';
 import Addproduct from './components/Addproduct';
 import Addcustomer from './components/Addcustomer'
+import Profile from './components/Profile';
+// import {ProtectedRoute } from "./components/ProtectedRoute"
+// import { AuthProvider } from './auth/AuthContext';
 
 
 function App() {
   return (
+    
     <div className="App">
+      <>
      <Space className='dashcontent'>
      <Sidebar />
      <Routes>
-        <Route exact path="/" element={<Home />}></Route>
+        <Route exact path="/home" element={<Home />}> </Route>
         <Route exact path="/products" element={<Products />}></Route>
         <Route exact path="products/addproduct" element={<Addproduct />}/>
         <Route exact path="/sales" element={<Sales />}></Route>
@@ -28,13 +33,15 @@ function App() {
         <Route exact path="/customers" element={<Customers />}></Route>
         <Route exact path="customers/addcustomer" element={<Addcustomer />}/>
         <Route exact path="/orders" element={<Orders />}></Route>
-        <Route exact path="/signin" element={<Signin />}></Route>
-        <Route exact path="login" element={<Login />}></Route>
+        <Route exact path="/home/signin" element={<Signin />}></Route>
+        <Route exact path="profile" element={<Profile />}></Route>
+        <Route exact path="/home/login" element={<Login />}></Route>
       </Routes> 
      </Space>
     
       
-      
+     </>
+
     </div>
   );
 }
