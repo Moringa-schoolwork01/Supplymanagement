@@ -9,6 +9,7 @@ const [password, setPassword] = useState('')
 const [isLoggedIn, setIsLoggedIn] = useState(false);
 const [errorMessage, setErrorMessage] = useState('');
 const [error, setError] = useState('');
+const [newuser, setNewuser] = useState({});
 
  
 // const handleLogin = () => {
@@ -42,9 +43,9 @@ const [error, setError] = useState('');
        localStorage.setItem("jwt", newuser.jwt);
        //shows alert with user details
        if (newuser.user) {
+        setNewuser(newuser);
         setIsLoggedIn(true);
         alert(`Login successful! Welcome, ${newuser.user}!`);
-        <Profile  user={newuser.user}/>
       } else {
         setErrorMessage('User does not exist.');
         alert('Login failed. User does not exist.')
@@ -61,6 +62,48 @@ const [error, setError] = useState('');
   }
   return (
 
+  //   <>
+  //   {isLoggedIn ? (
+  //     <Profile newuser={isLoggedIn} />
+  //   ) : (
+  //     <div class="form-box">
+  //       <form class="form" onSubmit={handleSubmit}>
+  //         <span class="title"> User Login</span>
+  //         <span class="subtitle">Welcome Back</span>
+  //         <div class="form-container">
+  //           <input
+  //             type="email"
+  //             class="input"
+  //             placeholder="Email"
+  //             id="email"
+  //             value={email}
+  //             onChange={(e) => setEmail(e.target.value)}
+  //           />
+  //           {error && email.length <= 0 ? (
+  //             <label className="formlbel">Field cant be empty</label>
+  //           ) : (
+  //             ""
+  //           )}
+  //           <input
+  //             type="password"
+  //             class="input"
+  //             placeholder="Password"
+  //             id="password"
+  //             value={password}
+  //             onChange={(e) => setPassword(e.target.value)}
+  //           />
+  //           {error && password.length <= 0 ? (
+  //             <label className="formlbel">Field cant be empty</label>
+  //           ) : (
+  //             ""
+  //           )}
+  //         </div>
+  //         <button>Login</button>
+  //       </form>
+  //       {errorMessage && <p>{errorMessage}</p>}
+  //     </div>
+  //   )}
+  // </>
     <div class="form-box">
     <form class="form" onSubmit={handleSubmit}>
         <span class="title"> User Login</span>
@@ -76,7 +119,7 @@ const [error, setError] = useState('');
         </div>
         <button>Login</button>
         </form>
-        {isLoggedIn && <p>Login successful!</p>}
+        {isLoggedIn && <Profile newuser={newuser} />}
       {errorMessage && <p>{errorMessage}</p>}
     </div>
 

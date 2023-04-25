@@ -29,7 +29,7 @@ const handleSubmit = (e) => {
     })
       .then((r) => r.json())
       .then((newme) => {
-        alert(`${newme.user} Registration successfuly!`)
+        alert(`${newme.email} Registration successfuly!`)
       })
       // .then((user) => onLogin(user));
 }
