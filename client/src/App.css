@@ -158,15 +158,26 @@ margin-left: 70px;
 .homecont{
   display: flex;
 }
-
+.custcont{
+  color: rgb(0, 0, 0);
+  width: 130%;
+  height: 100%;
+  margin-left: 1%;
+  margin-top: 100px;
+}
+.custcont h3{
+  margin-bottom: -10px;
+  font-weight: bolder;
+}
 .prodcont{
   color: rgb(0, 0, 0);
   width: 200%;
+  height: 50%;
   margin-left: 10%;
   margin-top: -60%;
 }
 .prodcont h3{
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-weight: bolder;
 }
 .custom-btn {
@@ -379,3 +390,57 @@ button:hover .arrow:before {
 .formlbel{
   color: red;
 }
+/* .add-customer-container {
+  background-color: #fff;
+  width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-customer-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: #333;
+}
+
+.input-field {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.add-customer-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-customer-btn:hover {
+  background-color: #080808;
+} */

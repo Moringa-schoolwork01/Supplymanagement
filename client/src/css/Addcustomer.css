@@ -1,0 +1,42 @@
+/* Addcustomer.css */
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin-left: 100px;
+  border: 5Px;
+}
+
+div {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+input[type="text"],
+input[type="email"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 100%;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  border: 2px;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #9a83da;
+}
+
