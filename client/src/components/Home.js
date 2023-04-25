@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import {
   AreaChart,
   Area,
@@ -9,7 +10,8 @@ import {
   Tooltip,
   PieChart,
   Pie,
-  Legend
+  Legend,
+  Cell // Import Cell from recharts
 } from 'recharts';
 
 const data = [
@@ -64,7 +66,7 @@ const pieChartData = [
   { name: 'Wheelbarrow', value: 100 },
   { name: 'Paper', value: 50 }
 ];
-
+const colors = ['#739cc9', '#9a83da', '#a1cf82', '#c7b4', '#AF19FF', '#b3cfb6'];
 function Home() {
   const navigate = useNavigate();
 
@@ -116,18 +118,24 @@ function Home() {
           </div>
           <div className='body3'>
             <h2>Top 5 Products</h2>
-            <PieChart width={400} height={400}>
+            {/* <PieChart width={400} height={400}>
               <Pie
                 data={pieChartData}
+                color={colors}
                 cx={200}
                 cy={200}
                 outerRadius={150}
-                fill='#15d8'
-                label
-              />
+                fill=''
+                labels
+                >
+            {pieChartData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+            ))}
+              
+              </Pie>
               <Tooltip />
               <Legend />
-            </PieChart>
+            </PieChart> */}
           </div>
         </div>
       </div>

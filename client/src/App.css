@@ -7,13 +7,14 @@
 }
 .sidebar{
   width: 280px;
-  height: 940px;
-  background-color: rgb(50, 152, 247);
+  height: 1040px;
+  background-color: rgb(110, 161, 236);
+  position: relative;
 }
 .header{
   padding-top: 20px;
   color: white;
-  background-color: rgba(0, 81, 255, 0.664);
+  background-color: rgba(0, 81, 255, 0.314);
 }
 .header h1{
   color: rgb(255, 255, 255);
@@ -73,7 +74,7 @@ ul li:hover a{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-
+ margin-bottom: 10%;
 }
 .body1{
   display: flex;
@@ -151,7 +152,6 @@ margin-right: 100px;
   color: black;
 }
 .body3{
-  background-color: rgba(109, 18, 18, 0.274);
 padding-bottom: 20%;
 width: 50%;
 margin-left: 70px;
@@ -159,16 +159,37 @@ margin-left: 70px;
 .homecont{
   display: flex;
 }
-
+.custcont{
+  color: rgb(0, 0, 0);
+  width: 130%;
+  height: 100%;
+  margin-left: 1%;
+  margin-top: 100px;
+}
+.custcont h3{
+  margin-bottom: -10px;
+  font-weight: bolder;
+}
 .prodcont{
   color: rgb(0, 0, 0);
   width: 200%;
+  height: 50%;
   margin-left: 10%;
-  margin-top: -60%;
+  margin-bottom:20%;
+  position: relative;
+  background-color: rgb(248, 246, 246);
 }
 .prodcont h3{
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-weight: bolder;
+  padding-top: 20px;
+}
+.prodsales{
+margin-bottom: 15%;
+}
+.prodorders{
+  margin-bottom: 18%;
+
 }
 .custom-btn {
   width: 100px;
@@ -224,9 +245,9 @@ margin-left: 70px;
 }
 
 button {
-  --primary-color: #645bff;
+  --primary-color: #6798e6;
   --secondary-color: #fff;
-  --hover-color: #111;
+  --hover-color: #111111e4;
   --arrow-width: 10px;
   --arrow-stroke: 2px;
   box-sizing: border-box;
@@ -380,3 +401,57 @@ button:hover .arrow:before {
 .formlbel{
   color: red;
 }
+/* .add-customer-container {
+  background-color: #fff;
+  width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-customer-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: #333;
+}
+
+.input-field {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.add-customer-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-customer-btn:hover {
+  background-color: #080808;
+} */

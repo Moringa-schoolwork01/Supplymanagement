@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 
 
-function Signin(onLogin) {
+function Signin() {
 
 const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
+const [confirmpassword, setConfirmPassword] = useState('')
+
 
 // Register new user
 const handleSubmit = (e) => {
@@ -25,7 +27,10 @@ const handleSubmit = (e) => {
       },
       body: JSON.stringify(newData),
     })
-      .then((r) => r.json(onLogin))
+      .then((r) => r.json())
+      .then((newme) => {
+        alert(`${newme.email} Registration successfuly!`)
+      })
       // .then((user) => onLogin(user));
 }
 
@@ -38,6 +43,7 @@ const handleSubmit = (e) => {
     <div class="form-container">
 			<input type="email" class="input" placeholder="Email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
 			<input type="password" class="input" placeholder="Password" id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+      <input type="password" class="input" placeholder="confirm password" id='confirmpassword' value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
     </div>
     <button>Signup</button>
   

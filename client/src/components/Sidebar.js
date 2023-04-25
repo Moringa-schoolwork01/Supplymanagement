@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom"
+import { useAuth } from "./Auth"
 
 
 function Sidebar() {
+
+
+const auth = useAuth()
+
   return (
     <div className="dashbord">
        <div className='sidebar'>
@@ -13,14 +18,17 @@ function Sidebar() {
       
       <ul>
 
-      <li><Link to='/'>Dashboard </Link></li>
+      <li><Link to='/home'>Dashboard </Link></li>
         <li><Link to='/sales'>Sales </Link></li>
         <li><Link to='/products'>Products</Link></li>
         <li><Link to='/customers'>Customers</Link></li>
         <li><Link to='/orders'>Orders</Link></li>
         <li><Link to='/reports'>Reports</Link></li>
+        {/* <li><Link to='/profile'>Profile</Link></li> */}
       </ul>
-      <button className="btn1">LogOut</button>
+      {!auth.user && (
+              <button className="btn1"><Link to='/login'>Logout</Link></button>
+      )}
     </div>
     </div>
   )

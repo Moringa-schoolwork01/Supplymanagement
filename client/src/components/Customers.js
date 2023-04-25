@@ -1,72 +1,148 @@
-import React from 'react'
-import { Link,Outlet } from 'react-router-dom'
-
-
+import React, { useState, useEffect } from 'react';
+import { Link, Outlet } from 'react-router-dom';
+import '../css/Customers.css';
 
 function Customers() {
+  const [customers, setCustomers] = useState([]);
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+
+  useEffect(() => {
+    fetch('./customers')
+      .then(response => response.json())
+      .then(data => setCustomers(data))
+      .catch(error => console.error(error));
+  }, []);
+
+  function handleDelete(customer) {
+    setCustomers(prevCustomers => prevCustomers.filter(p => p.id !== customer.id));
+  }
+
+  function handleUpdate(updatedCustomer) {
+    setCustomers(prevCustomers => {
+      const updatedCustomers = prevCustomers.map(customer => {
+        if (customer.id === updatedCustomer.id) {
+          return updatedCustomer;
+        } else {
+          return customer;
+        }
+      });
+      return updatedCustomers;
+    });
+    setSelectedCustomer(null);
+  }
+  
   return (
-    <div className='prodcont'>
+    <div className='custcont'>
+      <h3>Add your customer</h3>
+      <button className='btn2'>
+        <Link to='Addcustomer'>Add new customer</Link>
+      </button>
+      <Outlet />
+      <table className='table'>
+        <thead>
+          <tr className='table-primary'>
+            <th scope='col'>#</th>
+            <th scope='col'>first_name</th>
+            <th scope='col'>last_name</th>
+            <th scope='col'>contact</th>
+            <th scope='col'>email</th>
+            <th scope='col'>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {customers.map(customer => (
+            <tr key={customer.id}>
+              <th scope='row'>{customer.id}</th>
+              <td>{customer.first_name}</td>
+              <td>{customer.last_name}</td>
+              <td>{customer.contact}</td>
+              <td>{customer.email}</td>
+              <td>
+                <button
+                  className='custom-btn btn-2'
+                  onClick={() => setSelectedCustomer(customer)}
+                >
+                  Update
+                </button>
+                <button className='btnd' onClick={() => handleDelete(customer)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {selectedCustomer && (
+  <div>
+    <h3>Update customer</h3>
+    <form onSubmit={(e) => {
+      e.preventDefault();
+      handleUpdate(selectedCustomer);
+    }}>
+      <div className="form-group">
+        <label htmlFor="customer">customer</label>
+        <input
+          type="text"
+          className="form-control"
+          id="customer"
+          name="customer"
+          value={selectedCustomer.customer}
+          onChange={(e) => setSelectedCustomer({...selectedCustomer, customer: e.target.value})}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="first_name">first_name</label>
+        <input
+          type="text"
+          className="form-control"
+          id="first_name"
+          name="first_name"
+          value={selectedCustomer.first_name}
+          onChange={(e) => setSelectedCustomer({...selectedCustomer, first_name: e.target.value})}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="last_name">last_name</label>
+        <input
+          type="text"
+          className="form-control"
+          id="last_name"
+          name="last_name"
+          value={selectedCustomer.last_name}
+          onChange={(e) => setSelectedCustomer({...selectedCustomer, last_name: e.target.value})}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="contact">Contact</label>
+        <input
+          type="text"
+          className="form-control"
+          id="contact"
+          name="contact"
+          value={selectedCustomer.contact}
+          onChange={(e) => setSelectedCustomer({...selectedCustomer, contact: e.target.value})}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="email">Email</label>
+        <input
+          type="text"
+          className="form-control"
+          id="email"
+          name="email"
+          value={selectedCustomer.email}
+          onChange={(e) => setSelectedCustomer({...selectedCustomer, email: e.target.value})}
+        />
+      </div>
+      <button type="submit" className="btn btn-primary mr-2">Update</button>
+      <button type="button" className="btn btn-secondary" onClick={() => setSelectedCustomer(null)}>Cancel</button>
+    </form>
+  </div>
+)}
 
-    <h3 >Add new customer</h3>
-    <button className='btn2'><Link to='addcustomer'>Add new customer</Link></button>
-    <Outlet />
-
-          <table class="table">
-  <thead>
-    <tr class="table-primary">
-      <th scope="col">#</th>
-      <th scope="col">Full name</th>
-      <th scope="col">Contant</th>
-      <th scope="col">Email</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Jeffrey dama</td>
-      <td>0722848380</td>
-      <td>jeff@email.com</td>
-      <button className='custom-btn btn-2'>Update</button>
-      <button className='btnd'>Delete</button>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Sammy kuria</td>
-      <td>0768696986</td>
-      <td>sammy@email.com</td>
-      <button className='custom-btn btn-2'>Update</button>
-      <button className='btnd'>Delete</button>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Dante mabwoy</td>
-      <td>0787889097</td>
-      <td>dnte@email.com</td>
-      <button className='custom-btn btn-2'>Update</button>
-      <button className='btnd'>Delete</button>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Bobby shmoney</td>
-      <td>0766789636</td>
-      <td>bobby@email.com</td>
-      <button className='custom-btn btn-2'>Update</button>
-      <button className='btnd'>Delete</button>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>shiks kapienga</td>
-      <td>0722848380</td>
-      <td>shiks@email.com</td>
-      <button className='custom-btn btn-2'>Update</button>
-      <button className='btnd'>Delete</button>
-    </tr>
-  </tbody>
-</table>  
-
+      
     </div>
-  )
+  );
 }
 
-export default Customers
+export default Customers;
