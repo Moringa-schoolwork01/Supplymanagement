@@ -12,10 +12,16 @@ import Signin from './components/Signin';
 import Login from './components/Login';
 import Addproduct from './components/Addproduct';
 import Addcustomer from './components/Addcustomer'
+// import Pagination from 'semantic-ui-react';
 
 
 function App() {
   return (
+    // <Container>
+    // <Pagination onPageChange={this.handlePage} size='mini' siblingRange="6"
+    // defaultActivePage={this.state.imageIndex.page}
+    // totalPages={this.state.imageIndex.pages}/>
+    
     <div className="App">
      <Space className='dashcontent'>
      <Sidebar />

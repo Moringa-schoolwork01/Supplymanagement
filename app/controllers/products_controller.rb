@@ -2,8 +2,15 @@ class ProductsController < ApplicationController
 
         # GET /products: return an array of all products
         def  index
-            products = Product.all
-            render json: products
+            products = Product.paginate(:page => params [:page])
+            render json: products{
+              products: products,
+            # return an integer corresponding to the current page
+              page: products.current_page,
+            # return an integer corresponding to the total page count
+              page: products.total_pages,
+
+            }
         end
     
             
