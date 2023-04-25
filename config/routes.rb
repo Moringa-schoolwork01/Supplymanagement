@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :orders
+  resources :products
   resources :sales
   resources :customers
   resources :users, param: :_username

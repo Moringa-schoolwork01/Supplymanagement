@@ -42,7 +42,7 @@ class CustomersController < ApplicationController
 def destroy
     customer = Customer.find_by(id: params[:id])
     if customer
-      customer.destroy
+      customer.destroy!
     else
       render json: { error: "Customer not found" }, status: :not_found
     end
