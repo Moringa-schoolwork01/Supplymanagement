@@ -24,7 +24,7 @@
 
 
 # Create 10 customers
-10.times do
+1.times do
   Customer.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -33,7 +33,7 @@
 end
 
 
-10.times do
+1.times do
   Product.create!(
     product: Faker::Commerce.product_name,
     code: Faker::Boolean.boolean,
@@ -43,21 +43,21 @@ end
   )
 end
 
-# Create 10 orders for each customer
-Customer.all.each do |customer|
-  10.times do
-    customer.orders.create!(
-      date: Faker::Date.between(from: 1.year.ago, to: Date.today),
-      time: Faker::Time.between(from: Time.now - 1.day, to: Time.now, format: :default),
-      product_sold: Faker::Commerce.product_name,
-      price: Faker::Commerce.price(range: 0..100.0, as_string: true),
-      quantity: Faker::Number.between(from: 1, to: 10),
-      total_sales: Faker::Number.between(from: 50, to: 500)
-    )
-  end
-end
+# # Create 10 orders for each customer
+# Customer.all.each do |customer|
+#   1.times do
+#     customer.orders.create!(
+#       date: Faker::Date.between(from: 1.year.ago, to: Date.today),
+#       time: Faker::Time.between(from: Time.now - 1.day, to: Time.now, format: :default),
+#       product_sold: Faker::Commerce.product_name,
+#       price: Faker::Commerce.price(range: 0..100.0, as_string: true),
+#       quantity: Faker::Number.between(from: 1, to: 10),
+#       total_sales: Faker::Number.between(from: 50, to: 500)
+#     )
+#   end
+# end
 
-10.times do
+1.times do
   Sale.create!(
     date: Faker::Date.between(from: 1.year.ago, to: Date.today),
     name: Faker::Commerce.product_name,
@@ -70,3 +70,10 @@ end
   )
 end
 
+10.times do
+  Order.create!(
+    quantity: Faker::Number.between(from: 1, to: 100),
+    total_sales: Faker::Number.between(from: 100, to: 10000),
+    supplier_name: Faker::Company.name
+  )
+end

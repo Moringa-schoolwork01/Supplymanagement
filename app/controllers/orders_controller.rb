@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
 
 #  creating an new order
   def create
-    order = Order.create(date: params[:date], time: params[:time],  product_sold: params[:product_sold], quantity: params[:quantity], total_sales: params[:total_sales,],  customer_id: params[:customer_id,])
+    order = Order.create(quantity: params[:quantity], total_sales: params[:total_sales,],  supplier_name: params[:supplier_name,])
     render json: order, status: :created
   end
 
@@ -51,6 +51,6 @@ end
   private
 
   def order_params
-    params.permit(:date, :time, :product_sold, :price, :quantity, :total_sales, :customer_id,)
+    params.permit(:quantity, :total_sales, :supplier_name,)
   end
 end
