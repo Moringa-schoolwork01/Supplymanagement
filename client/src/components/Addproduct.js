@@ -9,7 +9,7 @@ function AddProduct({ onAdd }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newCustomer = {
+    const newProduct = {
       product: product,
       code: code,
       name: name,
@@ -20,7 +20,7 @@ function AddProduct({ onAdd }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newCustomer),
+      body: JSON.stringify(newProduct),
     })
       .then((response) => response.json())
       .then((data) => {

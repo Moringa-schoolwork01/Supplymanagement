@@ -11,9 +11,9 @@ const auth = useAuth()
     <div className="dashbord">
        <div className='sidebar'>
         <div className='header'>
-        <h1 className='head1'>HAKUNA MATATA</h1>
-        <h5 className='head5'>Vybz Kartel</h5>
-      <p>Admin</p>
+        <h1 className='head1'>Wakurugenzi</h1>
+        <h5 className='head5'>Point Of Sale</h5>
+      <p></p>
         </div>
       
       <ul>
