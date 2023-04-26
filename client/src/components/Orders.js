@@ -22,12 +22,9 @@ function Orders() {
   <thead>
     <tr class="table-primary">
       <th scope="col">#</th>
-      <th scope="col">Date </th>
-      <th scope="col">Time </th>
-      <th scope="col">Product sold</th>
-      <th scope="col">Price</th>
       <th scope="col">Quantity</th>
       <th scope="col">Total sales</th>
+      <th scope="col">Supplier name</th>
 
     </tr>
   </thead>
@@ -39,12 +36,9 @@ function Orders() {
         return(
           <tr>
           <th scope="row">{order.id}</th>
-          <td>{order.date}</td>
-          <td>{order.time}</td>
-          <td>{order.product_sold}</td>
-          <td>{order.price}</td>
           <td>{order.quantity}</td>
           <td>{order.total_sales}</td>
+          <td>{order.supplier_name}</td>
         </tr>
     
         )
