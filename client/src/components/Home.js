@@ -66,10 +66,24 @@ const pieChartData = [
   { name: 'Wheelbarrow', value: 100 },
   { name: 'Paper', value: 50 }
 ];
+const customerData = [
+  { name: 'Customer A', totalSpent: 1000 },
+  { name: 'Customer B', totalSpent: 2000 },
+  { name: 'Customer C', totalSpent: 3000 },
+  { name: 'Customer D', totalSpent: 4000 },
+  { name: 'Customer E', totalSpent: 5000 },
+  { name: 'Customer F', totalSpent: 6000 },
+  { name: 'Customer G', totalSpent: 7000 }
+];
+
 const colors = ['#739cc9', '#9a83da', '#a1cf82', '#c7b4', '#AF19FF', '#b3cfb6'];
 function Home() {
   const navigate = useNavigate();
+ // Sort the customer data by total amount spent, in descending order
+ const sortedCustomerData = customerData.sort((a, b) => b.totalSpent - a.totalSpent);
 
+ // Get the top 5 customers
+ const top5Customers = sortedCustomerData.slice(0, 5);
   return (
     <>
       <div className='homebody'>

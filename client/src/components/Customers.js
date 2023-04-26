@@ -14,22 +14,39 @@ function Customers() {
   }, []);
 
   function handleDelete(customer) {
-    setCustomers(prevCustomers => prevCustomers.filter(p => p.id !== customer.id));
+    fetch(`./customers/${customer.id}`, { method: 'DELETE' })
+      .then(() => {
+        setCustomers(prevCustomers => prevCustomers.filter(p => p.id !== customer.id));
+      })
+      .catch(error => console.error(error));
   }
-
+  
   function handleUpdate(updatedCustomer) {
-    setCustomers(prevCustomers => {
-      const updatedCustomers = prevCustomers.map(customer => {
-        if (customer.id === updatedCustomer.id) {
-          return updatedCustomer;
-        } else {
-          return customer;
-        }
+    fetch(`./customers/${updatedCustomer.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedCustomer)
+    })
+    .then(response => response.json())
+    .then(data => {
+      setCustomers(prevCustomers => {
+        const updatedCustomers = prevCustomers.map(customer => {
+          if (customer.id === updatedCustomer.id) {
+            return data;
+          } else {
+            return customer;
+          }
+        });
+        return updatedCustomers;
       });
-      return updatedCustomers;
-    });
-    setSelectedCustomer(null);
+      setSelectedCustomer(null);
+    })
+    .catch(error => console.error(error));
   }
+  
+  
   
   return (
     <div className='custcont'>

@@ -14,21 +14,38 @@ function Products() {
   }, []);
 
   function handleDelete(product) {
-    setProducts(prevProducts => prevProducts.filter(p => p.id !== product.id));
+    fetch(`./products/${product.id}`, { method: 'DELETE' })
+      .then(() => {
+        setProducts(prevProducts => prevProducts.filter(p => p.id !== product.id));
+      })
+      .catch(error => console.error(error));
   }
 
   function handleUpdate(updatedProduct) {
-    setProducts(prevProducts => {
-      const updatedProducts = prevProducts.map(product => {
-        if (product.id === updatedProduct.id) {
-          return updatedProduct;
-        } else {
-          return product;
-        }
+    fetch(`/products/${updatedProduct.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedProduct)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to update product');
+      }
+      setProducts(prevProducts => {
+        const updatedProducts = prevProducts.map(product => {
+          if (product.id === updatedProduct.id) {
+            return updatedProduct;
+          } else {
+            return product;
+          }
+        });
+        return updatedProducts;
       });
-      return updatedProducts;
-    });
-    setSelectedProduct(null);
+      setSelectedProduct(null);
+    })
+    .catch(error => console.error(error));
   }
   
   return (
