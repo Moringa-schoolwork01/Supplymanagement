@@ -4,9 +4,19 @@ class ProductsController < ApplicationController
       products = Product.all
       render json: products
   end
+
+     # GET /products/:id
+     def show
+        product = Product.find_by(id: params[:id])
+        if product
+          render json: product
+        else
+          render json: { error: "product  not found" }, status: :not_found
+        end
+      end 
   # POST /products: create a new product
   def create
-      product = Product.create(code: params[:code], name: params[:name], image_url: params[:image_url],  price: params[:price], action: params[:action])
+      product = Product.create(code: params[:code], name: params[:name], price: params[:price], quantity: params[:quantity])
       render json: product, status: :created
     end
   def update
@@ -30,6 +40,6 @@ class ProductsController < ApplicationController
   end
   private
   def products_params
-      params.permit(:code, :name, :image_url, :price, :action)
+      params.permit(:code, :name, :price, :quantity)
   end
 end
