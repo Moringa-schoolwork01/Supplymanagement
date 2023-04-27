@@ -7,9 +7,20 @@ import { Link, Outlet } from 'react-router-dom';
 function Sales() {
 
 
+  const [sales,setSales] = useState([])
+
+
+  useEffect(()=> {
+    fetch('/sales')
+    .then((resp) => resp.json())
+    .then((json) => {
+        console.log(json)
+        setSales(json)
+    })
+}, [])
   return (
     <div className='prodcont'>
-
+      <div className='prodsales'>
     <h3 >Recent Sales</h3>
     <button><Link to='salesform'>Add Sales</Link></button>
     <Outlet/>
@@ -26,56 +37,28 @@ function Sales() {
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>32yu8nm</td>
-      <td>Chairs</td>
-      <td>$20</td>
-      <td>$0</td>
-      <td>$20</td>
-      <td>Mpesa</td>
 
+
+      {
+        sales.map((sale) =>{
+          return(
+            <tr>
+            <th scope="row">{sale.id}</th>
+            <td>{sale.date}</td>
+            <td>{sale.name}</td>
+            <td>{sale.price}</td>
+            <td>{sale.discount}</td>
+            <td>{sale.total}</td>
+            <td>{sale.payment_method}</td>
+            </tr>
+
+          )
+        })
+      }
     
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>RUH44758</td>
-      <td>Tables</td>
-      <td>$70</td>
-      <td>$0</td>
-      <td>$70</td>
-      <td>Mpesa</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td >TY598IJ </td>
-      <td >Mabati </td>
-      <td>$150</td>
-      <td>$0</td>
-      <td>$150</td>
-      <td>Mpesa</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td >GH667IO </td>
-      <td >Wheelbarrow </td>
-      <td>$200</td>
-      <td>$0</td>
-      <td>$200</td>
-      <td>Mpesa</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td >GT559NM </td>
-      <td >Paperbag </td>
-      <td>$50</td>
-      <td>$0</td>
-      <td>$50</td>
-      <td>Cash</td>
-    </tr>
   </tbody>
 </table>  
-
+</div>
     </div>
   )
 }

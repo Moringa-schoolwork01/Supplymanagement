@@ -1,144 +1,93 @@
+
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useCallback } from 'react';
 import "../css/login.css";
+import { useNavigate } from 'react-router-dom';
 
 
-const Login = () => {
 
-  const [error, setError] = useState(null);
-  const [notify, setNotify] = useState(false);
+function Login () {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
+const [isLoggedIn, setIsLoggedIn] = useState(false);
+const [errorMessage, setErrorMessage] = useState('');
+const [error, setError] = useState('');
 
  
-  function notifyUser() {
+// const handleLogin = () => {
+//   navigate('/')
+// }
 
-    setNotify((notify) => !notify);
-    setTimeout(endNotification, 1000);
-  }
- 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("ni kunoma mazee")
-    const newData = {
-      email: email,
-      password_digest: password
-    }
-    console.log(newData)
-    setError(null);
-    fetch("/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newData),
-    }).then((res) => {
-      if (res.ok) {
-        res.json().then((user) => {
-          notifyUser();
-          localStorage.setItem("token", user.jwt);
-          localStorage.setItem("user", `${user.user.id}`);
-        });
-      } else {
-        res.json().then((error) => setError(error));
+  
+      console.log("ni kunoma mazee")
+      if(email.length===0||password.length===0){
+        setError(true)
       }
+      const newData = {
+        email: email,
+        password: password
+      }
+      //Console the new data creted
+      console.log(newData)
+
+      //Post newuser with credentials
+      fetch('/login', {
+        method: 'POST',
+        body: JSON.stringify(newData),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+      .then((r) => r.json())
+      .then((newuser) =>{
+        console.log(newuser)
+        // save the token to localStorage for future access
+       localStorage.setItem("jwt", newuser.jwt);
+       //shows alert with user details
+       if (newuser.user) {
+        setIsLoggedIn(true);
+        alert(`Login successful! Welcome, ${newuser.user}!`);
+        navigate('/home')
+      } else {
+        setErrorMessage('User does not exist.');
+        alert('Login failed. User does not exist.')
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      setErrorMessage('An error occurred. Please try again later.');
     });
-  };
-
-  const handleLogout = useCallback(() => {
-    localStorage.removeItem('token');
- 
-  }, []);
-
-  function endNotification() {
-    setNotify((notify) => !notify);
-    navigate("/dashboard");
-  }
-  const navigate = useNavigate()
-
-  return (
-    
-
-    <div class="form-box">
-    <form class="form" onSubmit={handleSubmit}>
-        <span class="title"> User Login</span>
-        <span class="subtitle">Remember me?</span>
-        <div class="form-container">
-          <input type="email" class="input" placeholder="Email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
-          <input type="password" class="input" placeholder="Password" id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-        </div>
-        <button onClick={() => navigate('Home')}>Login</button>
       
-    
-        </form>
-        
-    
+     
+
+     
+  }
+  return (
+<div className='landingpage'>
+
+       <div className='landingcontent'>
+          <h2 className='signincont'>Get A New Account</h2>
+          <h3>Register a new account and get started</h3>
+        </div>
+    <div>
+     <form class="formone" onSubmit={handleSubmit}>
+    <span class="title">User Login</span>
+    <label for="email" class="label">Email</label>
+    <input type="email" id="email" name="email" required=""  value={email} onChange={(e) => setEmail(e.target.value)} class="input"/>
+    {error&&email.length<=0?
+     <label className="formlbel">Field cant be empty</label>:""}
+    <label for="password" class="label">Password</label>
+    <input type="password" id="password" name="password" required="" class="input" value={password} onChange={(e) => setPassword(e.target.value)}/>
+    {error&&password.length<=0?
+     <label className="formlbel">Field cant be empty</label>:""}
+    <button type="submit" class="submit">Login</button>
+  </form>
     </div>
-    // <div className="container-login">
-    //   <div className="screen">
-    //     <div className="screen__content">
-    //       {notify ? <p className="alert-text">Login Successful</p> : null}
-    //       <form className="login" onSubmit={handleSubmit}>
-    //         <div className="login__field">
-    //           <i className="login__icon fas fa-user"></i>
-    //           {error ? <p className="alert-text">{error.errors}</p> : null}
-    //           <input
-    //             type="text"
-    //             name="username"
-    //             className="login__input"
-    //             placeholder="Username"
-    //             value={username}
-    //             onChange={(e) => setUserName(e.target.value)}
-    //           />
-    //         </div>
-    //         <div className="login__field">
-    //           <i className="login__icon fas fa-lock"></i>
-    //           <input
-    //             type="password"
-    //             className="login__input"
-    //             placeholder="Password"
-    //             value={password}
-    //             onChange={(e) => setPassword(e.target.value)}
-    //           />
-    //         </div>
-           
-    //         <button className="button login__submit">
-    //           <span className="button__text">Log In Now</span>
-    //           <i className="button__icon fas fa-chevron-right"></i>
-    //         </button>
-    //           {/* <div className="button__text">
-    //          <button  type="submit" className="button login__submit" onClick={handleLogout}>LOGOUT
-    //          <i className="button__icon fas fa-chevron-right"></i>
-    //          </button> 
-    //          </div> */}
-    //          <div className="button__text">
-    //          <NavLink  className="button login__submit" to='/'>LOGOUT
-    //          <i className="button__icon fas fa-chevron-right"></i>
-    //          </NavLink> 
-    //          </div> 
-    //         <NavLink to="/sign-up" className="gotosignup__text">
-    //           Sign Up
-    //         </NavLink>
-    //       </form>
-    //     </div>
-    //     {/* <div class="social-login">
-    //         <h3>log in via</h3>
-    //         <div class="social-icons">
-    //           <p className="social-login__icon fab fa-instagram"></p>
-    //           <p className="social-login__icon fab fa-facebook"></p>
-    //           <p className="social-login__icon fab fa-twitter"></p>
-    //         </div>
-    //        </div>  */}
-    //     <div className="screen__background">
-    //       <span className="screen__background__shape screen__background__shape4"></span>
-    //       <span className="screen__background__shape screen__background__shape3"></span>
-    //       <span className="screen__background__shape screen__background__shape2"></span>
-    //       <span className="screen__background__shape screen__background__shape1"></span>
-    //     </div>
-    //   </div>
-    // </div>
+    </div>
+
   );
 };
 

@@ -1,7 +1,25 @@
 Rails.application.routes.draw do
+  get '/product_sales_report', to: 'reports#product_sales_report'
+
+
+  get '/top_products', to: 'reports#top_products'
+
+
+# shows weekly report of orders
+  get '/weekly_report', to: 'reports#weekly_report'
+
+
+  resources :products
+  resources :orders
+  resources :products
+  resources :sales
+  resources :reports
+  resources :customers
   resources :users, param: :_username
   post '/login', to: 'sessions#create'
   get '/*a', to: 'application#not_found'
+
+
 end
 # Rails.application.routes.draw do
 #   resources :users

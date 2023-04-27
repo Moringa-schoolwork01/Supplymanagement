@@ -10,55 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_19_102828) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_27_092420) do
   create_table "customers", force: :cascade do |t|
-    t.string "name"
+    t.string "full_name"
     t.integer "contact"
     t.string "email"
-    t.string "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "order_items", force: :cascade do |t|
-    t.integer "quantity"
-    t.decimal "price"
-    t.integer "order_id", null: false
-    t.integer "product_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_order_items_on_order_id"
-    t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "date"
-    t.string "time"
-    t.string "product_sold"
-    t.integer "price"
     t.string "quantity"
-    t.integer "total_sales"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "supplier_name"
+    t.decimal "buying_price"
+    t.decimal "total_price"
   end
 
   create_table "products", force: :cascade do |t|
-    t.string "product"
-    t.boolean "code"
+    t.integer "code"
     t.string "name"
     t.integer "price"
-    t.string "action"
+    t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "sales", force: :cascade do |t|
-    t.string "date"
-    t.string "name"
-    t.integer "price"
-    t.integer "discount"
     t.integer "total"
-    t.string "payment_method"
+    t.integer "quantity"
+    t.text "payment_method"
+    t.integer "product_id"
+    t.integer "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -70,6 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_102828) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "order_items", "orders"
-  add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "sales", "customers"
+  add_foreign_key "sales", "products"
 end
