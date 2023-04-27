@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../css/Addproduct.css';
+import { useNavigate } from 'react-router-dom';
+
 
 function AddProduct({ onAdd }) {
   const [code, setCode] = useState('');
