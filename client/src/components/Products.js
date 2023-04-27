@@ -49,7 +49,7 @@ function Products() {
   }
   
   return (
-    <div className='prodcont'>
+    <div className='prodconta'>
       <h3>Add your product here</h3>
       <button className='btn2'>
         <Link to='Addproduct'>Add new product</Link>
@@ -59,10 +59,10 @@ function Products() {
         <thead>
           <tr className='table-primary'>
             <th scope='col'>#</th>
-            <th scope='col'>Product</th>
             <th scope='col'>Code</th>
             <th scope='col'>Name</th>
             <th scope='col'>Price</th>
+            <th scope='col'>Product_Image</th>
             <th scope='col'>Action</th>
           </tr>
         </thead>
@@ -70,10 +70,10 @@ function Products() {
           {products.map(product => (
             <tr key={product.id}>
               <th scope='row'>{product.id}</th>
-              <td>{product.product}</td>
               <td>{product.code}</td>
               <td>{product.name}</td>
               <td>{product.price}</td>
+              <td>{product.product_image}</td>
               <td>
                 <button
                   className='custom-btn btn-2'
@@ -97,18 +97,7 @@ function Products() {
       handleUpdate(selectedProduct);
     }}>
       <div className="form-group">
-        <label htmlFor="product">Product</label>
-        <input
-          type="text"
-          className="form-control"
-          id="product"
-          name="product"
-          value={selectedProduct.product}
-          onChange={(e) => setSelectedProduct({...selectedProduct, product: e.target.value})}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="code">Code</label>
+        <label htmlFor="product">Code</label>
         <input
           type="text"
           className="form-control"
@@ -138,6 +127,17 @@ function Products() {
           name="price"
           value={selectedProduct.price}
           onChange={(e) => setSelectedProduct({...selectedProduct, price: e.target.value})}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="product_image">ProductImage</label>
+        <input
+          type="url"
+          className="form-control"
+          id="product_image"
+          name="product_image"
+          value={selectedProduct.product_image}
+          onChange={(e) => setSelectedProduct({...selectedProduct, product_image: e.target.value})}
         />
       </div>
       <button type="submit" className="btn btn-primary mr-2">Update</button>
