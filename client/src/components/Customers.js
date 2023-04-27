@@ -51,16 +51,16 @@ function Customers() {
   return (
     <div className='custcont'>
       <h3>Add your customer</h3>
-      <button className='btn2'>
+      <button className='btn5'>
         <Link to='Addcustomer'>Add new customer</Link>
       </button>
       <Outlet />
-      <table className='table'>
+      <table className='tableC'>
         <thead>
-          <tr className='table-primary'>
+          <tr className='table-primaryC'>
             <th scope='col'>#</th>
-            <th scope='col'>first_name</th>
-            <th scope='col'>last_name</th>
+            {/* <th scope='col'>first_name</th> */}
+            <th scope='col'>full_name</th>
             <th scope='col'>contact</th>
             <th scope='col'>email</th>
             <th scope='col'>Action</th>
@@ -70,18 +70,18 @@ function Customers() {
           {customers.map(customer => (
             <tr key={customer.id}>
               <th scope='row'>{customer.id}</th>
-              <td>{customer.first_name}</td>
-              <td>{customer.last_name}</td>
+              {/* <td>{customer.first_name}</td> */}
+              <td>{customer.full_name}</td>
               <td>{customer.contact}</td>
               <td>{customer.email}</td>
               <td>
                 <button
-                  className='custom-btn btn-2'
+                  className='custom-btnc btn-C'
                   onClick={() => setSelectedCustomer(customer)}
                 >
                   Update
                 </button>
-                <button className='btnd' onClick={() => handleDelete(customer)}>
+                <button className='btnc' onClick={() => handleDelete(customer)}>
                   Delete
                 </button>
               </td>
@@ -96,7 +96,7 @@ function Customers() {
       e.preventDefault();
       handleUpdate(selectedCustomer);
     }}>
-      <div className="form-group">
+      {/* <div className="form-groupc">
         <label htmlFor="customer">customer</label>
         <input
           type="text"
@@ -106,8 +106,8 @@ function Customers() {
           value={selectedCustomer.customer}
           onChange={(e) => setSelectedCustomer({...selectedCustomer, customer: e.target.value})}
         />
-      </div>
-      <div className="form-group">
+      </div> */}
+      {/* <div className="form-groupc">
         <label htmlFor="first_name">first_name</label>
         <input
           type="text"
@@ -117,30 +117,30 @@ function Customers() {
           value={selectedCustomer.first_name}
           onChange={(e) => setSelectedCustomer({...selectedCustomer, first_name: e.target.value})}
         />
-      </div>
-      <div className="form-group">
-        <label htmlFor="last_name">last_name</label>
+      </div> */}
+      <div className="form-groupc">
+        <label htmlFor="full_name">full_name</label>
         <input
           type="text"
           className="form-control"
-          id="last_name"
-          name="last_name"
-          value={selectedCustomer.last_name}
-          onChange={(e) => setSelectedCustomer({...selectedCustomer, last_name: e.target.value})}
+          id="full_name"
+          name="full_name"
+          value={selectedCustomer.full_name}
+          onChange={(e) => setSelectedCustomer({...selectedCustomer, full_name: e.target.value})}
         />
       </div>
-      <div className="form-group">
+      <div className="form-groupc">
         <label htmlFor="contact">Contact</label>
         <input
           type="text"
-          className="form-control"
+          className="form-controlc"
           id="contact"
           name="contact"
           value={selectedCustomer.contact}
           onChange={(e) => setSelectedCustomer({...selectedCustomer, contact: e.target.value})}
         />
       </div>
-      <div className="form-group">
+      <div className="form-groupc">
         <label htmlFor="email">Email</label>
         <input
           type="text"
@@ -151,8 +151,8 @@ function Customers() {
           onChange={(e) => setSelectedCustomer({...selectedCustomer, email: e.target.value})}
         />
       </div>
-      <button type="submit" className="btn btn-primary mr-2">Update</button>
-      <button type="button" className="btn btn-secondary" onClick={() => setSelectedCustomer(null)}>Cancel</button>
+      <button type="submit" className="btn btn-primary mr-2c">Update</button>
+      <button type="button" className="btn btn-secondaryc" onClick={() => setSelectedCustomer(null)}>Cancel</button>
     </form>
   </div>
 )}

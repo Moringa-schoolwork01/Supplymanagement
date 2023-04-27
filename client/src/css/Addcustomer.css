@@ -1,42 +1,52 @@
-/* Addcustomer.css */
 
 form {
+  background-color: #b9c9da;
   display: flex;
   flex-direction: column;
-  max-width: 500px;
-  margin-left: 100px;
+  margin-left: 40px;
   border: 5Px;
+  width: 200%;
+  margin-bottom: 320px;
+  border-radius: 7px;
 }
 
-div {
-  margin-bottom: 20px;
-}
+
 
 label {
-  font-weight: bold;
-  margin-right: 10px;
+  font-weight: bolder;
+  font-size: larger;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-right: 0px;
+  margin-left: 110px;
 }
 
 input[type="text"],
 input[type="email"] {
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #111010;
   border-radius: 4px;
   font-size: 16px;
-  width: 100%;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  width: 90%;
 }
 
 button[type="submit"] {
-  background-color: #007bff;
+  align-self: center;
+  margin-left: 10px;
+  background-color: #2626c2;
   color: white;
   border: 2px;
   border-radius: 4px;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  width: 130px;
+  margin-bottom: 2px;
 }
 
 button[type="submit"]:hover {
   background-color: #9a83da;
+  margin-left: 30px;
 }
 

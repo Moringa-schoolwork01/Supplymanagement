@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import '../css/Addcustomer.css';
 
 function AddCustomer({ onAdd }) {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [fullName, setFullName] = useState('');
   const [contact, setContact] = useState('');
   const [email, setEmail] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const newCustomer = {
-      first_name: firstName,
-      last_name: lastName,
+      full_name: fullName,
       contact: contact,
       email: email,
     };
@@ -25,8 +23,7 @@ function AddCustomer({ onAdd }) {
       .then((response) => response.json())
       .then((data) => {
         onAdd(data);
-        setFirstName('');
-        setLastName('');
+        setFullName('');
         setContact('');
         setEmail('');
       })
@@ -36,23 +33,14 @@ function AddCustomer({ onAdd }) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        
         <div>
-          <label htmlFor='first Name'>First Name:</label>
+          <label htmlFor='Full Name'>Full Name:</label>
           <input
             type='text'
-            id='first_Name'
-            value={firstName}
-            onChange={(event) => setFirstName(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='Last Name'>Last Name:</label>
-          <input
-            type='text'
-            id='last_Name'
-            value={lastName}
-            onChange={(event) => setLastName(event.target.value)}
+            id='full_Name'
+            value={fullName}
+            onChange={(event) => setFullName(event.target.value)}
             required
           />
         </div>
