@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_26_172801) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_27_092420) do
   create_table "customers", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
+    t.string "full_name"
     t.integer "contact"
     t.string "email"
     t.datetime "created_at", null: false
@@ -22,33 +21,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_172801) do
 
   create_table "orders", force: :cascade do |t|
     t.string "quantity"
-    t.integer "total_sales"
     t.string "supplier_name"
+    t.decimal "buying_price"
+    t.decimal "total_price"
   end
 
   create_table "products", force: :cascade do |t|
-    t.string "product"
-    t.boolean "code"
+    t.integer "code"
     t.string "name"
     t.integer "price"
-    t.string "action"
+    t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "sales", force: :cascade do |t|
-    t.string "date"
-    t.string "name"
-    t.integer "price"
-    t.integer "discount"
     t.integer "total"
-    t.string "payment_method"
-    t.integer "customer_id"
+    t.integer "quantity"
+    t.text "payment_method"
     t.integer "product_id"
+    t.integer "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["customer_id"], name: "index_sales_on_customer_id"
-    t.index ["product_id"], name: "index_sales_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,6 +52,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_172801) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "sales", "customers"
-  add_foreign_key "sales", "products"
 end

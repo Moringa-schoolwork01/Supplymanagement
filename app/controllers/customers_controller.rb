@@ -20,7 +20,7 @@ class CustomersController < ApplicationController
 
   #  creating an new customer
     def create
-      customer = Customer.create(first_name: params[:first_name], last_name: params[:last_name],  contact: params[:contact], email: params[:email])
+      customer = Customer.create(full_name: params[:full_name],  contact: params[:contact], email: params[:email])
       render json: customer, status: :created
     end
   
@@ -52,7 +52,7 @@ def destroy
     private
   
     def customer_params
-      params.permit(:first_name, :last_name, :contact, :email,)
+      params.permit(:full_name, :contact, :email)
     end
   end
   

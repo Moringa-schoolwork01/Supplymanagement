@@ -1,8 +1,10 @@
 class CreateOrders < ActiveRecord::Migration[7.0]
   def change
+  create_table :orders do |t|
     t.string "quantity"
-    t.integer "total_sales"
     t.string "supplier_name"
+    t.decimal "buying_price"
+    t.decimal "total_price"
     t.timestamps
     end
   end
