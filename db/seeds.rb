@@ -14,7 +14,7 @@
 
 
 # Create 10 customers
-1.times do
+100.times do
   Customer.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -24,7 +24,7 @@
 end
 
 
-1.times do
+10.times do
   Product.create!(
     product: Faker::Commerce.product_name,
     code: Faker::Boolean.boolean,
@@ -36,7 +36,7 @@ end
 
 
 
-1.times do
+10.times do
   Sale.create!(
     date: Faker::Date.between(from: 1.year.ago, to: Date.today),
     name: Faker::Commerce.product_name,
@@ -44,7 +44,7 @@ end
     discount: Faker::Number.between(from: 0, to: 200),
     total: Faker::Number.between(from: 1, to: 1000),
     payment_method: Faker::Business.credit_card_type,
-    customer_id: Faker::Number.between(from: 1, to: 10),
+    customer_id: Faker::Number.between(from: 100, to: 150),
     product_id: Faker::Number.between(from: 1, to: 10)
   )
 end

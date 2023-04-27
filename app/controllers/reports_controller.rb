@@ -1,3 +1,4 @@
+
 class ReportsController < ApplicationController
     # showing total sales for each product
     def product_sales_report
@@ -13,25 +14,33 @@ class ReportsController < ApplicationController
       render json: sorted_sales_data
 
     end
+ 
                    # top 5 products
         def top_products
           @products = Product.joins(:sales).select("products.*, SUM(sales.total) as total_sales").group("products.id").order("total_sales DESC").limit(5)
-          render json: @products, only: [:id, :name, :price], methods: :total_sales
+          render json: @products, only: [ :name,], methods: :total_sales
         end
-      
-
-
-        # WEEKLY REPORT OF ORDERS
         def weekly_report
-            # Get the date 7 days ago from today
-            start_date = Date.today - 7.days
-        
-            # Query for all orders created between start_date and today
-            @orders = Order.where(created_at: start_date.beginning_of_day..Time.now)
-        
-            # Render the orders as JSON
-            render json: @orders
-          end
+  # Calculate the start date and end date for the last week
+  end_date = Date.today
+  start_date = end_date - 1.week
+  
+  # Query for all sales records created between start_date and end_date
+  sales = Sale.where(created_at: start_date.beginning_of_day..end_date.end_of_day)
+  
+  # Calculate the total sales for each day of the last week
+  daily_sales = (start_date..end_date).map do |date|
+    total_sales = sales.where(created_at: date.beginning_of_day..date.end_of_day).sum(:total)
+    {
+      date: date.to_s,
+      total_sales: total_sales
+    }
+  end
 
-        end
-   
+  # Render the daily sales as JSON
+  render json: daily_sales
+end
+
+
+
+end
