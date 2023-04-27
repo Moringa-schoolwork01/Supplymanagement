@@ -6,9 +6,9 @@ class ProductsController < ApplicationController
   end
   # POST /products: create a new product
   def create
-      product = Product.create(code: params[:code], name: params[:name], image_url: params[:image_url],  price: params[:price], action: params[:action])
-      render json: product, status: :created
-    end
+    product = Product.create(code: params[:code], name: params[:name], image_url: params[:image_url],  price: params[:price], action: params[:action])
+    render json: product, status: :created
+  end
   def update
       product = Product.find_by(id: params[:id])
       if product

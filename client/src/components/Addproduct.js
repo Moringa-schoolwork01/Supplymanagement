@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import '../css/Addproduct.css';
+import { useNavigate } from 'react-router-dom';
+
 
 function AddProduct({ onAdd }) {
   const [product, setProduct] = useState('');
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
+  const navigate = useNavigate();
+
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,6 +35,8 @@ function AddProduct({ onAdd }) {
         setCode('');
         setName('');
         setPrice('');
+        alert('Product added successfully.')
+        navigate('/product')
       })
       .catch((error) => console.error(error));
   };

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 
 function Signin() {
-
+  const navigate = useNavigate();
 const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
 const [confirmpassword, setConfirmPassword] = useState('')
@@ -30,31 +30,39 @@ const handleSubmit = (e) => {
       .then((r) => r.json())
       .then((newme) => {
         alert(`${newme.email} Registration successfuly!`)
+        navigate('/login')
       })
       // .then((user) => onLogin(user));
 }
 
 
   return (
-    <div class="form-box">
-<form class="form" onSubmit={handleSubmit}>
-    <span class="title"> register new user</span>
-    <span class="subtitle">Hey am new</span>
-    <div class="form-container">
-			<input type="email" class="input" placeholder="Email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
-			<input type="password" class="input" placeholder="Password" id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-      <input type="password" class="input" placeholder="confirm password" id='confirmpassword' value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
-    </div>
-    <button>Signup</button>
-  
-
-    </form>
-    
-<div class="form-section">
+<div className='landingpage'>
+      <div className='landingcontent'>
+          <h2 className='signincont'>Get A New Account</h2>
+          <h3>Register a new account and get started</h3>
+        </div>
+    <div>
+      <form class="formone" onSubmit={handleSubmit}>
+    <span class="title">Register New Account</span>
+    <label for="email" class="label">Email</label>
+    <input type="email" id="email" name="email" required=""  value={email} onChange={(e) => setEmail(e.target.value)} class="input"/>
+    <label for="password" class="label">Password</label>
+    <input type="password" id="password" name="password" required="" class="input" value={password} onChange={(e) => setPassword(e.target.value)}/>
+    <label for="password" class="label">Password Confirmation</label>
+    <input type="password" id="password_confirmation" name="password_confirmation" required="" class="input" value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+    <button type="submit" class="submit" >Register</button>
+    <div class="form-section">
   <p>Have an account? <a href="login">login</a> </p>
-</div>
-</div>
+ </div>
+  </form>
+  
+    </div>
+    </div>
+
   )
 }
 
 export default Signin
+
+

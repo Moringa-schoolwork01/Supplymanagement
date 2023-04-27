@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import '../css/Addcustomer.css';
+import { useNavigate } from 'react-router-dom';
+
 
 function AddCustomer({ onAdd }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [contact, setContact] = useState('');
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,6 +33,8 @@ function AddCustomer({ onAdd }) {
         setLastName('');
         setContact('');
         setEmail('');
+        alert('Customer added successfully.')
+        navigate('/customer')
       })
       .catch((error) => console.error(error));
   };

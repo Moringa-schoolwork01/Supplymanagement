@@ -55,7 +55,7 @@ function Customers() {
         <Link to='Addcustomer'>Add new customer</Link>
       </button>
       <Outlet />
-      <table className='table'>
+      <table className='tablecustomers'>
         <thead>
           <tr className='table-primary'>
             <th scope='col'>#</th>

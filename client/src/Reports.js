@@ -36,7 +36,7 @@ useEffect(()=> {
 }, [])
   return (
     <div className='prodcont'>
-    
+    <div className='prodreport'>
     <h3 >Product Sales Reports</h3>
 
           <table class="table">
@@ -143,6 +143,8 @@ useEffect(()=> {
 
 </tbody>
 </table> 
+</div>
+
     </div>
   )
 }

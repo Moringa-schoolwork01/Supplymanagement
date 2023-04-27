@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import "../css/login.css";
-import Profile from "./Profile";
+import { useNavigate } from 'react-router-dom';
+
 
 
 function Login () {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
 const [isLoggedIn, setIsLoggedIn] = useState(false);
 const [errorMessage, setErrorMessage] = useState('');
 const [error, setError] = useState('');
-const [newuser, setNewuser] = useState({});
 
  
 // const handleLogin = () => {
@@ -28,7 +29,10 @@ const [newuser, setNewuser] = useState({});
         email: email,
         password: password
       }
+      //Console the new data creted
       console.log(newData)
+
+      //Post newuser with credentials
       fetch('/login', {
         method: 'POST',
         body: JSON.stringify(newData),
@@ -43,9 +47,9 @@ const [newuser, setNewuser] = useState({});
        localStorage.setItem("jwt", newuser.jwt);
        //shows alert with user details
        if (newuser.user) {
-        setNewuser(newuser);
         setIsLoggedIn(true);
         alert(`Login successful! Welcome, ${newuser.user}!`);
+        navigate('/home')
       } else {
         setErrorMessage('User does not exist.');
         alert('Login failed. User does not exist.')
@@ -61,69 +65,30 @@ const [newuser, setNewuser] = useState({});
      
   }
   return (
+<div className='landingpage'>
 
-  //   <>
-  //   {isLoggedIn ? (
-  //     <Profile newuser={isLoggedIn} />
-  //   ) : (
-  //     <div class="form-box">
-  //       <form class="form" onSubmit={handleSubmit}>
-  //         <span class="title"> User Login</span>
-  //         <span class="subtitle">Welcome Back</span>
-  //         <div class="form-container">
-  //           <input
-  //             type="email"
-  //             class="input"
-  //             placeholder="Email"
-  //             id="email"
-  //             value={email}
-  //             onChange={(e) => setEmail(e.target.value)}
-  //           />
-  //           {error && email.length <= 0 ? (
-  //             <label className="formlbel">Field cant be empty</label>
-  //           ) : (
-  //             ""
-  //           )}
-  //           <input
-  //             type="password"
-  //             class="input"
-  //             placeholder="Password"
-  //             id="password"
-  //             value={password}
-  //             onChange={(e) => setPassword(e.target.value)}
-  //           />
-  //           {error && password.length <= 0 ? (
-  //             <label className="formlbel">Field cant be empty</label>
-  //           ) : (
-  //             ""
-  //           )}
-  //         </div>
-  //         <button>Login</button>
-  //       </form>
-  //       {errorMessage && <p>{errorMessage}</p>}
-  //     </div>
-  //   )}
-  // </>
-    <div class="form-box">
-    <form class="form" onSubmit={handleSubmit}>
-        <span class="title"> User Login</span>
-        <span class="subtitle">Welcome Back</span>
-        <div class="form-container">
-          <input type="email" class="input" placeholder="Email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
-          {error&&email.length<=0?
-          <label className="formlbel">Field cant be empty</label>:""}
-          <input type="password" class="input" placeholder="Password" id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-          {error&&password.length<=0?
-          <label className="formlbel">Field cant be empty</label>:""}
-
+       <div className='landingcontent'>
+          <h2 className='signincont'>Get A New Account</h2>
+          <h3>Register a new account and get started</h3>
         </div>
-        <button>Login</button>
-        </form>
-        {isLoggedIn && <Profile newuser={newuser} />}
-      {errorMessage && <p>{errorMessage}</p>}
+    <div>
+     <form class="formone" onSubmit={handleSubmit}>
+    <span class="title">User Login</span>
+    <label for="email" class="label">Email</label>
+    <input type="email" id="email" name="email" required=""  value={email} onChange={(e) => setEmail(e.target.value)} class="input"/>
+    {error&&email.length<=0?
+     <label className="formlbel">Field cant be empty</label>:""}
+    <label for="password" class="label">Password</label>
+    <input type="password" id="password" name="password" required="" class="input" value={password} onChange={(e) => setPassword(e.target.value)}/>
+    {error&&password.length<=0?
+     <label className="formlbel">Field cant be empty</label>:""}
+    <button type="submit" class="submit">Login</button>
+  </form>
+    </div>
     </div>
 
   );
 };
 
 export default Login;
+
