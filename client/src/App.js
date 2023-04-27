@@ -12,7 +12,7 @@ import Signin from './components/Signin';
 import Login from './components/Login';
 import Addproduct from './components/Addproduct';
 import Addcustomer from './components/Addcustomer'
-
+import SalesForm from './components/SalesForm';
 
 function App() {
   return (
@@ -30,11 +30,9 @@ function App() {
         <Route exact path="/orders" element={<Orders />}></Route>
         <Route exact path="/signin" element={<Signin />}></Route>
         <Route exact path="login" element={<Login />}></Route>
+        <Route exact path="sales/salesform" element={<SalesForm />}></Route>
       </Routes> 
-     </Space>
-    
-      
-      
+     </Space>      
     </div>
   );
 }

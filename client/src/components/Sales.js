@@ -1,11 +1,18 @@
 import React from 'react'
+import SalesForm from '../components/SalesForm';
+import { Link, Outlet } from 'react-router-dom';
+
+
 
 function Sales() {
+
+
   return (
     <div className='prodcont'>
 
     <h3 >Recent Sales</h3>
-
+    <button><Link to='salesform'>Add Sales</Link></button>
+    <Outlet/>
           <table class="table">
   <thead>
     <tr class="table-primary">
