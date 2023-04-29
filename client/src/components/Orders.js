@@ -1,55 +1,158 @@
-import React,{ useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import { Link, Outlet } from 'react-router-dom';
+import '../css/Orders.css';
 
 function Orders() {
+  const [orders, setOrders] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [statusMessage, setStatusMessage] = useState('');
+  const [updateSuccess, setUpdateSuccess] = useState(false);
 
-  const [orders,setOrders] = useState([])
+  useEffect(() => {
+    fetch('./orders')
+      .then(response => response.json())
+      .then(data => setOrders(data))
+      .catch(error => console.error(error));
+  }, []);
 
-
-  useEffect(()=> {
-    fetch('/orders')
-    .then((resp) => resp.json())
-    .then((json) => {
-        console.log(json)
-        setOrders(json)
-    })
-}, [])
-  return (
-    <div className='prodcont'>
-<div className='prodorders'>
-          <h3 > Recent Orders </h3>
-
-          <table class="table">
-  <thead>
-    <tr class="table-primary">
-      <th scope="col">#</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Total sales</th>
-      <th scope="col">Supplier name</th>
-
-    </tr>
-  </thead>
-  <tbody>
-
-
-    {
-      orders.map((order) =>{
-        return(
-          <tr>
-          <th scope="row">{order.id}</th>
-          <td>{order.quantity}</td>
-          <td>{order.total_sales}</td>
-          <td>{order.supplier_name}</td>
-        </tr>
-    
-        )
+  function handleDelete(order) {
+    fetch(`./orders/${order.id}`, { method: 'DELETE' })
+      .then(() => {
+        setOrders(prevOrders => prevOrders.filter(o => o.id !== order.id));
+        setStatusMessage('Order deleted successfully');
       })
-    }
-  </tbody>
-</table>  
-</div>
+      .catch(error => console.error(error));
+  }
 
+  function handleUpdate(updatedOrder) {
+    fetch(`/orders/${updatedOrder.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedOrder)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to update order');
+      }
+      setOrders(prevOrders => {
+        const updatedOrders = prevOrders.map(order => {
+          if (order.id === updatedOrder.id) {
+            return updatedOrder;
+          } else {
+            return order;
+          }
+        });
+        return updatedOrders;
+      });
+      setSelectedOrder(null);
+      setUpdateSuccess(true); // Set updateSuccess to true
+    })
+    .catch(error => console.error(error));
+  }
+  return (
+    <div className='prodconta'>
+      {statusMessage && <div className="alert alert-success">{statusMessage}</div>}
+      <h3>Add your order here</h3>
+      <button className='btn2'>
+        <Link to='AddOrder'>Add new order</Link>
+      </button>
+      <Outlet />
+      <table className='table'>
+        <thead>
+          <tr className='table-primary'>
+            <th scope='col'>#</th>
+            <th scope='col'>Quantity</th>
+            <th scope='col'>Supplier name</th>
+            <th scope='col'>Buying price</th>
+            <th scope='col'>Total price</th>
+            <th scope='col'>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map(order => (
+            <tr key={order.id}>
+              <th scope='row'>{order.id}</th>
+              <td>{order.quantity}</td>
+              <td>{order.supplier_name}</td>
+              <td>{order.buying_price}</td>
+              <td>{order.total_price}</td>
+              <td>
+                <button
+                  className='custom-btn btn-2'
+                  onClick={() => setSelectedOrder(order)}
+                >
+                  Update
+                </button>
+                <button className='btnd' onClick={() => handleDelete(order)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {selectedOrder && (
+        <div>
+   <h3>Update Order</h3>
+<form onSubmit={(e) => {
+  e.preventDefault();
+  handleUpdate(selectedOrder);
+}}>
+  <div className="form-group">
+    <label htmlFor="order_quantity">Quantity</label>
+    <input
+      type="text"
+      className="form-control"
+      id="order_quantity"
+      name="order_quantity"
+      value={selectedOrder.quantity}
+      onChange={(e) => setSelectedOrder({...selectedOrder, quantity: e.target.value})}
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="supplier_name">Supplier Name</label>
+    <input
+      type="text"
+      className="form-control"
+      id="supplier_name"
+      name="supplier_name"
+      value={selectedOrder.supplier_name}
+      onChange={(e) => setSelectedOrder({...selectedOrder, supplier_name: e.target.value})}
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="buying_price">Buying price</label>
+    <input
+      type="text"
+      className="form-control"
+      id="buying_price"
+      name="buying_price"
+      value={selectedOrder.buying_price}
+      onChange={(e) => setSelectedOrder({...selectedOrder, buying_price: e.target.value})}
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="total_price">Total Price</label>
+    <input
+      type="text"
+      className="form-control"
+      id="buying_price"
+      name="buying_price"
+      value={selectedOrder.buying_price}
+      onChange={(e) => setSelectedOrder({...selectedOrder, buying_price: e.target.value})}
+    />
+  </div>
+  <button type="submit" className="btn btn-primary mr-2">Update</button>
+  <button type="button" className="btn btn-secondary" onClick={() => setSelectedOrder(null)}>Cancel</button>
+</form>
+</div>
+)}
+
+      
     </div>
-  )
+  );
 }
 
-export default Orders
+export default Orders;

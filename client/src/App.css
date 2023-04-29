@@ -455,3 +455,7 @@ label {
 .add-customer-btn:hover {
   background-color: #080808;
 } */
+.actions button {
+  display: inline-block;
+  margin-right: 5px;
+}

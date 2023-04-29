@@ -13,6 +13,7 @@ import Login from './components/Login';
 import Addproduct from './components/Addproduct';
 import Addcustomer from './components/Addcustomer';
 import UpdateCustomer from './components/UpdateCustomer'
+import Addorder from './components/Addorder';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route exact path="customers/addcustomer" element={<Addcustomer />}/>
         <Route exact path="customers/UpdateCustomer" element={<UpdateCustomer />}/>
         <Route exact path="/orders" element={<Orders />}></Route>
+        <Route exact path="orders/addorder" element={<Addorder />}/>
         <Route exact path="/home/signin" element={<Signin />}></Route>
         {/* <Route exact path="profile" element={<Profile />}></Route> */}
         <Route exact path="/home/login" element={<Login />}></Route>
