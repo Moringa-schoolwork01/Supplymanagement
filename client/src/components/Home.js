@@ -16,46 +16,32 @@ import {
 
 const data = [
   {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400
+    date: '12-03-10',
+    total_sales: 3500,
   },
   {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210
+    date: '12-04-10',
+    total_sales: 2100,
   },
   {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290
+    date: '12-04-10',
+    total_sales: 4000,
   },
   {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000
+    date: '12-06-10',
+    total_sales: 2000,
+  },
+ {
+    date: '12-07-10',
+    total_sales: 3000,
   },
   {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181
+    date: '12-08-10',
+    total_sales: 2500,
   },
   {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100
+    date: '12-09-10',
+    total_sales: 3500,
   }
 ];
 
@@ -87,16 +73,8 @@ function Home() {
   return (
     <>
       <div className='homebody'>
-        <div className='homeheader'>
           <h2>Dashboard Overview</h2>
-          <button onClick={() => navigate('Signin')}>
-            Login
-            <div class='arrow-wrapper'>
-              <div class='arrow'></div>
-            </div>
-          </button>
-        </div>
-
+       
         <div className='body1'>
           <div class='card'>Sales</div>
           <div class='card'>Customers</div>
@@ -119,12 +97,12 @@ function Home() {
               }}
             >
               <CartesianGrid strokeDasharray='3 3' />
-              <XAxis dataKey='name' />
+              <XAxis dataKey='date' />
               <YAxis />
               <Tooltip />
               <Area
                 type='monotone'
-                dataKey='uv'
+                dataKey='total_sales'
                 stroke='#8884d8'
                 fill='#8884d8'
               />
