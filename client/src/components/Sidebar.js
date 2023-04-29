@@ -1,9 +1,12 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "./Auth"
 
-
 function Sidebar() {
-
+const navigate = useNavigate()
+  const handleLogout = ()=>{
+    localStorage.removeItem('jwt')
+    navigate('/login')
+  }
 
 const auth = useAuth()
 
@@ -27,7 +30,7 @@ const auth = useAuth()
         {/* <li><Link to='/profile'>Profile</Link></li> */}
       </ul>
       {!auth.user && (
-              <button className="btn1"><Link to='/login'>Logout</Link></button>
+              <button className="btn1" onClick={handleLogout}>Logout</button>
       )}
     </div>
     </div>
