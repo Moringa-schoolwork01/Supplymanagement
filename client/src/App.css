@@ -74,12 +74,20 @@ ul li:hover a{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
- margin-bottom: 10%;
+ margin-top: 5%;
+}
+.kijana{
+  margin-bottom: 15px;
+  font-weight:  570;
+  font-size: 50px;
 }
 .body1{
   display: flex;
 }
-.card {
+.grey-bg {  
+  background-color: #F5F7FA;
+}
+/* .card {
   box-sizing: border-box;
   margin-top: 30px;
 margin-right: 100px; 
@@ -109,7 +117,7 @@ margin-right: 100px;
 
 .card:active {
   transform: scale(0.95) rotateZ(1.7deg);
-}
+} */
 .App{
   display: flex;
   flex-direction: column;
@@ -521,9 +529,8 @@ margin-left: 10%;
   width: 70%;
 }
 .landingimage{
-max-width: 520px;
+max-width: 950px;
 float: right;
-border: 3px solid grey;
 border-radius: 10px;
 margin-left: 55px;
 }
@@ -540,4 +547,109 @@ margin-left: 55px;
 }
 .signincont{
   font-size: 40px;
+}
+
+.card2 {
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  max-width: 320px;
+  border-radius: 20px;
+  margin-right: 80px;
+  margin-bottom: 30px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.title span {
+  position: relative;
+  padding: 0.5rem;
+  background-color: rgb(250, 250, 250);
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+}
+
+.title span svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  height: 1rem;
+}
+
+.title-text {
+  margin-left: 0.5rem;
+  color: #374151;
+  font-size: 22px;
+}
+
+.percent {
+  margin-left: 0.5rem;
+  color: rgb(110, 161, 236);
+  font-weight: 600;
+  display: flex;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.data p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #1F2937;
+  font-size: 35px ;
+  line-height: 2.5rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.data .rangeA,.rangeB,.rangeC,.rangeD {
+  position: relative;
+  background-color: #E5E7EB;
+  width: 100%;
+  height: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.data .rangeA .fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(110, 160, 236, 0.69);
+  width: 26%;
+  height: 100%;
+  border-radius: 0.25rem;
+}
+.data .rangeB .fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(246, 137, 137, 0.614);
+  width: 66%;
+  height: 100%;
+  border-radius: 0.25rem;
+}.data .rangeC .fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(238, 222, 119);
+  width: 40%;
+  height: 100%;
+  border-radius: 0.25rem;
+}.data .rangeD .fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(130, 240, 138);
+  width: 76%;
+  height: 100%;
+  border-radius: 0.25rem;
 }

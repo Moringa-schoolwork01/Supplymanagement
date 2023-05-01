@@ -16,7 +16,7 @@ function LandingPage() {
       <button className='muslimin'  onClick={() => navigate('Login')}>Login</button>
         </div>
         <div>
-           <img className='landingimage' src='https://images.unsplash.com/photo-1602665478334-f8c4fd62ede4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80' alt='img'></img>
+           <img className='landingimage' src='https://static.vecteezy.com/system/resources/previews/003/590/705/original/scm-supply-chain-management-concept-with-icon-set-template-free-vector.jpg' alt='img'></img>
         </div>
      
     </div>
