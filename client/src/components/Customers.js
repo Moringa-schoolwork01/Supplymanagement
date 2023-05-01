@@ -81,7 +81,7 @@ function Customers() {
   return (
     <div className='custcont'>
       <h3>Add your customer</h3>
-      <button className='btn5'>
+      <button className='btn2'>
         <Link to='Addcustomer'>Add new customer</Link>
       </button>
       <Outlet />

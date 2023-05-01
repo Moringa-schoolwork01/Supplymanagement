@@ -89,7 +89,7 @@ function Products() {
   }
   
   return (
-    <div className='prodconta'>
+    <div className='prodcont'>
       <h3>Add your product here</h3>
       <button className='btn2'>
         <Link to='Addproduct'>Add new product</Link>

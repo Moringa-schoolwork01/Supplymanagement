@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   # GET /products: return an array of all products
   def  index
       products = Product.all
-      render json: products include:get_image_url
+      render json: products
   end
 
      # GET /products/:id
