@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_25_184540) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_01_120238) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -40,7 +40,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_184540) do
   end
 
   create_table "customers", force: :cascade do |t|
-    t.string "full_name"
+    t.string "first_name"
+    t.string "last_name"
     t.integer "contact"
     t.string "email"
     t.datetime "created_at", null: false
@@ -48,33 +49,42 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_184540) do
   end
 
   create_table "orders", force: :cascade do |t|
+    t.string "date"
+    t.string "time"
+    t.string "product_sold"
+    t.integer "price"
     t.string "quantity"
-    t.string "supplier_name"
-    t.decimal "buying_price"
-    t.decimal "total_price"
+    t.integer "total_sales"
+    t.integer "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "product_id"
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
   create_table "products", force: :cascade do |t|
-    t.integer "code"
+    t.boolean "code"
     t.string "name"
-    t.string "image"
+    t.string "image_url"
     t.integer "price"
-    t.integer "quantity"
+    t.string "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "sales", force: :cascade do |t|
+    t.string "date"
+    t.string "name"
+    t.integer "price"
+    t.integer "discount"
     t.integer "total"
-    t.integer "quantity"
-    t.text "payment_method"
-    t.integer "product_id"
+    t.string "payment_method"
     t.integer "customer_id"
+    t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_sales_on_customer_id"
+    t.index ["product_id"], name: "index_sales_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -84,4 +94,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_184540) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "sales", "customers"
+  add_foreign_key "sales", "products"
 end
