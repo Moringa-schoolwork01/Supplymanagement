@@ -5,6 +5,7 @@ function AddProduct({ onAdd }) {
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
+  const [quantity, setQuantity] = useState('');
   const [product_image, setProductImage] = useState('');
 
   const handleSubmit = (event) => {
@@ -13,6 +14,7 @@ function AddProduct({ onAdd }) {
       code: code,
       name: name,
       price: price,
+      quantity: quantity,
       product_image: product_image,
     };
     fetch('/products', {
@@ -28,6 +30,7 @@ function AddProduct({ onAdd }) {
         setCode('');
         setName('');
         setPrice('');
+        setQuantity('');
         setProductImage('');
       })
       .catch((error) => console.error(error));
@@ -67,21 +70,33 @@ function AddProduct({ onAdd }) {
           />
         </div>
         <div>
+          <label htmlFor='quantity'>Quantity:</label>
+          <input
+            type='number'
+            id='quantity'
+            value={quantity}
+            onChange={(event) => setQuantity(event.target.value)}
+            required
+          />
+        </div>
+        <div>
           <label htmlFor='product_image'>Product Image:</label>
           <input
             type='url'
             id='product_image'
+            accept='jpg'
             value={product_image}
             onChange={(event) => setProductImage(event.target.value)}
             required
           />
         </div>
+        {product_image && (
+          <img src={product_image} alt={name} style={{ width: '100px' }} />
+        )}
         <button type='submit'>Add Product</button>
       </form>
     </div>
   );
 }
-
-
 
 export default AddProduct;
