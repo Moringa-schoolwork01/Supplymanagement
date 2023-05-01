@@ -64,7 +64,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_184540) do
   create_table "products", force: :cascade do |t|
     t.boolean "code"
     t.string "name"
-    t.string "image_url"
+    t.string "image"
     t.integer "price"
     t.string "action"
     t.datetime "created_at", null: false
