@@ -49,10 +49,13 @@ end
   )
 end
 
-10.times do
-  Order.create!(
-    quantity: Faker::Number.between(from: 1, to: 100),
-    total_sales: Faker::Number.between(from: 100, to: 10000),
-    supplier_name: Faker::Company.name
+
+Product.create!(
+    {
+      code: "HS#7698",
+      name: "Lenovo",
+      price: "150,000kshs",
+    }
   )
-end
+
+Sale.create!(date: 4th Jan 2023, name: gucci, )

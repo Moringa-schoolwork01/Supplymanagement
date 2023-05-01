@@ -5,10 +5,20 @@ class ProductsController < ApplicationController
       render json: products
   end
   # POST /products: create a new product
-  def create
-      product = Product.create(code: params[:code], name: params[:name], image_url: params[:image_url],  price: params[:price], action: params[:action])
+#   def create
+#     #   product = Product.create!(code: params[:code], name: params[:name],  price: params[:price])
+#     product = Product.create!(products_params)  
+#     render json: product, status: :created
+#     end
+
+def create
+    product = Product.new(products_params)
+    if product.save!
       render json: product, status: :created
+    else
+      render json: { errors: product.errors.full_messages }, status: :unprocessable_entity
     end
+  end
   def update
       product = Product.find_by(id: params[:id])
       if product
@@ -30,6 +40,6 @@ class ProductsController < ApplicationController
   end
   private
   def products_params
-      params.permit(:code, :name, :image_url, :price, :action)
+      params.permit(:code, :name, :product_image, :price, :action)
   end
 end
