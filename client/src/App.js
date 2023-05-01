@@ -26,20 +26,6 @@ function App() {
       <>
      <Space className='dashcontent'>
      <Routes>
-        <Route exact path="/home" element={<Home />}> </Route>
-        <Route exact path="/products" element={<Products />}></Route>
-        <Route exact path="products/addproduct" element={<Addproduct />}/> 
-        <Route exact path="/sales" element={<Sales />}></Route>
-        <Route exact path="/reports" element={<Reports />}></Route>
-        <Route exact path="/customers" element={<Customers />}></Route>
-        <Route exact path="customers/addcustomer" element={<Addcustomer />}/>
-        <Route exact path="customers/UpdateCustomer" element={<UpdateCustomer />}/>
-        <Route exact path="/orders" element={<Orders />}></Route>
-        <Route exact path="orders/addorder" element={<Addorder />}/>
-        <Route exact path="/home/signin" element={<Signin />}></Route>
-        {/* <Route exact path="profile" element={<Profile />}></Route> */}
-        <Route exact path="/home/login" element={<Login />}></Route>
-
        <Route exact path="/" element={
         <Row>
             <Col span={24}><LandingPage /></Col>
