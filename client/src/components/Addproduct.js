@@ -1,23 +1,18 @@
 import React, { useState } from 'react';
-// import '../css/Addproduct.css';
+import { Form, Input, Button, Upload, Image } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
-
 function AddProduct({ onAdd }) {
-  const [code, setCode] = useState('');
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [quantity, setQuantity] = useState('');
-  const [product_image, setProductImage] = useState('');
+  const [form] = Form.useForm();
+  const [productImage, setProductImage] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const navigate = useNavigate();
+
+  const onFinish = (values) => {
     const newProduct = {
-      code: code,
-      name: name,
-      price: price,
-      quantity: quantity,
-      product_image: product_image,
+      ...values,
+      product_image: productImage,
     };
     fetch('/products', {
       method: 'POST',
@@ -29,75 +24,65 @@ function AddProduct({ onAdd }) {
       .then((response) => response.json())
       .then((data) => {
         onAdd(data);
-        setCode('');
-        setName('');
-        setPrice('');
-        setQuantity('');
+        form.resetFields();
         setProductImage('');
+        navigate('/');
       })
       .catch((error) => console.error(error));
   };
 
+  const handleImageChange = (info) => {
+    if (info.file.status === 'done') {
+      setProductImage(info.file.originFileObj);
+    }
+  };
+
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='code'>Code:</label>
-          <input
-            type='text'
-            id='code'
-            value={code}
-            onChange={(event) => setCode(event.target.value)}
-            required
+    <Form form={form} onFinish={onFinish} layout="vertical">
+      <Form.Item label="Code" name="code" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item label="Name" name="name" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item label="Price" name="price" rules={[{ required: true }]}>
+        <Input type="number" />
+      </Form.Item>
+      <Form.Item label="Quantity" name="quantity" rules={[{ required: true }]}>
+        <Input type="number" />
+      </Form.Item>
+      <Form.Item
+        label="Product Image"
+        name="product_image"
+        valuePropName="fileList"
+        getValueFromEvent={(e) => e.fileList[0]}
+        rules={[{ required: true }]}
+      >
+        <Upload
+          accept="image/*"
+          listType="picture"
+          maxCount={1}
+          beforeUpload={() => false}
+          onChange={handleImageChange}
+        >
+          <Button icon={<UploadOutlined />}>Upload</Button>
+        </Upload>
+      </Form.Item>
+      {productImage && (
+        <Form.Item>
+          <Image
+            src={URL.createObjectURL(productImage)}
+            alt="Product Image Preview"
+            width={100}
           />
-        </div>
-        <div>
-          <label htmlFor='name'>Name:</label>
-          <input
-            type='text'
-            id='name'
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='price'>Price:</label>
-          <input
-            type='number'
-            id='price'
-            value={price}
-            onChange={(event) => setPrice(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='quantity'>Quantity:</label>
-          <input
-            type='number'
-            id='quantity'
-            value={quantity}
-            onChange={(event) => setQuantity(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='product_image'>Product Image:</label>
-          <input
-            type='file'
-            id='product_image'
-            // accept='jpg'
-            value={product_image}
-            onChange={(event) => setProductImage(event.target.files[0])}
-            required
-          />
-        </div>
-        {product_image && (
-          <img src={product_image} alt={name} style={{ width: '100px' }} />
-        )}
-        <button type='submit'>Add Product</button>
-      </form>
-    </div>
+        </Form.Item>
+      )}
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Add Product
+        </Button>
+      </Form.Item>
+    </Form>
   );
 }
 

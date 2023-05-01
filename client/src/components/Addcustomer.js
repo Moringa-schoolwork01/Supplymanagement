@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
-// import '../css/Addcustomer.css';
+import { Form, Input, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
-
+import { useState } from 'react';
 
 function AddCustomer({ onAdd }) {
-  const [fullName, setFullName] = useState('');
-  const [contact, setContact] = useState('');
-  const [email, setEmail] = useState('');
+  const [form] = Form.useForm();
   const navigate = useNavigate();
 
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (values) => {
     const newCustomer = {
-      full_name: fullName,
-      contact: contact,
-      email: email,
+      full_name: values.full_name,
+      contact: values.contact,
+      email: values.email,
     };
     fetch('/customers', {
       method: 'POST',
@@ -27,51 +22,46 @@ function AddCustomer({ onAdd }) {
       .then((response) => response.json())
       .then((data) => {
         onAdd(data);
-        setFullName('');
-        setContact('');
-        setEmail('');
-        alert('Customer added successfully.')
-        navigate('/customer')
+        form.resetFields();
+        alert('Customer added successfully.');
+        navigate('/customer');
       })
       .catch((error) => console.error(error));
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        
-        <div>
-          <label htmlFor='Full Name'>Full Name:</label>
-          <input
-            type='text'
-            id='full_Name'
-            value={fullName}
-            onChange={(event) => setFullName(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='contact'>Contact:</label>
-          <input
-            type='text'
-            id='contact'
-            value={contact}
-            onChange={(event) => setContact(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='email'>Email:</label>
-          <input
-            type='email'
-            id='email'
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            required
-          />
-        </div>
-        <button type='submit'>Add Customer</button>
-      </form>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div style={{ display: 'flex', alignItems: 'center', marginLeft: 150 }}>
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/005/086/602/small/warehouse-workers-check-quantity-and-delivery-of-products-from-customers-purchase-orders-to-deliver-goods-to-the-correct-location-free-vector.jpg" alt="Warehouse workers" style={{ height: '80%', marginRight: 20 }} />
+        <Form layout="vertical" form={form} onFinish={handleSubmit} style={{ width: 400 }}>
+          <Form.Item
+            label="Full Name"
+            name="full_name"
+            rules={[{ required: true, message: 'Please enter a full name' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Contact"
+            name="contact"
+            rules={[{ required: true, message: 'Please enter a contact number' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[{ required: true, message: 'Please enter an email address' }]}
+          >
+            <Input type="email" />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Add Customer
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 }
