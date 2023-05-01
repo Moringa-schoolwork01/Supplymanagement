@@ -12,19 +12,27 @@ function AddProduct({ onAdd }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newProduct = {
-      code: code,
-      name: name,
-      price: price,
-      quantity: quantity,
-      product_image: product_image,
-    };
+    // const newProduct = {
+    //   code: code,
+    //   name: name,
+    //   price: price,
+    //   quantity: quantity,
+    //   product_image: product_image,
+    // };
+    const newProduct = new FormData()
+    newProduct.append("code", code)
+    newProduct.append("name", name)
+    newProduct.append("price", price)
+    newProduct.append("quantity", quantity)
+    newProduct.append("product_image", product_image, "product_image")
+
     fetch('/products', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newProduct),
+      body: newProduct
+      // headers: {
+      //   'Content-Type': 'application/json',
+      // },
+      // body: JSON.stringify(newProduct),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -87,7 +95,7 @@ function AddProduct({ onAdd }) {
             type='file'
             id='product_image'
             // accept='jpg'
-            value={product_image}
+            // value={product_image}
             onChange={(event) => setProductImage(event.target.files[0])}
             required
           />

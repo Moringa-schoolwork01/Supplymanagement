@@ -1,5 +1,6 @@
 class ProductSerializer < ActiveModel::Serializer
   attributes :code, :name, :price, :get_image_url, :product_image
+  
 end
 # def get_image
 #   if self.product_image.blob

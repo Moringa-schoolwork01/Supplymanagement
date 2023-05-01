@@ -38,9 +38,9 @@ function Products() {
     },
     {
       title: 'Product Image',
-      dataIndex: 'product_image',
-      key: 'product_image',
-      render: (image) => <img src={image} alt="Product" width="100" />,
+      dataIndex: 'get_image_url',
+      key: 'get_image_url',
+      render: (image) => <img src={image} alt="Product" width="100" height="100"/>,
     },
     {
       title: 'Action',
@@ -96,42 +96,7 @@ function Products() {
       </button>
       <Outlet />
       <Table columns={columns} dataSource={products} />
-      {/* <table className='table'>
-        <thead>
-          <tr className='table-primary'>
-            <th scope='col'>#</th>
-            <th scope='col'>Code</th>
-            <th scope='col'>Name</th>
-            <th scope='col'>Price</th>
-            <th scope='col'>Quantity</th>
-            <th scope='col'>Product_Image</th>
-            <th scope='col'>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map(product => (
-            <tr key={product.id}>
-              <th scope='row'>{product.id}</th>
-              <td>{product.code}</td>
-              <td>{product.name}</td>
-              <td>{product.price}</td>
-              <td>{product.quantity}</td>
-              <td>{product.product_image}</td>
-              <td>
-                <button
-                  className='custom-btn btn-2'
-                  onClick={() => setSelectedProduct(product)}
-                >
-                  Update
-                </button>
-                <button className='btnd' onClick={() => handleDelete(product)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
+      
       {selectedProduct && (
   <div>
     <h3>Update Product</h3>

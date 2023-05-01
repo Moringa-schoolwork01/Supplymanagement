@@ -1,25 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { Form, Input, Button } from 'antd';
+// import 'antd/dist/antd.css';
 
 function Signin() {
   const navigate = useNavigate();
-const [email, setEmail] = useState('')
-const [password, setPassword] = useState('')
-const [confirmpassword, setConfirmPassword] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmpassword, setConfirmPassword] = useState('');
 
-
-// Register new user
-const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log("bombastic side eye")
+  // Register new user
+  const handleSubmit = (values) => {
+    console.log("bombastic side eye");
 
     const newData ={
-      email: email,
-      password: password,
-      password_confirmation: password
-    }
-   console.log (newData)
+      email: values.email,
+      password: values.password,
+      password_confirmation: values.password_confirmation
+    };
+    console.log (newData);
     fetch("/users", {
       method: "POST",
       headers: {
@@ -29,40 +28,38 @@ const handleSubmit = (e) => {
     })
       .then((r) => r.json())
       .then((newme) => {
-        alert(`${newme.email} Registration successfuly!`)
-        navigate('/login')
-      })
-      // .then((user) => onLogin(user));
-}
-
+        alert(`${newme.email} Registration successfuly!`);
+        navigate('/login');
+      });
+  };
 
   return (
-<div className='landingpage'>
+    <div className='landingpage'>
       <div className='landingcontent'>
-          <h2 className='signincont'>Get A New Account</h2>
-          <h3>Register a new account and get started</h3>
-        </div>
-    <div>
-      <form class="formone" onSubmit={handleSubmit}>
-    <span class="title">Register New Account</span>
-    <label for="email" class="label">Email</label>
-    <input type="email" id="email" name="email" required=""  value={email} onChange={(e) => setEmail(e.target.value)} class="input"/>
-    <label for="password" class="label">Password</label>
-    <input type="password" id="password" name="password" required="" class="input" value={password} onChange={(e) => setPassword(e.target.value)}/>
-    <label for="password" class="label">Password Confirmation</label>
-    <input type="password" id="password_confirmation" name="password_confirmation" required="" class="input" value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
-    <button type="submit" class="submit" >Register</button>
-    <div class="form-section">
-  <p>Have an account? <a href="login">login</a> </p>
- </div>
-  </form>
-  
+        <h2 className='signincont'>Get A New Account</h2>
+        <h3>Register a new account and get started</h3>
+      </div>
+      <div>
+        <Form className="formone" onFinish={handleSubmit}>
+          <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please input your email!' }]}>
+            <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+          </Form.Item>
+          <Form.Item label="Password" name="password" rules={[{ required: true, message: 'Please input your password!' }]}>
+            <Input.Password value={password} onChange={(e) => setPassword(e.target.value)} />
+          </Form.Item>
+          <Form.Item label="Password Confirmation" name="password_confirmation" rules={[{ required: true, message: 'Please confirm your password!' }]}>
+            <Input.Password value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">Register</Button>
+          </Form.Item>
+          <div className="form-section">
+            <p>Have an account? <a href="login">Login</a></p>
+          </div>
+        </Form>
+      </div>
     </div>
-    </div>
-
-  )
+  );
 }
 
-export default Signin
-
-
+export default Signin;
