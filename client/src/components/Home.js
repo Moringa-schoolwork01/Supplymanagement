@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { useEffect,useState } from 'react';
 import {
   AreaChart,
   Area,
@@ -63,15 +63,18 @@ const customerData = [
 
 const colors = ['#739cc9', '#9a83da', '#a1cf82', '#c7b4', '#AF19FF', '#b3cfb6'];
 function Home() {
+  const [reports,setReports] = useState([])
 
-//   useEffect(()=> {
-//     fetch('/sales')
-//     .then((resp) => resp.json())
-//     .then((json) => {
-//         console.log(json)
-//         setSales(json)
-//     })
-// }, [])
+
+
+  useEffect(()=> {
+    fetch('/weekly_report')
+    .then((resp) => resp.json())
+    .then((data) => {
+        console.log(data)
+        setReports(data)
+    })
+}, [])
 
  // Sort the customer data by total amount spent, in descending order
  const sortedCustomerData = customerData.sort((a, b) => b.totalSpent - a.totalSpent);
@@ -203,7 +206,7 @@ function Home() {
             <AreaChart
               width={800}
               height={400}
-              data={data}
+              data={reports}
               margin={{
                 top: 10,
                 right: 30,

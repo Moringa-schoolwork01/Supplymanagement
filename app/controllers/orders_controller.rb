@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
   def create
     order = Order.create(product_id: params[:product],quantity: params[:quantity], supplier_name: params[:supplier_name], buying_price: params[:buying_price,], total_price: params[:total_price,])
     render json: order, status: :created
-  end
+  en
 
   
 
