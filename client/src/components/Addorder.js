@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import '../css/Addorder.css';
+// import '../css/Addorder.css';
 
 function AddOrder({ onAdd }) {
+  const [product, setProduct] = useState('');
   const [quantity, setQuantity] = useState('');
   const [supplier_name, setSupplierName] = useState('');
   const [buying_price, setBuyingPrice] = useState('');
@@ -10,6 +11,7 @@ function AddOrder({ onAdd }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newOrder = {
+      product: product,
       quantity: quantity,
       supplier_name: supplier_name,
       buying_price: buying_price,
@@ -25,6 +27,7 @@ function AddOrder({ onAdd }) {
       .then((response) => response.json())
       .then((data) => {
         onAdd(data);
+        setProduct('');
         setQuantity('');
         setSupplierName('');
         setBuyingPrice('');
@@ -37,6 +40,14 @@ function AddOrder({ onAdd }) {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
+        <label htmlFor='product'>Product Name:</label>
+          <input
+            type='text'
+            id='product'
+            value={product}
+            onChange={(event) => setProduct(event.target.value)}
+            required
+          />
           <label htmlFor='quantity'>Quantity:</label>
           <input
             type='number'

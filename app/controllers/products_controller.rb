@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   # GET /products: return an array of all products
   def  index
       products = Product.all
-      render json: products
+      render json: products include:get_image_url
   end
 
      # GET /products/:id
@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
   # POST /products: create a new product
   def create
       product = Product.create(code: params[:code], name: params[:name], price: params[:price], quantity: params[:quantity])
-      render json: product, status: :created
+      render json: product , status: :created
     end
   def update
       product = Product.find_by(id: params[:id])

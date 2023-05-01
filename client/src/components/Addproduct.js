@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../css/Addproduct.css';
+// import '../css/Addproduct.css';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -84,11 +84,11 @@ function AddProduct({ onAdd }) {
         <div>
           <label htmlFor='product_image'>Product Image:</label>
           <input
-            type='url'
+            type='file'
             id='product_image'
-            accept='jpg'
+            // accept='jpg'
             value={product_image}
-            onChange={(event) => setProductImage(event.target.value)}
+            onChange={(event) => setProductImage(event.target.files[0])}
             required
           />
         </div>

@@ -15,6 +15,8 @@ import Addcustomer from './components/Addcustomer';
 import UpdateCustomer from './components/UpdateCustomer'
 import Addorder from './components/Addorder';
 import LandingPage from './components/LandingPage';
+// import Newtable from './components/Newtable';
+import Sampleform from './components/Sampleform';
 
 function App() {
   return (
