@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 # shows weekly report of orders
   get '/weekly_report', to: 'reports#weekly_report'
   get '/select_product', to: 'reports#select_product'
+  get '/select_customer', to: 'reports#select_customer'
 
 
   resources :products
