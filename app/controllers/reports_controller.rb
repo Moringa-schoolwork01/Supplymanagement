@@ -41,7 +41,15 @@ class ReportsController < ApplicationController
   # Render the daily sales as JSON
   render json: daily_sales
 end
-
+def select_product
+  products = Product.all
+  my_product = products.all.map do |data|
+    {value: data.id,
+    label: data.name
+  }
+end
+  render json: my_product
+end
 
 
 end

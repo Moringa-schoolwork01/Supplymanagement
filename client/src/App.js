@@ -16,6 +16,7 @@ import UpdateCustomer from './components/UpdateCustomer'
 import Addorder from './components/Addorder';
 import LandingPage from './components/LandingPage';
 // import Newtable from './components/Newtable';
+import Sampleform from './components/Sampleform';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         {/* <Route exact path="profile" element={<Profile />}></Route> */}
         <Route exact path="/home/login" element={<Login />}></Route>
         {/* <Route exact path="/newtable" element={<Newtable />}></Route> */}
+        <Route exact path="/sampleform" element={<Sampleform />}></Route>
 
        <Route exact path="/" element={
         <Row>

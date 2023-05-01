@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_120238) do
     t.decimal "total_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "product"
+    t.integer "product_id"
   end
 
   create_table "products", force: :cascade do |t|
