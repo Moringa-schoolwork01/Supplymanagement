@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import {
   AreaChart,
@@ -64,7 +63,16 @@ const customerData = [
 
 const colors = ['#739cc9', '#9a83da', '#a1cf82', '#c7b4', '#AF19FF', '#b3cfb6'];
 function Home() {
-  const navigate = useNavigate();
+
+//   useEffect(()=> {
+//     fetch('/sales')
+//     .then((resp) => resp.json())
+//     .then((json) => {
+//         console.log(json)
+//         setSales(json)
+//     })
+// }, [])
+
  // Sort the customer data by total amount spent, in descending order
  const sortedCustomerData = customerData.sort((a, b) => b.totalSpent - a.totalSpent);
 
@@ -73,13 +81,120 @@ function Home() {
   return (
     <>
       <div className='homebody'>
-          <h2>Dashboard Overview</h2>
+          <h2 className='kijana'>Dashboard Overview</h2>
        
         <div className='body1'>
-          <div class='card'>Sales</div>
-          <div class='card'>Customers</div>
-          <div class='card'>Products</div>
-          <div class='card'>Orders</div>
+        <div class="card2">
+    <div class="title">
+        <span>
+            <svg width="20" fill="currentColor" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+              
+            </svg>
+        </span>
+        <p class="title-text">
+            Sales
+        </p>
+        <p class="percent">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" fill="currentColor" height="20" width="20">
+               
+            </svg> 20%
+        </p>
+    </div>
+    <div class="data">
+        <p>
+            39,500 
+        </p>
+        
+        <div class="rangeA">
+            <div class="fill">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card2">
+    <div class="title">
+        <span>
+            <svg width="10" fill="currentColor" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+               
+            </svg>
+        </span>
+        <p class="title-text">
+            Products
+        </p>
+        <p class="percent">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" fill="currentColor" height="20" width="20">
+                
+            </svg> 70%
+        </p>
+    </div>
+    <div class="data">
+        <p>
+            39,500 
+        </p>
+        
+        <div class="rangeB">
+            <div class="fill">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card2">
+    <div class="title">
+        <span>
+            <svg width="20" fill="currentColor" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+              
+            </svg>
+        </span>
+        <p class="title-text">
+            Customers
+        </p>
+        <p class="percent">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" fill="currentColor" height="20" width="20">
+              
+            </svg> 35%
+        </p>
+    </div>
+    <div class="data">
+        <p>
+            39,500 
+        </p>
+        
+        <div class="rangeC">
+            <div class="fill">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card2">
+    <div class="title">
+        <span>
+          
+        </span>
+        <p class="title-text">
+            Orders
+        </p>
+        <p class="percent">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" fill="currentColor" height="20" width="20">
+              
+            </svg> 85%
+        </p>
+    </div>
+    <div class="data">
+        <p>
+            39,500 
+        </p>
+        
+        <div class="rangeD">
+            <div class="fill">
+            </div>
+        </div>
+    </div>
+</div>
+
+
         </div>
 
         <div className='homecont'>
@@ -110,7 +225,7 @@ function Home() {
           </div>
           <div className='body3'>
             <h2>Top 5 Products</h2>
-            {/* <PieChart width={400} height={400}>
+             <PieChart width={400} height={400}>
               <Pie
                 data={pieChartData}
                 color={colors}
@@ -127,7 +242,7 @@ function Home() {
               </Pie>
               <Tooltip />
               <Legend />
-            </PieChart> */}
+            </PieChart> 
           </div>
         </div>
       </div>
@@ -139,3 +254,5 @@ function Home() {
 }
 
 export default Home
+
+
