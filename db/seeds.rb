@@ -26,6 +26,7 @@ end
 # create 10 orders records
 10.times do
   Order.create(
+    product: Faker::Commerce.product_name,
     quantity: Faker::Number.between(from: 1, to: 100),
     supplier_name: Faker::Company.name,
     buying_price: Faker::Number.decimal(l_digits: 2),

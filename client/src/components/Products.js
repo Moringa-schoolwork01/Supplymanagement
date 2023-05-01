@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import '../css/Products.css';
+// import '../css/Products.css';
+import { Space, Table, Tag } from 'antd';
+
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -12,7 +14,45 @@ function Products() {
       .then(data => setProducts(data))
       .catch(error => console.error(error));
   }, []);
-
+  const columns = [
+    {
+      title: 'Code',
+      dataIndex: 'code',
+      key: 'code',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Price',
+      dataIndex: 'price',
+      key: 'price',
+    },
+    {
+      title: 'Quantity',
+      dataIndex: 'quantity',
+      key: 'quantity',
+    },
+    {
+      title: 'Product Image',
+      dataIndex: 'product_image',
+      key: 'product_image',
+      render: (image) => <img src={image} alt="Product" width="100" />,
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Space size="middle">
+          <Tag color='geekblue' onClick={() => setSelectedProduct(record)}><a>Update </a></Tag>
+          <Tag color='volcano'onClick={() => handleDelete(record)}><a>Delete</a></Tag>
+        </Space>
+      ),
+    },
+  ];
   function handleDelete(product) {
     fetch(`./products/${product.id}`, { method: 'DELETE' })
       .then(() => {
@@ -55,7 +95,8 @@ function Products() {
         <Link to='Addproduct'>Add new product</Link>
       </button>
       <Outlet />
-      <table className='table'>
+      <Table columns={columns} dataSource={products} />
+      {/* <table className='table'>
         <thead>
           <tr className='table-primary'>
             <th scope='col'>#</th>
@@ -90,7 +131,7 @@ function Products() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
       {selectedProduct && (
   <div>
     <h3>Update Product</h3>

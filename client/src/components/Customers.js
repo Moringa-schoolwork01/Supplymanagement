@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import '../css/Customers.css';
+// import '../css/Customers.css';
+import { Space, Table, Tag } from 'antd';
 
 function Customers() {
   const [customers, setCustomers] = useState([]);
@@ -12,8 +13,37 @@ function Customers() {
       .then(data => setCustomers(data))
       .catch(error => console.error(error));
   }, []);
-
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'full_name',
+      key: 'full_name',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'Contact',
+      dataIndex: 'contact',
+      key: 'contact',
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
+    },
+  
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Space size="middle">
+          <Tag color='geekblue' onClick={() => setSelectedCustomer(record)}><a>Update {record.name}</a></Tag>
+          <Tag color='volcano'onClick={() => handleDelete(record)}><a>Delete{record.name}</a></Tag>
+        </Space>
+      ),
+    },
+  ];
   function handleDelete(customer) {
+    console.log (customer)
     fetch(`./customers/${customer.id}`, { method: 'DELETE' })
       .then(() => {
         setCustomers(prevCustomers => prevCustomers.filter(p => p.id !== customer.id));
@@ -55,11 +85,11 @@ function Customers() {
         <Link to='Addcustomer'>Add new customer</Link>
       </button>
       <Outlet />
-      <table className='tableC'>
+      <Table columns={columns} dataSource={customers} />
+      {/* <table className='tableC'>
         <thead>
           <tr className='table-primaryC'>
             <th scope='col'>#</th>
-            {/* <th scope='col'>first_name</th> */}
             <th scope='col'>full_name</th>
             <th scope='col'>contact</th>
             <th scope='col'>email</th>
@@ -70,7 +100,6 @@ function Customers() {
           {customers.map(customer => (
             <tr key={customer.id}>
               <th scope='row'>{customer.id}</th>
-              {/* <td>{customer.first_name}</td> */}
               <td>{customer.full_name}</td>
               <td>{customer.contact}</td>
               <td>{customer.email}</td>
@@ -88,7 +117,7 @@ function Customers() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
       {selectedCustomer && (
   <div>
     <h3>Update customer</h3>

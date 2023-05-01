@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_27_092420) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_01_120238) do
   create_table "customers", force: :cascade do |t|
     t.string "full_name"
     t.integer "contact"
@@ -24,6 +24,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_092420) do
     t.string "supplier_name"
     t.decimal "buying_price"
     t.decimal "total_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "product"
   end
 
   create_table "products", force: :cascade do |t|
@@ -52,7 +55,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_092420) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "orders", "customers"
-  add_foreign_key "sales", "customers"
-  add_foreign_key "sales", "products"
 end
