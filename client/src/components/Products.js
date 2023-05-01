@@ -62,6 +62,7 @@ function Products() {
             <th scope='col'>Code</th>
             <th scope='col'>Name</th>
             <th scope='col'>Price</th>
+            <th scope='col'>Quantity</th>
             <th scope='col'>Product_Image</th>
             <th scope='col'>Action</th>
           </tr>
@@ -73,6 +74,7 @@ function Products() {
               <td>{product.code}</td>
               <td>{product.name}</td>
               <td>{product.price}</td>
+              <td>{product.quantity}</td>
               <td>{product.product_image}</td>
               <td>
                 <button
@@ -127,6 +129,17 @@ function Products() {
           name="price"
           value={selectedProduct.price}
           onChange={(e) => setSelectedProduct({...selectedProduct, price: e.target.value})}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="quantity">Quantity</label>
+        <input
+          type="number"
+          className="form-control"
+          id="quantity"
+          name="quantity"
+          value={selectedProduct.quantity}
+          onChange={(e) => setSelectedProduct({...selectedProduct, quantity: e.target.value})}
         />
       </div>
       <div className="form-group">
