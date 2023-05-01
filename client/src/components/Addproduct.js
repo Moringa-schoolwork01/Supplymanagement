@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
-import '../css/Addproduct.css';
+// import '../css/Addproduct.css';
+import { useNavigate } from 'react-router-dom';
+
 
 function AddProduct({ onAdd }) {
-  const [product, setProduct] = useState('');
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [product_image, setProductImage] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const newProduct = {
-      product: product,
       code: code,
       name: name,
       price: price,
+      quantity: quantity,
+      product_image: product_image,
     };
     fetch('/products', {
       method: 'POST',
@@ -25,10 +29,11 @@ function AddProduct({ onAdd }) {
       .then((response) => response.json())
       .then((data) => {
         onAdd(data);
-        setProduct('');
         setCode('');
         setName('');
         setPrice('');
+        setQuantity('');
+        setProductImage('');
       })
       .catch((error) => console.error(error));
   };
@@ -37,17 +42,7 @@ function AddProduct({ onAdd }) {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor='product'>Product:</label>
-          <input
-            type='text'
-            id='product'
-            value={product}
-            onChange={(event) => setProduct(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='code'>code:</label>
+          <label htmlFor='code'>Code:</label>
           <input
             type='text'
             id='code'
@@ -57,7 +52,7 @@ function AddProduct({ onAdd }) {
           />
         </div>
         <div>
-          <label htmlFor='name'>name:</label>
+          <label htmlFor='name'>Name:</label>
           <input
             type='text'
             id='name'
@@ -67,7 +62,7 @@ function AddProduct({ onAdd }) {
           />
         </div>
         <div>
-          <label htmlFor='price'>Product Price:</label>
+          <label htmlFor='price'>Price:</label>
           <input
             type='number'
             id='price'
@@ -76,12 +71,34 @@ function AddProduct({ onAdd }) {
             required
           />
         </div>
+        <div>
+          <label htmlFor='quantity'>Quantity:</label>
+          <input
+            type='number'
+            id='quantity'
+            value={quantity}
+            onChange={(event) => setQuantity(event.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor='product_image'>Product Image:</label>
+          <input
+            type='file'
+            id='product_image'
+            // accept='jpg'
+            value={product_image}
+            onChange={(event) => setProductImage(event.target.files[0])}
+            required
+          />
+        </div>
+        {product_image && (
+          <img src={product_image} alt={name} style={{ width: '100px' }} />
+        )}
         <button type='submit'>Add Product</button>
       </form>
     </div>
   );
 }
-
-
 
 export default AddProduct;

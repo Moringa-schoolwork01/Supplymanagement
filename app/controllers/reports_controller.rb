@@ -20,6 +20,7 @@ class ReportsController < ApplicationController
           @products = Product.joins(:sales).select("products.*, SUM(sales.total) as total_sales").group("products.id").order("total_sales DESC").limit(5)
           render json: @products, only: [ :name,], methods: :total_sales
         end
+        
         def weekly_report
   # Calculate the start date and end date for the last week
   end_date = Date.today
@@ -40,7 +41,15 @@ class ReportsController < ApplicationController
   # Render the daily sales as JSON
   render json: daily_sales
 end
-
+def select_product
+  products = Product.all
+  my_product = products.all.map do |data|
+    {value: data.id,
+    label: data.name
+  }
+end
+  render json: my_product
+end
 
 
 end

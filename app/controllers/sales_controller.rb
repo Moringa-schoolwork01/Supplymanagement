@@ -20,7 +20,7 @@ end
 
 # POST /sales: create a new sales
 def create
-    sale = Sale.create(date: params[:date], name: params[:name], price: params[:price], discount: params[:discount], total: params[:total], payment_method: params[:payment_method], customer_id: params[:customer_id], product_id: params[:product_id])
+    sale = Sale.create(total: params[:total], quantity: params[:quantity], payment_method: params[:payment_method], customer_id: params[:customer_id], product_id: params[:product_id])
     render json: sale, status: :created
   end
 
@@ -45,6 +45,6 @@ def destroy
 end
 private
 def sales_params
-    params.permit(:date, :name, :price, :discount, :total, :payment_method, :customer_id, :product_id,)
+    params.permit(:total, :quantity, :payment_method, :customer_id, :product_id,)
 end
 end

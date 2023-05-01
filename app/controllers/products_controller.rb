@@ -2,8 +2,18 @@ class ProductsController < ApplicationController
   # GET /products: return an array of all products
   def  index
       products = Product.all
-      render json: products
+      render json: products include:get_image_url
   end
+
+     # GET /products/:id
+     def show
+        product = Product.find_by(id: params[:id])
+        if product
+          render json: product
+        else
+          render json: { error: "product  not found" }, status: :not_found
+        end
+      end 
   # POST /products: create a new product
 #   def create
 #     #   product = Product.create!(code: params[:code], name: params[:name],  price: params[:price])
