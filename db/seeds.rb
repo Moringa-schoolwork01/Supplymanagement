@@ -185,4 +185,5 @@ end
     email: Faker::Internet.email,
     password: Faker::Internet.password(min_length: 8)
   )
-end
+
+Sale.create!(date: 4th Jan 2023, name: gucci, )

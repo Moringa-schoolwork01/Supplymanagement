@@ -1,102 +1,96 @@
 import React, { useState } from 'react';
-// import '../css/Addproduct.css';
+import { Form, Input, Button, Upload, Image } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
-
 function AddProduct({ onAdd }) {
+  const [form] = Form.useForm();
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [quantity, setQuantity] = useState('');
   const [product_image, setProductImage] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const newProduct = {
-      code: code,
-      name: name,
-      price: price,
-      quantity: quantity,
-      product_image: product_image,
-    };
+  const navigate = useNavigate();
+
+  const onFinish = (values) => {
+    // const newProduct = {
+    //   ...values,
+    //   product_image: productImage,
+    // };
+    const newProduct = new FormData()
+    newProduct.append("code", code)
+    newProduct.append("name", name)
+    newProduct.append("price", price)
+    newProduct.append("quantity", quantity)
+    newProduct.append("product_image", product_image, "product_image")
+console.log(newProduct)
     fetch('/products', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newProduct),
+      body: newProduct
+      // headers: {
+      //   'Content-Type': 'application/json',
+      // },
+      // body: JSON.stringify(newProduct),
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log (data)
         onAdd(data);
-        setCode('');
-        setName('');
-        setPrice('');
-        setQuantity('');
+        form.resetFields();
         setProductImage('');
+        navigate('/');
       })
       .catch((error) => console.error(error));
   };
 
+  // const handleImageChange = (info) => {
+  //   if (info.file.status === 'done') {
+  //     setProductImage(info.file.originFileObj);
+  //   }
+  // };
+
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='code'>Code:</label>
-          <input
-            type='text'
-            id='code'
-            value={code}
-            onChange={(event) => setCode(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='name'>Name:</label>
-          <input
-            type='text'
-            id='name'
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='price'>Price:</label>
-          <input
-            type='number'
-            id='price'
-            value={price}
-            onChange={(event) => setPrice(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='quantity'>Quantity:</label>
-          <input
-            type='number'
-            id='quantity'
-            value={quantity}
-            onChange={(event) => setQuantity(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='product_image'>Product Image:</label>
-          <input
-            type='file'
-            id='product_image'
-            // accept='jpg'
-            value={product_image}
-            onChange={(event) => setProductImage(event.target.files[0])}
-            required
-          />
-        </div>
-        {product_image && (
-          <img src={product_image} alt={name} style={{ width: '100px' }} />
-        )}
-        <button type='submit'>Add Product</button>
-      </form>
+    <div style={{ display: 'flex', justifyContent: 'flex-end', width: '80%', margin: '0 auto', marginLeft: '250%', marginTop: '40%' }}>
+      <div style={{ display: 'flex', alignItems: 'center' }}></div>
+      <img src="https://t3.ftcdn.net/jpg/02/92/95/18/240_F_292951874_MY7CiuWdJQsodJq2ICgyGkl7A7KTHQ2T.jpg" alt="Warehouse workers" style={{ height: '80%', marginLeft: -200, marginTop: 60 }} />
+      <Form form={form} onFinish={onFinish} layout="vertical">
+        <Form.Item label="Code" onChange={(event) => setCode(event.target.value)} name="code" rules={[{ required: true }]}>
+          <Input style={{ width: '200%' }} />
+        
+        </Form.Item>
+        <Form.Item label="Name" onChange={(event) => setName(event.target.value)} name="name" rules={[{ required: true }]}>
+          <Input style={{ width: '200%' }} />
+        </Form.Item>
+        <Form.Item label="Price" onChange={(event) => setPrice(event.target.value)} name="price" rules={[{ required: true }]}>
+          <Input type="number" style={{ width: '200%' }} />
+        </Form.Item>
+        <Form.Item
+          label="Quantity"
+          onChange={(event) => setQuantity(event.target.value)}name="quantity"
+          rules={[{ required: true }]}
+        >
+          <Input type="number" style={{ width: '200%' }} />
+        </Form.Item>
+        <Form.Item label="Image" onChange={(event) => setProductImage(event.target.files[0])}name="product_image" rules={[{ required: true }]}>
+          <Input type="file" style={{ width: '200%' }} />
+        </Form.Item>
+        /
+        {/* {productImage && (
+          <Form.Item>
+            <Image
+              src={URL.createObjectURL(productImage)}
+              alt="Product Image Preview"
+              width={100}
+            />
+          </Form.Item>
+        )} */}
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Add Product
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 }

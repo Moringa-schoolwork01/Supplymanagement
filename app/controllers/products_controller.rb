@@ -16,10 +16,20 @@ class ProductsController < ApplicationController
         end
       end 
   # POST /products: create a new product
-  def create
-      product = Product.create(code: params[:code], name: params[:name], price: params[:price], quantity: params[:quantity])
-      render json: product , status: :created
+#   def create
+#     #   product = Product.create!(code: params[:code], name: params[:name],  price: params[:price])
+#     product = Product.create!(products_params)  
+#     render json: product, status: :created
+#     end
+
+def create
+    product = Product.new(products_params)
+    if product.save!
+      render json: product, status: :created
+    else
+      render json: { errors: product.errors.full_messages }, status: :unprocessable_entity
     end
+  end
   def update
       product = Product.find_by(id: params[:id])
       if product
@@ -41,6 +51,6 @@ class ProductsController < ApplicationController
   end
   private
   def products_params
-      params.permit(:code, :name, :price, :quantity)
+      params.permit(:code, :name, :product_image, :price, :quantity)
   end
 end

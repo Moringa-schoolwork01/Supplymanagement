@@ -113,7 +113,12 @@ function App() {
           <Col span={16}><Orders /></Col>
         </Row>      
         }></Route>
-        
+        <Route exact path="orders/addorder" element={
+          <Row>
+          <Col span={8}> <Sidebar /></Col>
+            <Col span={16}><Addorder /></Col>
+          </Row>      
+        }/>
         <Route exact path="/signin" element={
         <Row>
           <Col span={16}><Signin /></Col>

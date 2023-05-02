@@ -1,20 +1,29 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-// import '../css/Addorder.css';
+import { useEffect, useState } from 'react';
+import { Button, Checkbox, Form, Input , Col, Row, Select,} from 'antd';
 
-function AddOrder({ onAdd }) {
-  const navigate = useNavigate();
-  const [product, setProduct] = useState('');
-  const [quantity, setQuantity] = useState('');
+
+  const onSearch = (value) => {
+    console.log('search:', value);
+  };
+const onFinish = (values) => {
+  console.log('Success:', values);
+};
+const onFinishFailed = (errorInfo) => {
+  console.log('Failed:', errorInfo);
+};
+const AddOrder= () => {
+    const [products, setProduct] = useState([]);
+    const [quantity, setQuantity] = useState('');
   const [supplier_name, setSupplierName] = useState('');
   const [buying_price, setBuyingPrice] = useState('');
+  const [selected_product, setSelectedProduct] = useState('');
   const [total_price, setTotalPrice] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const newOrder = {
-      product: product,
+      product: products,
       quantity: quantity,
       supplier_name: supplier_name,
       buying_price: buying_price,
@@ -40,64 +49,134 @@ function AddOrder({ onAdd }) {
       })
       .catch((error) => console.error(error));
   };
+    useEffect(() => {
+        fetch('/select_product')
+        .then(response => response.json())
+        .then(data => setProduct(data))
+    },[]
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-        <label htmlFor='product'>Product Name:</label>
-          <input
-            type='text'
-            id='product'
-            value={product}
-            onChange={(event) => setProduct(event.target.value)}
-            required
-          />
-          <label htmlFor='quantity'>Quantity:</label>
-          <input
-            type='number'
-            id='quantity'
-            value={quantity}
-            onChange={(event) => setQuantity(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='supplier_name'>Supplier Name:</label>
-          <input
-            type='text'
-            id='supplier_name'
-            value={supplier_name}
-            onChange={(event) => setSupplierName(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='buying_price'>Buying Price:</label>
-          <input
-            type='number'
-            id='buying_price'
-            value={buying_price}
-            onChange={(event) => setBuyingPrice(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='total_price'>Total Price:</label>
-          <input
-            type='number'
-            id='total_price'
-            value={total_price}
-            onChange={(event) => setTotalPrice(event.target.value)}
-            required
-          />
-        </div>
-        <button type='submit'>Add Order</button>
-      </form>
-    </div>
-  );
-}
+    )
+    const onProductChange = (value) => {
+        console.log(`selected ${value}`);
+        setSelectedProduct(value)
+      };
+    
+    return(
+        <>
+        <Row>
+        <Col span={4}></Col>
+        <Col span={8}>
+            <img
+            style={{
+                marginTop: 200,
+                marginRight: 180,
+            }}
+             src={"https://static.vecteezy.com/system/resources/thumbnails/005/086/602/small/warehouse-workers-check-quantity-and-delivery-of-products-from-customers-purchase-orders-to-deliver-goods-to-the-correct-location-free-vector.jpg"} alt=''></img>
+        </Col>
+      <Col span={8}><Form
+        name="basic"
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 16,
+        }}
+        style={{
+            marginTop: 200,
+          minWidth: 600,
+        }}
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={handleSubmit}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+        
+      >
+        <Form.Item
+          label="Quantity"
+          name="quantity"
+          onChange={(event) => setQuantity(event.target.value)}
+        >
+          <Input />
+        </Form.Item>
+    
+        <Form.Item
+          label="Supplier Name"
+          name="suppler_name"
+          onChange={(event) => setSupplierName(event.target.value)}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Buying Price"
+          name="buying_price"
+          onChange={(event) => setBuyingPrice(event.target.value)}
+        >
+          <Input />
+        </Form.Item>
 
+        <Form.Item
+          label="Product Name"
+          name="product"
+          
+        >
+          <Select
+    showSearch
+    placeholder="Select a product"
+    optionFilterProp="children"
+    onChange={onProductChange}
+    onSearch={onSearch}
+    filterOption={(input, option) =>
+      (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+    }
+    options={products}
+    // options={[
+        
+    //   {
+    //     value: 'jack',
+    //     label: 'Jack',
+    //   },
+    //   {
+    //     value: 'lucy',
+    //     label: 'Lucy',
+    //   },
+    //   {
+    //     value: 'tom',
+    //     label: 'Tom',
+    //   },
+    // ]}
+    ></Select>
+        </Form.Item>
+        {/* <Form.Item
+          name="remember"
+          valuePropName="checked"
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
+     */}
+        <Form.Item
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form></Col>
+      <Col span={4}></Col>
+        
+      </Row>
+      </>
 
+    )
+   
 
+};
 export default AddOrder;

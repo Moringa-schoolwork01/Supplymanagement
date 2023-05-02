@@ -9,7 +9,7 @@ function Products() {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
-    fetch('./products')
+    fetch('/products')
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(error => console.error(error));
@@ -38,9 +38,9 @@ function Products() {
     },
     {
       title: 'Product Image',
-      dataIndex: 'product_image',
-      key: 'product_image',
-      render: (image) => <img src={image} alt="Product" width="100" />,
+      dataIndex: 'get_image_url',
+      key: 'get_image_url',
+      render: (image) => <img src={image} alt="Product" width="100" height="100"/>,
     },
     {
       title: 'Action',
@@ -54,7 +54,7 @@ function Products() {
     },
   ];
   function handleDelete(product) {
-    fetch(`./products/${product.id}`, { method: 'DELETE' })
+    fetch(`/products/${product.id}`, { method: 'DELETE' })
       .then(() => {
         setProducts(prevProducts => prevProducts.filter(p => p.id !== product.id));
       })
@@ -88,6 +88,8 @@ function Products() {
     .catch(error => console.error(error));
   }
   
+  
+  
   return (
     <div className='prodcont'>
       <h3>Add your product here</h3>
@@ -96,42 +98,7 @@ function Products() {
       </button>
       <Outlet />
       <Table columns={columns} dataSource={products} />
-      {/* <table className='table'>
-        <thead>
-          <tr className='table-primary'>
-            <th scope='col'>#</th>
-            <th scope='col'>Code</th>
-            <th scope='col'>Name</th>
-            <th scope='col'>Price</th>
-            <th scope='col'>Quantity</th>
-            <th scope='col'>Product_Image</th>
-            <th scope='col'>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map(product => (
-            <tr key={product.id}>
-              <th scope='row'>{product.id}</th>
-              <td>{product.code}</td>
-              <td>{product.name}</td>
-              <td>{product.price}</td>
-              <td>{product.quantity}</td>
-              <td>{product.product_image}</td>
-              <td>
-                <button
-                  className='custom-btn btn-2'
-                  onClick={() => setSelectedProduct(product)}
-                >
-                  Update
-                </button>
-                <button className='btnd' onClick={() => handleDelete(product)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
+      
       {selectedProduct && (
   <div>
     <h3>Update Product</h3>
@@ -183,7 +150,7 @@ function Products() {
           onChange={(e) => setSelectedProduct({...selectedProduct, quantity: e.target.value})}
         />
       </div>
-      <div className="form-group">
+      {/* <div className="form-group">
         <label htmlFor="product_image">ProductImage</label>
         <input
           type="url"
@@ -193,7 +160,7 @@ function Products() {
           value={selectedProduct.product_image}
           onChange={(e) => setSelectedProduct({...selectedProduct, product_image: e.target.value})}
         />
-      </div>
+      </div> */}
       <button type="submit" className="btn btn-primary mr-2">Update</button>
       <button type="button" className="btn btn-secondary" onClick={() => setSelectedProduct(null)}>Cancel</button>
     </form>

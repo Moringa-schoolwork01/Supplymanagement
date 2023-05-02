@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+    belongs_to :product
     # belongs_to :customer
     # # has_many :sales
     # has_many :products, through: :sales
