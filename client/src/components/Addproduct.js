@@ -53,6 +53,7 @@ console.log(newProduct)
   return (
     <div style={{ display: 'flex', justifyContent: 'flex-end', width: '80%', margin: '0 auto', marginLeft: '250%', marginTop: '40%' }}>
       <div style={{ display: 'flex', alignItems: 'center' }}></div>
+      <img src="https://t3.ftcdn.net/jpg/02/92/95/18/240_F_292951874_MY7CiuWdJQsodJq2ICgyGkl7A7KTHQ2T.jpg" alt="Warehouse workers" style={{ height: '80%', marginLeft: -200, marginTop: 60 }} />
       <Form form={form} onFinish={onFinish} layout="vertical">
         <Form.Item label="Code" onChange={(event) => setCode(event.target.value)} name="code" rules={[{ required: true }]}>
           <Input style={{ width: '200%' }} />
