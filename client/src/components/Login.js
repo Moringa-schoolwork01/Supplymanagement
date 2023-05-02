@@ -1,144 +1,204 @@
-import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useCallback } from 'react';
-import "../css/login.css";
+import React, { Fragment, useState } from "react";
+import {Row,Col, Avatar, Card, Form, Input, Button, Typography, Alert, Spin } from 'antd';
 
+// import "../css/login.css";
+import { useNavigate } from 'react-router-dom';
+import { EditOutlined, EllipsisOutlined, SettingOutlined,UserOutlined, LockOutlined  } from '@ant-design/icons';
+// import { Form, Input, Button, Typography, Alert, Spin } from 'antd';
+// import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-const Login = () => {
+const { Meta } = Card;
+const { Title } = Typography;
 
-  const [error, setError] = useState(null);
-  const [notify, setNotify] = useState(false);
-  const [email, setEmail] = useState('')
-const [password, setPassword] = useState('')
-
+function Login () {
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false)
  
-  function notifyUser() {
-
-    setNotify((notify) => !notify);
-    setTimeout(endNotification, 1000);
-  }
- 
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("ni kunoma mazee")
-    const newData = {
-      email: email,
-      password_digest: password
-    }
-    console.log(newData)
-    setError(null);
-    fetch("/login", {
-      method: "POST",
+  const onFinish = (values) => {
+    console.log('Received values of form: ', values);
+    setLoading(true);
+    //Post newuser with credentials
+    fetch('/login', {
+      method: 'POST',
+      body: JSON.stringify(values),
       headers: {
-        "Content-Type": "application/json",
+        'Content-type': 'application/json; charset=UTF-8',
       },
-      body: JSON.stringify(newData),
-    }).then((res) => {
-      if (res.ok) {
-        res.json().then((user) => {
-          notifyUser();
-          localStorage.setItem("token", user.jwt);
-          localStorage.setItem("user", `${user.user.id}`);
-        });
-      } else {
-        res.json().then((error) => setError(error));
-      }
-    });
+    })
+    .then((r) => r.json())
+    .then((newuser) =>{
+      console.log(newuser)
+      // save the token to localStorage for future access
+     localStorage.setItem("jwt", newuser.jwt);
+     setLoading(false) //stop loading
+
+     //shows alert with user details
+     if (newuser.user) {
+      setIsLoggedIn(true);
+      alert(`Login successful! Welcome, ${newuser.user}!`);
+      navigate('/home')
+    } else {
+      setErrorMessage('User does not exist.');
+      alert('Login failed. User does not exist.')
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    setErrorMessage('An error occurred. Please try again later.');
+    setLoading(false) //stop loading
+  });
   };
 
-  const handleLogout = useCallback(() => {
-    localStorage.removeItem('token');
- 
-  }, []);
-
-  function endNotification() {
-    setNotify((notify) => !notify);
-    navigate("/dashboard");
-  }
-  const navigate = useNavigate()
-
   return (
+    <>
     
+    
+    <Card
+    style={{
+      width: 900,
+      top:"20vh",
+      left:'20vw',
+      background: '#fcfefe',
+         }}
+    // cover={
+    //   <img
+    //     alt="example"
+    //     src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+    //   />
+    // }
+    // actions={[
+    //   <SettingOutlined key="setting" />,
+    //   <EditOutlined key="edit" />,
+    //   <EllipsisOutlined key="ellipsis" />,
+    // ]}
+  > 
+  <Row>
+            <Col span={14}> <img src="./reg.png" /></Col>
+             <Col span={6}><Form
+          name="login"
+          onFinish={onFinish}
+          initialValues={{
+            remember: true,
+          }}
+          // style={
+          // {fontSize:'700px',
+          // width:400,
+          // height:1000,
 
-    <div class="form-box">
-    <form class="form" onSubmit={handleSubmit}>
-        <span class="title"> User Login</span>
-        <span class="subtitle">Remember me?</span>
-        <div class="form-container">
-          <input type="email" class="input" placeholder="Email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
-          <input type="password" class="input" placeholder="Password" id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-        </div>
-        <button onClick={() => navigate('Home')}>Login</button>
-      
-    
-        </form>
-        
-    
-    </div>
-    // <div className="container-login">
-    //   <div className="screen">
-    //     <div className="screen__content">
-    //       {notify ? <p className="alert-text">Login Successful</p> : null}
-    //       <form className="login" onSubmit={handleSubmit}>
-    //         <div className="login__field">
-    //           <i className="login__icon fas fa-user"></i>
-    //           {error ? <p className="alert-text">{error.errors}</p> : null}
-    //           <input
-    //             type="text"
-    //             name="username"
-    //             className="login__input"
-    //             placeholder="Username"
-    //             value={username}
-    //             onChange={(e) => setUserName(e.target.value)}
-    //           />
-    //         </div>
-    //         <div className="login__field">
-    //           <i className="login__icon fas fa-lock"></i>
-    //           <input
-    //             type="password"
-    //             className="login__input"
-    //             placeholder="Password"
-    //             value={password}
-    //             onChange={(e) => setPassword(e.target.value)}
-    //           />
-    //         </div>
-           
-    //         <button className="button login__submit">
-    //           <span className="button__text">Log In Now</span>
-    //           <i className="button__icon fas fa-chevron-right"></i>
-    //         </button>
-    //           {/* <div className="button__text">
-    //          <button  type="submit" className="button login__submit" onClick={handleLogout}>LOGOUT
-    //          <i className="button__icon fas fa-chevron-right"></i>
-    //          </button> 
-    //          </div> */}
-    //          <div className="button__text">
-    //          <NavLink  className="button login__submit" to='/'>LOGOUT
-    //          <i className="button__icon fas fa-chevron-right"></i>
-    //          </NavLink> 
-    //          </div> 
-    //         <NavLink to="/sign-up" className="gotosignup__text">
-    //           Sign Up
-    //         </NavLink>
-    //       </form>
-    //     </div>
-    //     {/* <div class="social-login">
-    //         <h3>log in via</h3>
-    //         <div class="social-icons">
-    //           <p className="social-login__icon fab fa-instagram"></p>
-    //           <p className="social-login__icon fab fa-facebook"></p>
-    //           <p className="social-login__icon fab fa-twitter"></p>
-    //         </div>
-    //        </div>  */}
-    //     <div className="screen__background">
-    //       <span className="screen__background__shape screen__background__shape4"></span>
-    //       <span className="screen__background__shape screen__background__shape3"></span>
-    //       <span className="screen__background__shape screen__background__shape2"></span>
-    //       <span className="screen__background__shape screen__background__shape1"></span>
-    //     </div>
+          // }
+          // }
+        >
+          <Title  className="title">User Login</Title>
+          <Form.Item
+            name="email"
+            rules={[
+              
+              {
+                required: true,
+                message: 'Please input your email!',
+              },
+            ]}
+            
+          >
+            <Input style= {
+              {
+                padding:15,
+                width:300,
+              }
+            }prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your password!',
+              },
+            ]}
+          >
+            <Input.Password style= {
+              {
+                padding:15,
+                width:300,
+              }
+            }
+            prefix={<LockOutlined className="site-form-item-icon" />} placeholder="Password" />
+          </Form.Item>
+          {errorMessage && <Alert message={errorMessage} type="error" />}
+          <Form.Item>
+            <Button type="primary" htmlType="submit" className="submit" loading={loading}>
+              {loading ? <Spin /> : 'Log in'}
+            </Button>
+          </Form.Item>
+        </Form>
+        </Col>
+        <Col span={4}></Col>
+         </Row> 
+    {/* <Meta
+      avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />}
+      title="Card title"
+      description="This is the description"
+    /> */}
+  </Card>
+    </>
+  
+    // <div className='landingpage'>
+    //   <div className='landingcontent'>
+    //     <Title level={2} className='signincont'>Welcome back !</Title>
+    //     <Title level={3}>Input your credentials here</Title>
     //   </div>
+    //   <div>
+    //        <img className='loginimage' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRecroq9Fmqao54FgAtVCqFRC-014ctCH4ww&usqp=CAU' alt='img'></img>
+    //     </div>
+      
+    //   <div>
+    //     <Form
+    //       name="login"
+    //       onFinish={onFinish}
+    //       initialValues={{
+    //         remember: true,
+    //       }}
+    //     >
+    //       <Title level={4} className="title">User Login</Title>
+    //       <Form.Item
+    //         name="email"
+    //         rules={[
+    //           {
+    //             required: true,
+    //             message: 'Please input your email!',
+    //           },
+    //         ]}
+    //       >
+    //         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
+    //       </Form.Item>
+    //       <Form.Item
+    //         name="password"
+    //         rules={[
+    //           {
+    //             required: true,
+    //             message: 'Please input your password!',
+    //           },
+    //         ]}
+    //       >
+    //         <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder="Password" />
+    //       </Form.Item>
+    //       {errorMessage && <Alert message={errorMessage} type="error" />}
+    //       <Form.Item>
+    //         <Button type="primary" htmlType="submit" className="submit" loading={loading}>
+    //           {loading ? <Spin /> : 'Log in'}
+    //         </Button>
+    //       </Form.Item>
+    //     </Form>
+        
+    //   </div>
+     
+
     // </div>
+
+    
+    
   );
 };
 
