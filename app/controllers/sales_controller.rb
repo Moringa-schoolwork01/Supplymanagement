@@ -2,14 +2,14 @@ class SalesController < ApplicationController
      # GET /sales: return an array of all sales
   def  index
     sales = Sale.all
-    render json: sales
+    render json: sales, each_serializer: SalesSerializer
 end
 
    # GET /sales/:id
 def show
   sale = Sale.find_by(id: params[:id])
   if sale
-    render json: sale
+    render json: sale, each_serializer: SalesSerializer
   else
     render json: { error: "sale  not found" }, status: :not_found
   end

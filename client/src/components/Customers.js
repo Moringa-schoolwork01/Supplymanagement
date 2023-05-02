@@ -86,38 +86,7 @@ function Customers() {
       </button>
       <Outlet />
       <Table columns={columns} dataSource={customers} />
-      {/* <table className='tableC'>
-        <thead>
-          <tr className='table-primaryC'>
-            <th scope='col'>#</th>
-            <th scope='col'>full_name</th>
-            <th scope='col'>contact</th>
-            <th scope='col'>email</th>
-            <th scope='col'>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {customers.map(customer => (
-            <tr key={customer.id}>
-              <th scope='row'>{customer.id}</th>
-              <td>{customer.full_name}</td>
-              <td>{customer.contact}</td>
-              <td>{customer.email}</td>
-              <td>
-                <button
-                  className='custom-btnc btn-C'
-                  onClick={() => setSelectedCustomer(customer)}
-                >
-                  Update
-                </button>
-                <button className='btnc' onClick={() => handleDelete(customer)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
+
       {selectedCustomer && (
   <div>
     <h3>Update customer</h3>
@@ -125,28 +94,7 @@ function Customers() {
       e.preventDefault();
       handleUpdate(selectedCustomer);
     }}>
-      {/* <div className="form-groupc">
-        <label htmlFor="customer">customer</label>
-        <input
-          type="text"
-          className="form-control"
-          id="customer"
-          name="customer"
-          value={selectedCustomer.customer}
-          onChange={(e) => setSelectedCustomer({...selectedCustomer, customer: e.target.value})}
-        />
-      </div> */}
-      {/* <div className="form-groupc">
-        <label htmlFor="first_name">first_name</label>
-        <input
-          type="text"
-          className="form-control"
-          id="first_name"
-          name="first_name"
-          value={selectedCustomer.first_name}
-          onChange={(e) => setSelectedCustomer({...selectedCustomer, first_name: e.target.value})}
-        />
-      </div> */}
+
       <div className="form-groupc">
         <label htmlFor="full_name">full_name</label>
         <input

@@ -17,6 +17,7 @@ import Addorder from './components/Addorder';
 import LandingPage from './components/LandingPage';
 // import Newtable from './components/Newtable';
 import Sampleform from './components/Sampleform';
+import AddSale from './components/AddSale';
 
 function App() {
   return (
@@ -32,7 +33,8 @@ function App() {
         <Row>
             <Col span={24}><LandingPage /></Col>
         </Row>      
-      }></Route>
+      }>
+      </Route>
 
         <Route exact path="/home" element={
              <Row>
@@ -40,6 +42,14 @@ function App() {
              <Col span={16}><Home /></Col>
          </Row> 
       }></Route>
+
+<Route exact path="/orders/sampleform" element={
+             <Row>
+            <Col span={8}> <Sidebar /></Col>
+             <Col span={16}><Sampleform /></Col>
+         </Row> 
+      }></Route>
+
 
         <Route exact path="/products" element={
         <Row>
@@ -59,6 +69,13 @@ function App() {
           <Row>
             <Col span={8}> <Sidebar /></Col>
              <Col span={16}><Sales /></Col>
+         </Row>    
+          }></Route>
+
+<Route exact path="/sales/addsale" element={
+          <Row>
+            <Col span={8}> <Sidebar /></Col>
+             <Col span={16}><AddSale /></Col>
          </Row>    
           }></Route>
 

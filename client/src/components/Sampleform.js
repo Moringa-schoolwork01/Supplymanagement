@@ -13,6 +13,7 @@ const onFinishFailed = (errorInfo) => {
   console.log('Failed:', errorInfo);
 };
 const Sampleform= () => {
+    const [form ]= Form.useForm()
     const [products, setProduct] = useState([]);
     const [quantity, setQuantity] = useState('');
   const [supplier_name, setSupplierName] = useState('');
@@ -21,7 +22,7 @@ const Sampleform= () => {
   const [total_price, setTotalPrice] = useState('');
 
     useEffect(() => {
-        fetch('./select_product')
+        fetch('/select_product')
         .then(response => response.json())
         .then(data => setProduct(data))
     },[]
@@ -66,12 +67,14 @@ const Sampleform= () => {
         <Col span={4}></Col>
         <Col span={8}>
             <img
+            className='formimg'
             style={{
                 marginTop: 200,
             }}
              src={"https://static.vecteezy.com/system/resources/thumbnails/005/086/602/small/warehouse-workers-check-quantity-and-delivery-of-products-from-customers-purchase-orders-to-deliver-goods-to-the-correct-location-free-vector.jpg"} alt=''></img>
         </Col>
-      <Col span={8}><Form
+      <Col span={8}>
+        <Form
         name="basic"
         labelCol={{
           span: 8,
@@ -86,6 +89,7 @@ const Sampleform= () => {
         initialValues={{
           remember: true,
         }}
+        form = {form}
         onFinish={handleSubmit}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
@@ -129,34 +133,11 @@ const Sampleform= () => {
       (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
     }
     options={products}
-    // options={[
-        
-    //   {
-    //     value: 'jack',
-    //     label: 'Jack',
-    //   },
-    //   {
-    //     value: 'lucy',
-    //     label: 'Lucy',
-    //   },
-    //   {
-    //     value: 'tom',
-    //     label: 'Tom',
-    //   },
-    // ]}
+ 
+   
     ></Select>
         </Form.Item>
-        {/* <Form.Item
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-     */}
+     
         <Form.Item
           wrapperCol={{
             offset: 8,

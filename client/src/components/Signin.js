@@ -29,8 +29,9 @@ const handleSubmit = (e) => {
     })
       .then((r) => r.json())
       .then((newme) => {
-        alert(`${newme.email} Registration successfuly!`)
+        alert(`${newme.user.email} Registration successfuly!`)
         navigate('/login')
+        console.log(newme)
       })
       // .then((user) => onLogin(user));
 }

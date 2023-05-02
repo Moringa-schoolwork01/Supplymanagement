@@ -51,5 +51,14 @@ end
   render json: my_product
 end
 
+def select_customer
+   customer = Customer.all
+   my_customer = customer.all.map do |data|
+    {value: data.id,
+  label: data.full_name}
+   end
+   render json: my_customer
+end
+
 
 end

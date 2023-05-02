@@ -105,7 +105,7 @@ function Home() {
     </div>
     <div class="data">
         <p>
-            39,500 
+            9,500 
         </p>
         
         <div class="rangeA">
@@ -133,7 +133,7 @@ function Home() {
     </div>
     <div class="data">
         <p>
-            39,500 
+            49,000 
         </p>
         
         <div class="rangeB">
@@ -161,7 +161,7 @@ function Home() {
     </div>
     <div class="data">
         <p>
-            39,500 
+            20,500 
         </p>
         
         <div class="rangeC">
@@ -187,7 +187,7 @@ function Home() {
     </div>
     <div class="data">
         <p>
-            39,500 
+            60,750 
         </p>
         
         <div class="rangeD">
