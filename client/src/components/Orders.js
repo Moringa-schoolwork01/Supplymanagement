@@ -100,40 +100,7 @@ function Orders() {
       </button>
       <Outlet />
       <Table columns={columns} dataSource={orders} />
-      {/* <table className='table'>
-        <thead>
-          <tr className='table-primary'>
-            <th scope='col'>#</th>
-            <th scope='col'>Quantity</th>
-            <th scope='col'>Supplier name</th>
-            <th scope='col'>Buying price</th>
-            <th scope='col'>Total price</th>
-            <th scope='col'>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map(order => (
-            <tr key={order.id}>
-              <th scope='row'>{order.id}</th>
-              <td>{order.quantity}</td>
-              <td>{order.supplier_name}</td>
-              <td>{order.buying_price}</td>
-              <td>{order.total_price}</td>
-              <td>
-                <button
-                  className='custom-btn btn-2'
-                  onClick={() => setSelectedOrder(order)}
-                >
-                  Update
-                </button>
-                <button className='btnd' onClick={() => handleDelete(order)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
+
       {selectedOrder && (
         <div>
    <h3>Update Order</h3>

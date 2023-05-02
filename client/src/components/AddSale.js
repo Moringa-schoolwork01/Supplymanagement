@@ -1,6 +1,8 @@
 
 import { useEffect, useState } from 'react';
 import { Button, Checkbox, Form, Input , Col, Row, Select,} from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { maxWidth, width } from '@mui/system';
 
 
   const onSearch = (value) => {
@@ -13,6 +15,7 @@ const onFinishFailed = (errorInfo) => {
   console.log('Failed:', errorInfo);
 };
 const AddSale= () => {
+    const navigate = useNavigate();
     const [products, setProduct] = useState([]);
     const [customers, setCustomers] = useState([]);
     const [selected_customers, setSelectedCustomers] = useState([]);
@@ -70,7 +73,7 @@ const AddSale= () => {
             //   total_price: parseInt(buying_price)* parseInt(quantity),
         };
         console.log(newOrder);
-        fetch('/orders', {
+        fetch('/sales', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,11 +83,15 @@ const AddSale= () => {
             .then((response) => response.json())
             .then((data) => {
                 // onAdd(data);
+                console.log('tuko hapa ')
                 setSelectedProduct('');
                 setQuantity('');
                 setSupplierName('');
                 setBuyingPrice('');
                 setTotalPrice('');
+                alert('Sale was successful')
+                navigate('/sales')
+                console.log(data)
             })
             .catch((error) => console.error(error));
     }
@@ -98,6 +105,8 @@ const AddSale= () => {
             className='formimg'
             style={{
                 marginTop: 200,
+                width: 350,
+                marginLeft: -150
             }}
              src={"https://static.vecteezy.com/system/resources/thumbnails/005/086/602/small/warehouse-workers-check-quantity-and-delivery-of-products-from-customers-purchase-orders-to-deliver-goods-to-the-correct-location-free-vector.jpg"} alt=''></img>
         </Col>
@@ -113,6 +122,7 @@ const AddSale= () => {
         style={{
             marginTop: 200,
           minWidth: 600,
+          marginRight:550
         }}
         initialValues={{
           remember: true,
@@ -185,7 +195,7 @@ const AddSale= () => {
           }}
         >
           <Button type="primary" htmlType="submit" onClick={handleSubmit}>
-            Submitttttttttttt
+            Submit
           </Button>
         </Form.Item>
       </Form></Col>
