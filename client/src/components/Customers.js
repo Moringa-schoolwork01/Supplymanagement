@@ -8,7 +8,7 @@ function Customers() {
   const [selectedCustomer, setSelectedCustomer] = useState(null);
 
   useEffect(() => {
-    fetch('./customers')
+    fetch('/customers')
       .then(response => response.json())
       .then(data => setCustomers(data))
       .catch(error => console.error(error));
@@ -44,7 +44,7 @@ function Customers() {
   ];
   function handleDelete(customer) {
     console.log (customer)
-    fetch(`./customers/${customer.id}`, { method: 'DELETE' })
+    fetch(`/customers/${customer.id}`, { method: 'DELETE' })
       .then(() => {
         setCustomers(prevCustomers => prevCustomers.filter(p => p.id !== customer.id));
       })
@@ -52,7 +52,7 @@ function Customers() {
   }
   
   function handleUpdate(updatedCustomer) {
-    fetch(`./customers/${updatedCustomer.id}`, {
+    fetch(`/customers/${updatedCustomer.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

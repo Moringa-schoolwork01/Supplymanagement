@@ -1,15 +1,27 @@
 class OrdersController < ApplicationController
    # GET /orders
-   def index
-    orders = Order.all
-    render json: orders
+   
+    def index
+      @orders = Order.includes(:product).all
+      render json: @orders
+    end
+ 
+  
+  def update
+    order = Order.find_by(id: params[:id])
+    if order
+      order.update(order_params)
+      render json: order 
+    else
+      render json: { error: "order not found" }, status: :not_found
+    end
   end
 
    # GET /orders/:id
   def show
     order = Order.find_by(id: params[:id])
     if order
-      render json: order
+      render json: order, each_serializer: OrderSerializer
     else
       render json: { error: "order  not found" }, status: :not_found
     end
@@ -21,21 +33,13 @@ class OrdersController < ApplicationController
   def create
     order = Order.create(product_id: params[:product],quantity: params[:quantity], supplier_name: params[:supplier_name], buying_price: params[:buying_price,], total_price: params[:total_price,])
     render json: order, status: :created
-  en
+  end
 
   
 
 
    # PATCH /order/:id
-  def update
-    order = Order.find_by(id: params[:id])
-    if order
-      order.update(order_params)
-      render json: order 
-    else
-      render json: { error: "order not found" }, status: :not_found
-    end
-  end
+ 
 
    # DELETE /order/:id
 def destroy
@@ -54,3 +58,4 @@ end
     params.permit(:product, :quantity, :supplier_name, :buying_price, :total_price)
   end
 end
+

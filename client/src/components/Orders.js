@@ -11,7 +11,7 @@ function Orders() {
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
   useEffect(() => {
-    fetch('./orders')
+    fetch('/orders')
       .then(response => response.json())
       .then(data => setOrders(data))
       .catch(error => console.error(error));
@@ -19,8 +19,8 @@ function Orders() {
   const columns = [
     {
       title: 'Product Name',
-      dataIndex: 'product',
-      key: 'product',
+      dataIndex: 'product_name',
+      key: 'product_name',
       render: (text) => <a>{text}</a>,
     },
     {
@@ -56,7 +56,7 @@ function Orders() {
     },
   ];
   function handleDelete(order) {
-    fetch(`./orders/${order.id}`, { method: 'DELETE' })
+    fetch(`/orders/${order.id}`, { method: 'DELETE' })
       .then(() => {
         setOrders(prevOrders => prevOrders.filter(o => o.id !== order.id));
         setStatusMessage('Order deleted successfully');
@@ -65,6 +65,7 @@ function Orders() {
   }
 
   function handleUpdate(updatedOrder) {
+    console.log(updatedOrder.id)
     fetch(`/orders/${updatedOrder.id}`, {
       method: 'PUT',
       headers: {

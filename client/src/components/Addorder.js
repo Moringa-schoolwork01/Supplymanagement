@@ -21,7 +21,7 @@ const AddOrder= () => {
   const [total_price, setTotalPrice] = useState('');
 
     useEffect(() => {
-        fetch('./select_product')
+        fetch('/select_product')
         .then(response => response.json())
         .then(data => setProduct(data))
     },[]

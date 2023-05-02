@@ -51,6 +51,6 @@ def create
   end
   private
   def products_params
-      params.permit(:code, :name, :product_image, :price, :action)
+      params.permit(:code, :name, :product_image, :price, :quantity)
   end
 end

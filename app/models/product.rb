@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
     has_one_attached :product_image
     has_many :sales
-    has_many :orders, through: :sales
+    has_many :orders
 
     def get_image_url
         if self.product_image.blob
