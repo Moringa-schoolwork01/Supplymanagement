@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 // import '../css/Addorder.css';
 
 function AddOrder({ onAdd }) {
+  const navigate = useNavigate();
   const [product, setProduct] = useState('');
   const [quantity, setQuantity] = useState('');
   const [supplier_name, setSupplierName] = useState('');
@@ -32,6 +35,8 @@ function AddOrder({ onAdd }) {
         setSupplierName('');
         setBuyingPrice('');
         setTotalPrice('');
+        alert('Order was successful')
+        navigate('/orders')
       })
       .catch((error) => console.error(error));
   };
