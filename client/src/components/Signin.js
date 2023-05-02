@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from "react";
+import {Row,Col, Avatar, Card, Form, Input, Button, Typography, Alert, Spin } from 'antd';
+
+// import "../css/login.css";
 import { useNavigate } from 'react-router-dom';
-import { Form, Input, Button } from 'antd';
-// import 'antd/dist/antd.css';
+import { EditOutlined, EllipsisOutlined, SettingOutlined,UserOutlined, LockOutlined  } from '@ant-design/icons';
+// import { Form, Input, Button, Typography, Alert, Spin } from 'antd';
+// import { UserOutlined, LockOutlined } from '@ant-design/icons';
+
+const { Meta } = Card;
+const { Title } = Typography;
 
 function Signin() {
   const navigate = useNavigate();
@@ -34,32 +41,72 @@ function Signin() {
   };
 
   return (
-    <div className='landingpage'>
-      <div className='landingcontent'>
-        <h2 className='signincont'>Get A New Account</h2>
-        <h3>Register a new account and get started</h3>
-      </div>
-      <div>
-        <Form className="formone" onFinish={handleSubmit}>
+    <>
+    
+    
+    <Card
+    style={{
+      width: 950,
+      height:500,
+      top:"20vh",
+      left:'30vw',
+      background: '#fcfefe',
+            // background: 'radial-gradient(328px at 2.9% 15%, rgb(191, 224, 251) 0%, rgb(232, 233, 251) 25.8%, rgb(252, 239, 250) 50.8%, rgb(234, 251, 251) 77.6%, rgb(240, 251, 244) 100.7%)',
+    }}
+    // cover={
+    //   <img
+    //     alt="example"
+    //     src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+    //   />
+    // }
+    // actions={[
+    //   <SettingOutlined key="setting" />,
+    //   <EditOutlined key="edit" />,
+    //   <EllipsisOutlined key="ellipsis" />,
+    // ]}
+  > 
+  <Row>
+            <Col span={16}> <img src='./lg.png'  /></Col>
+             <Col span={14}><Form className="formmone" onFinish={handleSubmit}>
           <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please input your email!' }]}>
-            <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+            <Input style= {
+              {
+                padding:15,
+                width:300,
+              }} value={email} onChange={(e) => setEmail(e.target.value)} />
           </Form.Item>
           <Form.Item label="Password" name="password" rules={[{ required: true, message: 'Please input your password!' }]}>
-            <Input.Password value={password} onChange={(e) => setPassword(e.target.value)} />
+            <Input.Password style= {
+              {
+                padding:15,
+                width:300,
+              }
+            } value={password} onChange={(e) => setPassword(e.target.value)} />
           </Form.Item>
           <Form.Item label="Password Confirmation" name="password_confirmation" rules={[{ required: true, message: 'Please confirm your password!' }]}>
-            <Input.Password value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+            <Input.Password style= {
+              {
+                padding:15,
+                width:300,
+              }
+            } value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)} />
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">Register</Button>
           </Form.Item>
-          <div className="form-section">
-            <p>Have an account? <a href="login">Login</a></p>
-          </div>
+         
         </Form>
-      </div>
-    </div>
-  );
-}
-
-export default Signin;
+        </Col>
+        <Col span={4}></Col>
+         </Row> 
+    {/* <Meta
+      avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />}
+      title="Card title"
+      description="This is the description"
+    /> */}
+  </Card>
+    </>
+    );
+  };
+  
+  export default Signin;

@@ -5,6 +5,10 @@
   list-style: none;
   font-family: 'Comfortaa', cursive;
 }
+body{
+  background-color: 	#fcfefe; 
+}
+.title
 .sidebar{
   width: 280px;
   height: 1040px;
