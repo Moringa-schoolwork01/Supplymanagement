@@ -35,7 +35,7 @@ function Signin() {
     })
       .then((r) => r.json())
       .then((newme) => {
-        alert(`${newme.email} Registration successfuly!`);
+        alert(` Registration successfuly!`);
         navigate('/login');
       });
   };

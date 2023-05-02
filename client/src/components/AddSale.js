@@ -132,23 +132,8 @@ const AddSale= () => {
         autoComplete="off"
         
       >
-        <Form.Item
-          label="Quantity"
-          name="quantity"
-          onChange={(event) => setQuantity(event.target.value)}
-        >
-          <Input />
-        </Form.Item>
 
-        <Form.Item
-          label="Payment method"
-          name="payment_method"
-          onChange={(event) => setPaymentMethod(event.target.value)}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
+<Form.Item
           label="Product Name"
           name="product_id"
           
@@ -187,6 +172,26 @@ const AddSale= () => {
    
     ></Select>
         </Form.Item>
+        
+        <Form.Item
+          label="Quantity"
+          name="quantity"
+          onChange={(event) => setQuantity(event.target.value)}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Payment method"
+          name="payment_method"
+          onChange={(event) => setPaymentMethod(event.target.value)}
+        >
+          <Input />
+        </Form.Item>
+
+   
+
+       
      
         <Form.Item
           wrapperCol={{

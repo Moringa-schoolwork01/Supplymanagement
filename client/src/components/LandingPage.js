@@ -11,7 +11,7 @@ function LandingPage() {
     <div className='landingpage'>
         <div className='landingcontent'>
         <h1>Welcome</h1>
-      <p>Wakurugenzi P.O.S</p>
+      <p>Bright Pearl P.O.S</p>
       <button className='muslimin'  onClick={() => navigate('Signin')}>Register</button>
       <button className='muslimin'  onClick={() => navigate('Login')}>Login</button>
         </div>

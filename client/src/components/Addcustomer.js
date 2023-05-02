@@ -24,7 +24,7 @@ function AddCustomer({ onAdd }) {
         onAdd(data);
         form.resetFields();
         alert('Customer added successfully.');
-        navigate('/customer');
+        navigate('/customers');
       })
       .catch((error) => console.error(error));
   };
