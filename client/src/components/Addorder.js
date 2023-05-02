@@ -68,6 +68,7 @@ const AddOrder= () => {
             <img
             style={{
                 marginTop: 200,
+                marginRight: 180,
             }}
              src={"https://static.vecteezy.com/system/resources/thumbnails/005/086/602/small/warehouse-workers-check-quantity-and-delivery-of-products-from-customers-purchase-orders-to-deliver-goods-to-the-correct-location-free-vector.jpg"} alt=''></img>
         </Col>
