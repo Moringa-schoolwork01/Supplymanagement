@@ -1,76 +1,167 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import { Link, Outlet } from 'react-router-dom';
+import '../css/Orders.css';
+import { Space, Table, Tag } from 'antd';
+
 
 function Orders() {
+  const [orders, setOrders] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [statusMessage, setStatusMessage] = useState('');
+  const [updateSuccess, setUpdateSuccess] = useState(false);
+
+  useEffect(() => {
+    fetch('/orders')
+      .then(response => response.json())
+      .then(data => setOrders(data))
+      .catch(error => console.error(error));
+  }, []);
+  const columns = [
+    {
+      title: 'Product Name',
+      dataIndex: 'product_name',
+      key: 'product_name',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'Quantity',
+      dataIndex: 'quantity',
+      key: 'quantity',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'SupplierName',
+      dataIndex: 'supplier_name',
+      key: 'supplier_name',
+    },
+    {
+      title: 'BuyingPrice',
+      dataIndex: 'buying_price',
+      key: 'buying_price',
+    },
+    {
+      title: 'TotalPrice',
+      dataIndex: 'total_price',
+      key: 'total_price',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Space size="middle">
+          <Tag color='geekblue' onClick={() => setSelectedOrder(record)}><a>Update </a></Tag>
+          <Tag color='volcano'onClick={() => handleDelete(record)}><a>Delete</a></Tag>
+        </Space>
+      ),
+    },
+  ];
+  function handleDelete(order) {
+    fetch(`/orders/${order.id}`, { method: 'DELETE' })
+      .then(() => {
+        setOrders(prevOrders => prevOrders.filter(o => o.id !== order.id));
+        setStatusMessage('Order deleted successfully');
+      })
+      .catch(error => console.error(error));
+  }
+
+  function handleUpdate(updatedOrder) {
+    console.log(updatedOrder.id)
+    fetch(`/orders/${updatedOrder.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedOrder)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to update order');
+      }
+      setOrders(prevOrders => {
+        const updatedOrders = prevOrders.map(order => {
+          if (order.id === updatedOrder.id) {
+            return updatedOrder;
+          } else {
+            return order;
+          }
+        });
+        return updatedOrders;
+      });
+      setSelectedOrder(null);
+      setUpdateSuccess(true); // Set updateSuccess to true
+    })
+    .catch(error => console.error(error));
+  }
   return (
-    <div className='prodcont'>
+    <div className='prodconta'>
+      {statusMessage && <div className="alert alert-success">{statusMessage}</div>}
+      <h3>Add your order here</h3>
+      <button className='btn2'>
+        <Link to='AddOrder'>Add new order</Link>
+      </button>
+      <Outlet />
+      <Table columns={columns} dataSource={orders} />
 
-    <h3 >Recent Orders</h3>
+      {selectedOrder && (
+        <div>
+   <h3>Update Order</h3>
+<form onSubmit={(e) => {
+  e.preventDefault();
+  handleUpdate(selectedOrder);
+}}>
+  <div className="form-group">
+    <label htmlFor="order_quantity">Quantity</label>
+    <input
+      type="text"
+      className="form-control"
+      id="order_quantity"
+      name="order_quantity"
+      value={selectedOrder.quantity}
+      onChange={(e) => setSelectedOrder({...selectedOrder, quantity: e.target.value})}
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="supplier_name">Supplier Name</label>
+    <input
+      type="text"
+      className="form-control"
+      id="supplier_name"
+      name="supplier_name"
+      value={selectedOrder.supplier_name}
+      onChange={(e) => setSelectedOrder({...selectedOrder, supplier_name: e.target.value})}
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="buying_price">Buying price</label>
+    <input
+      type="text"
+      className="form-control"
+      id="buying_price"
+      name="buying_price"
+      value={selectedOrder.buying_price}
+      onChange={(e) => setSelectedOrder({...selectedOrder, buying_price: e.target.value})}
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="total_price">Total Price</label>
+    <input
+      type="text"
+      className="form-control"
+      id="buying_price"
+      name="buying_price"
+      value={selectedOrder.buying_price}
+      onChange={(e) => setSelectedOrder({...selectedOrder, buying_price: e.target.value})}
+    />
+  </div>
+  <button type="submit" className="btn btn-primary mr-2">Update</button>
+  <button type="button" className="btn btn-secondary" onClick={() => setSelectedOrder(null)}>Cancel</button>
+</form>
+</div>
+)}
 
-          <table class="table">
-  <thead>
-    <tr class="table-primary">
-      <th scope="col">#</th>
-      <th scope="col">Date </th>
-      <th scope="col">Time </th>
-      <th scope="col">Product sold</th>
-      <th scope="col">Price</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Total sales</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>2023-04-16</td>
-      <td>10:30pm</td>
-      <td>Chairs</td>
-      <td>$20</td>
-      <td>100</td>
-      <td>$2000</td>
-
-    
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>2023-04-16</td>
-      <td>10:30pm</td>
-      <td>Tables</td>
-      <td>$70</td>
-      <td>300</td>
-      <td>$721000</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>2023-04-16</td>
-      <td>10:30pm</td>
-      <td >Mabati </td>
-      <td>$150</td>
-      <td>200</td>
-      <td>$30000</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>2023-04-16</td>
-      <td>10:30pm</td>
-      <td >Wheelbarrow </td>
-      <td>$200</td>
-      <td>300</td>
-      <td>$60000</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>2023-04-16</td>
-      <td>10:30pm</td>
-      <td >Paperbag </td>
-      <td>$50</td>
-      <td>1000</td>
-      <td>$50000</td>
-    </tr>
-  </tbody>
-</table>  
-
+      
     </div>
-  )
+  );
 }
 
-export default Orders
+export default Orders;
